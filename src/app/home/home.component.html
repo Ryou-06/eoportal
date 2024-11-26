@@ -1,3 +1,48 @@
-<!-- home.component.html -->
-<h1>Welcome back Angular!</h1>
-<p>This is the main content of the Home page.</p>
+<div class="container">
+    <div class="top-container">
+      <h1>Welcome Back,</h1>
+      <div class="content-container">
+        <div class="total-documents">
+          <h3>Total Documents Needed</h3>
+          <p>{{ totalDocuments }}</p>
+          <!-- View Button positioned in the top-right corner -->
+          <button class="view-btn" (click)="openViewModal()">View</button>
+        </div>
+        
+        <!-- Button for triggering the upload modal -->
+        <div class="upload-section">
+          <h3>Document Upload</h3>
+          <button (click)="openModal()">+</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Company Resources Section -->
+    <div class="company-resources">
+      <h3>Company Resources</h3>
+      <p>Here you can upload or view company-related resources such as guides, templates, etc.</p>
+    </div>
+  </div>
+  
+  <!-- Modal for file upload -->
+  <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>Drag and Drop Files Here</h3>
+      <div class="drag-area" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+        <p>Drag your files here</p>
+        <input type="file" (change)="onFileSelected($event)" />
+      </div>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+  
+  <!-- Modal for viewing total documents -->
+  <div *ngIf="isViewModalOpen" class="modal-overlay" (click)="closeViewModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>View Total Documents</h3>
+      <p>Here you can view the details of the total documents needed.</p>
+      <!-- Add more details or dynamic content here -->
+      <button (click)="closeViewModal()">Close</button>
+    </div>
+  </div>
+  
