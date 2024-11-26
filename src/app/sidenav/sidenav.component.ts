@@ -11,9 +11,9 @@ import { HomeComponent } from "../home/home.component";
   styleUrl: './sidenav.component.css'
 })
 export class SidenavComponent {
-  isSidebarVisible = true;
+  isNavVisible = true;
 
-  toggleSidebar() {
-    this.isSidebarVisible = !this.isSidebarVisible;
+  toggleNav() {
+    this.isNavVisible = !this.isNavVisible;
   }
 }
