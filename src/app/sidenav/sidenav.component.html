@@ -1,6 +1,4 @@
-<!-- Main Layout -->
 <div class="main-layout">
-  <!-- Top Navigation Bar -->
   <div class="top-nav">
     <div class="top-nav-header">
       <span>Portal</span>
@@ -12,16 +10,25 @@
           <i class="fas fa-home"></i> Home
         </a>
       </li>
-      <!-- Profile Link -->
-      <li>
-        <a routerLink="/profile" routerLinkActive="active-link">
-          <i class="fas fa-user"></i> 
+      <!-- Profile Link with Dropdown -->
+      <li class="profile-link" (click)="toggleProfileDropdown()">
+        <a>
+          <i class="fas fa-user"></i>
         </a>
+        <ul *ngIf="isProfileDropdownVisible" class="dropdown-menu">
+          <li>
+            <a routerLink="/profile">View Profile</a>
+          </li>
+          <li>
+            <a routerLink="/settings">Settings</a>
+          </li>
+          <li>
+            <a routerLink="/logout">Logout</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
-
-  <!-- Main Content Area -->
   <div class="main-content">
     <router-outlet></router-outlet>
   </div>
