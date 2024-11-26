@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
   
   totalDocuments = 5; // Example: Total number of documents needed
-  selectedFile: File | null = null;
+  selectedFiles: File[] = []; // Array to hold selected files
   isModalOpen = false; // For file upload modal
   isViewModalOpen = false; // For "View" modal
 
@@ -38,18 +38,22 @@ export class HomeComponent {
 
   // Handle file selection (from input)
   onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      console.log('File selected:', file.name);
+    const files = event.target.files;
+    if (files.length > 0) {
+      // Add files to the selectedFiles array
+      this.selectedFiles = Array.from(files);
+      console.log('Files selected:', this.selectedFiles);
     }
   }
 
   // Handle file drop (from drag-and-drop)
   onFileDrop(event: any) {
     event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    if (file) {
-      console.log('File dropped:', file.name);
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      // Add files to the selectedFiles array
+      this.selectedFiles = Array.from(files);
+      console.log('Files dropped:', this.selectedFiles);
     }
   }
 
@@ -58,12 +62,15 @@ export class HomeComponent {
     event.preventDefault();
   }
 
-  // Upload the document (you can add upload logic here)
-  uploadDocument(): void {
-    if (this.selectedFile) {
-      console.log('Uploading:', this.selectedFile.name);
+  // Upload the document (file submission)
+  submitFile(): void {
+    if (this.selectedFiles.length > 0) {
+      this.selectedFiles.forEach(file => {
+        console.log('Submitting file:', file.name);
+        // Add your file upload logic here (e.g., call an API to upload the file)
+      });
     } else {
-      console.log('No file selected.');
+      console.log('No files selected for submission.');
     }
   }
 }

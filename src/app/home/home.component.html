@@ -4,9 +4,9 @@
       <div class="content-container">
         <div class="total-documents">
           <h3>Total Documents Needed</h3>
-          <p>{{ totalDocuments }}</p>
-          <!-- View Button positioned in the top-right corner -->
           <button class="view-btn" (click)="openViewModal()">View</button>
+          <!-- Display the number of total documents below the "View" button -->
+          <p>{{ totalDocuments }}</p>
         </div>
         
         <!-- Button for triggering the upload modal -->
@@ -27,12 +27,24 @@
   <!-- Modal for file upload -->
   <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
     <div class="modal" (click)="$event.stopPropagation()">
-      <h3>Drag and Drop Files Here</h3>
       <div class="drag-area" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
         <p>Drag your files here</p>
         <input type="file" (change)="onFileSelected($event)" />
       </div>
-      <button (click)="closeModal()">Close</button>
+  
+      <!-- Display the selected files as a list -->
+      <div class="file-list" *ngIf="selectedFiles.length > 0">
+        <h4>Selected Files:</h4>
+        <ul>
+          <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+        </ul>
+      </div>
+  
+      <!-- Buttons Container -->
+      <div class="buttons-container">
+        <button (click)="closeModal()">Cancel</button>
+        <button class="submit-btn" (click)="submitFile()">Submit</button>
+      </div>
     </div>
   </div>
   
@@ -42,7 +54,6 @@
       <h3>View Total Documents</h3>
       <p>Here you can view the details of the total documents needed.</p>
       <!-- Add more details or dynamic content here -->
-      <button (click)="closeViewModal()">Close</button>
+      <button (click)="closeViewModal()">Back</button>
     </div>
   </div>
-  
