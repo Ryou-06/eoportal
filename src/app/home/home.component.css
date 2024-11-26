@@ -3,11 +3,11 @@
     flex-direction: column;
     padding: 2rem;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 15px;
     background-color: #f9f9f9;
     max-width: 80%;
     margin: 2rem auto;
-    height: 600px;
+    height: 650px;
   }
   
   .top-container {
@@ -29,6 +29,20 @@
     gap: 2rem;
     width: 100%;
   }
+
+  .upload-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack the button vertically */
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 20px;
+  }
   
   .total-documents, .upload-section {
     flex: 1;
@@ -48,7 +62,7 @@
     flex-grow: 1;
     padding: 2rem;
     background-color: #f0f0f0;
-    border-radius: 8px;
+    border-radius: 20px;
     border: 1px solid #ccc;
     margin-top: 1rem;
     height: 100%;
@@ -64,20 +78,28 @@
   
   /* Style for the button that triggers the modal */
   .upload-section button {
-    font-size: 2rem;
-    padding: 0.5rem;
-    width: 50px;
-    height: 50px;
+    font-size: 3rem; /* Make the button text larger */
+    padding: 1rem;
+    width: 80px; /* Increase width */
+    height: 80px; /* Increase height */
     border-radius: 50%;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .upload-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
   }
   
-  /* Modal Styles */
-  .modal-overlay {
+/* Modal Styles */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -97,8 +119,11 @@
     max-width: 500px;
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
-  
+
   .drag-area {
     border: 2px dashed #4CAF50;
     padding: 2rem;
@@ -114,12 +139,41 @@
   input[type="file"] {
     display: none;
   }
+
+  /* Add Flexbox for Buttons Container */
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Submit Button Styling */
+.submit-btn {
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
   
-  /* Styling for modal close button */
+.submit-btn:hover {
+    background-color: #353131;
+  }
+
+  /* Styling for the Back Button (Cancel) */
+  .cancel-btn {
+    background-color: #000;
+    color: white;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #353131;
+  }
+  
   button {
-    margin-top: 1rem;
     padding: 0.5rem 1rem;
-    background-color: #f44336;
+    background-color: #000;
     color: white;
     border: none;
     border-radius: 4px;
@@ -127,28 +181,55 @@
   }
   
   button:hover {
-    background-color: #d32f2f;
+    background-color: #353131;
   }
   
   /* Position the "View" button in the upper-right corner of the total-documents section */
   .total-documents {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
+
   .view-btn {
     position: absolute;
-    top: 0;
-    right: 10px; /* Adjust this value to move the button a little to the left */
+    top: 20px; /* Move it higher to be above the number */
+    right: 20px;
     padding: 0.5rem 1rem;
-    background-color: #2196F3;
+    background-color: #756b6b;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: x-large;
+  }
+  
+  .view-btn:hover {
+    background-color: #1976D2;
+  }
+
+  .total-documents p {
+    margin-top: 1rem; /* Add space between the button and the document number */
+    font-size:7rem;
+    font-weight: bold;
+    color: #333;
+    margin-left: 38rem;
+    margin-bottom: 0;
+  }
+
+  /* Adjust the modal for other buttons as well */
+button {
+    padding: 0.5rem 1rem;
+    background-color: #000;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;    
   }
-
-  .view-btn:hover {
-    background-color: #1976D2;
+  
+  button:hover {
+    background-color: #353131;
   }
   
