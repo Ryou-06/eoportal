@@ -3,20 +3,27 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   {
-    path: '',  // Default route, redirects to home
+    path: '', // Default route
     redirectTo: '/home',
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    component: SidenavComponent,  // SidenavComponent as the parent layout
+    path: '', // Sidenav parent layout
+    component: SidenavComponent,
     children: [
-      { path: '', component: HomeComponent },  // HomeComponent will be injected here
+      { path: 'home', component: HomeComponent },
+      { path: 'profile', component: ProfileComponent },
+      // Add other child routes here
     ],
   },
-  { path: 'login', component: LoginComponent },  // Login route, no sidenav
-  { path: 'signup', component: SignupComponent },  // Signup route, no sidenav
+  { path: 'login', component: LoginComponent }, // Public route
+  { path: 'signup', component: SignupComponent }, // Public route
+  {
+    path: '**', // Wildcard route for 404s
+    redirectTo: '/home',
+  },
 ];

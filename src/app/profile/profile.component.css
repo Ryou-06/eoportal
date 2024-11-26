@@ -1,0 +1,30 @@
+/* Add a background to the body */
+.main-content {
+    background-image: url('/app/assets/eoportalbg.jpg');
+    background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Glass container styles */
+  .glass-container {
+    width: 300px;
+    padding: 20px;
+    margin: 50px auto;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Slight white tint */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Ensure text and container contrast */
+  .glass-container h2,
+  .glass-container p {
+    margin: 0;
+    padding: 10px 0;
+  }
+  

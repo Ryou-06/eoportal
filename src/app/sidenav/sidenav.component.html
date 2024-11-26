@@ -4,27 +4,19 @@
       <span>Portal</span>
     </div>
     <ul class="top-nav-links">
-      <!-- Home Link -->
       <li>
         <a routerLink="/home" routerLinkActive="active-link">
           <i class="fas fa-home"></i> Home
         </a>
       </li>
-      <!-- Profile Link with Dropdown -->
       <li class="profile-link" (click)="toggleProfileDropdown()">
         <a>
           <i class="fas fa-user"></i>
         </a>
         <ul *ngIf="isProfileDropdownVisible" class="dropdown-menu">
-          <li>
-            <a routerLink="/profile">View Profile</a>
-          </li>
-          <li>
-            <a routerLink="/settings">Settings</a>
-          </li>
-          <li>
-            <a routerLink="/logout">Logout</a>
-          </li>
+          <li><a routerLink="/profile">View Profile</a></li>
+          <li><a routerLink="/settings">Settings</a></li>
+          <li><a routerLink="/logout">Logout</a></li>
         </ul>
       </li>
     </ul>
