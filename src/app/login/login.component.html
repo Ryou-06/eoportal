@@ -1,1 +1,30 @@
-</h1>Pasok na kau guys baka ma hit ko ung leave button sa gmeet</h1>
+<div class="login-container">
+    <div class="login-form">
+      <h2>Login</h2>
+      <form>
+        <input 
+          type="email" 
+          id="login-email" 
+          [(ngModel)]="email" 
+          name="email" 
+          placeholder="Email" 
+          required 
+        />
+        <input 
+          type="password" 
+          id="login-password" 
+          [(ngModel)]="password" 
+          name="password" 
+          placeholder="Password" 
+          required 
+        />
+        <button type="submit">Login</button>
+      </form>
+      <div class="signup-link">
+        <p>Don't have an account? 
+          <a (click)="navigateToSignUp()">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  

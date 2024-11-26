@@ -1,0 +1,29 @@
+<!-- Main Layout -->
+<div class="main-layout">
+    <!-- Full Vertical Sidebar (Sidenav) -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span>Portal</span>
+      </div>
+      <ul class="sidebar-links">
+        <!-- Home Link -->
+        <li>
+          <a routerLink="/home" routerLinkActive="active-link">
+            <i class="fas fa-home"></i> Home
+          </a>
+        </li>
+        <!-- Profile Link -->
+        <li>
+          <a routerLink="/profile" routerLinkActive="active-link">
+            <i class="fas fa-user"></i> Profile
+          </a>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

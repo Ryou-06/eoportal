@@ -1,0 +1,80 @@
+/* Signup Container */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #edf2f7;  /* Slightly darker background */
+  }
+  
+  /* Form Styling */
+  .signup-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;  /* Responsive form */
+  }
+  
+  /* Title */
+  .signup-form h2 {
+    text-align: center;
+    color: #2d3748;  /* Darker text color */
+    margin-bottom: 1.5rem;
+    font-size: 24px;
+  }
+  
+  /* Input Fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Focus Effect */
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #48bb78;  /* Green border on focus */
+    box-shadow: 0 0 5px rgba(72, 187, 120, 0.5);
+  }
+  
+  /* Submit Button */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #38a169;  /* Green button */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2f855a;  /* Darker green on hover */
+  }
+  
+  /* Link to Login */
+  .login-link {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .login-link a {
+    color: #38a169;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  
