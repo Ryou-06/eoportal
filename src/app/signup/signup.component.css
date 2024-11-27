@@ -1,80 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+h2, input, p{
+  font-family: 'Poppins', sans-serif;
+}
 /* Signup Container */
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #edf2f7;  /* Slightly darker background */
-  }
-  
-  /* Form Styling */
-  .signup-form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;  /* Responsive form */
-  }
-  
-  /* Title */
-  .signup-form h2 {
-    text-align: center;
-    color: #2d3748;  /* Darker text color */
-    margin-bottom: 1.5rem;
-    font-size: 24px;
-  }
-  
-  /* Input Fields */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-  }
-  
-  /* Focus Effect */
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus {
-    border-color: #48bb78;  /* Green border on focus */
-    box-shadow: 0 0 5px rgba(72, 187, 120, 0.5);
-  }
-  
-  /* Submit Button */
-  button {
-    width: 100%;
-    padding: 12px;
-    background-color: #38a169;  /* Green button */
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #2f855a;  /* Darker green on hover */
-  }
-  
-  /* Link to Login */
-  .login-link {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .login-link a {
-    color: #38a169;
-    text-decoration: none;
-  }
-  
-  .login-link a:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #000000, #434343); /* Same background as login */
+}
+
+/* Glassmorphic Form */
+.signup-form {
+  background: rgba(255, 255, 255, 0.15); /* Transparent white */
+  backdrop-filter: blur(15px); /* Strong blur for glass effect */
+  -webkit-backdrop-filter: blur(15px); /* Safari support */
+  border-radius: 16px; /* Rounded corners */
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); /* Shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+  width: 100%;
+  max-width: 420px;
+  margin-top: -150px; /* Optional alignment tweak */
+  overflow: hidden;
+}
+
+/* Title */
+.signup-form h2 {
+  text-align: center;
+  color: #000; /* Black text for contrast */
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-size: 24px; /* Similar to login page */
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"]
+ {
+  width: 95%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.25); /* Transparent input background */
+  color: #000; /* Black text */
+  outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Darker placeholder text */
+}
+
+/* Focus Effect */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+select {
+  width: 101%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.25); /* Transparent input background */
+  color: #000; /* Black text */
+  outline: none;
+}
+
+select option {
+  color: #000; /* Black text */
+  background: #fff; /* White background for options */
+}
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #000; /* Black button */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #1c1c1c; /* Slightly lighter black */
+  transform: scale(1.02); /* Subtle scaling */
+}
+
+/* Link to Login */
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-link a {
+  color: #000; /* Black text */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

@@ -13,7 +13,8 @@ export class SignupComponent {
   name: string = '';
   email: string = '';
   password: string = '';
-
+  birthday: string = ''; // Add birthday field
+  department: string = ''; // Add department field
   constructor(private router: Router) {}
 
   onSignup() {

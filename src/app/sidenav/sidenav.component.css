@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+ p, span, li{
+  font-family: 'Poppins', sans-serif;
+}
 /* Reset body and html for full height */
 html, body {
   height: 100%;
   margin: 10;
   padding: 0;
   color: white; /* Ensures text is visible against black */
+  overflow: hidden;
 }
 
 /* Universal Reset */
@@ -19,6 +25,7 @@ html, body {
   flex-direction: column; /* Stack navbar on top of content */
   height: 100vh;
   overflow: hidden; /* Prevent scrolling outside the layout */
+
 }
 
 /* Top Navigation Bar */
@@ -76,7 +83,7 @@ html, body {
 }
 
 .active-link {
-  background-color: #fbbf24; /* Tailwind's text-yellow-300 */
+  
   color: #2d3748; /* Darker color for active link */
 }
 
@@ -84,10 +91,12 @@ html, body {
 .main-content {
   flex-grow: 1; /* Fills remaining height */
   padding-top: 64px; /* Offset for fixed navbar height */
-  background-color: #000; /* Black background for content area */
   overflow-y: auto; /* Add scrolling if content overflows */
   box-sizing: border-box; /* Include padding in the total height calculation */
+  background: linear-gradient(135deg, #000000, #434343);
+  overflow: hidden;
 }
+
 
 /* Profile Dropdown */
 .profile-link {
@@ -125,6 +134,54 @@ html, body {
 .dropdown-menu li a:hover {
   background-color: #4a5568; /* Tailwind's bg-gray-600 */
   color: #e2e8f0; /* Tailwind's text-gray-200 */
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  background: #d4d4d4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transform: rotate(-10deg);
+  position: absolute;
+}
+
+.card:nth-child(1) {
+  top: 20%;
+  left: 25%;
+  background-color: #e0e0e0;
+}
+
+.card:nth-child(2) {
+  top: 35%;
+  left: 40%;
+  background-color: #ffffff;
+  transform: rotate(5deg);
+}
+
+.card:nth-child(3) {
+  top: 50%;
+  left: 55%;
+  background-color: #b8b8b8;
+  transform: rotate(-5deg);
+}
+
+.card-tag {
+  width: 100px;
+  height: 50px;
+  background: #8b5e3c;
+  border-radius: 4px;
+  position: absolute;
+  transform: rotate(10deg);
+}
+
+.card-tag:nth-child(4) {
+  top: 20%;
+  left: 60%;
+}
+
+.card-tag:nth-child(5) {
+  top: 45%;
+  left: 30%;
 }
 
 /* Responsive Design */

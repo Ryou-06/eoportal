@@ -6,22 +6,27 @@
     <ul class="top-nav-links">
       <li>
         <a routerLink="/home" routerLinkActive="active-link">
-          <i class="fas fa-home"></i> Home
+          <i class="fas fa-home"></i> <p>Home</p>
         </a>
       </li>
       <li class="profile-link" (click)="toggleProfileDropdown()">
         <a>
-          <i class="fas fa-user"></i>
+          <i class="fas fa-user" style="margin-top: 5px;"></i>
         </a>
         <ul *ngIf="isProfileDropdownVisible" class="dropdown-menu">
           <li><a routerLink="/profile">View Profile</a></li>
-          <li><a routerLink="/settings">Settings</a></li>
-          <li><a routerLink="/logout">Logout</a></li>
+          <li><a routerLink="/updateprofile">Update Profile</a></li>
+          <li><a routerLink="/login">Logout</a></li>
         </ul>
       </li>
     </ul>
   </div>
   <div class="main-content">
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card-tag"></div>
+    <div class="card-tag"></div>
     <router-outlet></router-outlet>
   </div>
 </div>

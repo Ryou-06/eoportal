@@ -4,11 +4,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 export const routes: Routes = [
   {
     path: '', // Default route
-    redirectTo: '/home',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
@@ -17,6 +17,9 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'updateprofile', component: UpdateprofileComponent},
+      { path: 'login', component: LoginComponent }, // Public route
+      { path: 'signup', component: SignupComponent }, // Public route
       // Add other child routes here
     ],
   },

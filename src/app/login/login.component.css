@@ -1,64 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+h2, p, a, input{
+    font-family: 'Poppins', sans-serif;
+}
 /* Login Container */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #edf2f7;  /* Slightly darker background */
+    background: linear-gradient(135deg, #000000, #434343); /* Dark gradient background for contrast */
+    overflow: hidden; /* Hide scrollbar for the container */
 }
 
-/* Form Styling */
+/* Glassmorphic Form */
 .login-form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.15); /* Transparent white */
+    backdrop-filter: blur(15px); /* Strong blur for glass effect */
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    border-radius: 16px;
+    padding: 3rem; /* Increased padding for more spacious interior */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle light border */
     width: 100%;
-    max-width: 400px;  /* Responsive form */
+    max-width: 420px; /* Increased maximum width */
+    margin-top: -150px; /* Adjusted positioning */
+    overflow: auto; /* Enable scrolling for overflowing content */
+
+    /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.login-form::-webkit-scrollbar {
+    display: none; /* Webkit browsers */
 }
 
 /* Title */
 .login-form h2 {
     text-align: center;
-    color: #2d3748;  /* Darker text color */
+    color: #000; /* Black text for contrast */
+    font-weight: bold;
     margin-bottom: 1.5rem;
-    font-size: 24px;
 }
 
 /* Input Fields */
 input[type="email"],
 input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 12px;
     margin-bottom: 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
+    border-radius: 10px;
     font-size: 16px;
+    background: rgba(255, 255, 255, 0.25); /* Transparent input */
+    color: #000;
     outline: none;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Dark placeholder */
 }
 
 /* Focus Effect */
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #48bb78;  /* Green border on focus */
-    box-shadow: 0 0 5px rgba(72, 187, 120, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-/* Submit Button */
+/* Button */
 button {
-    width: 100%;
+    width: 70%;
     padding: 12px;
-    background-color: #38a169;  /* Green button */
+    background-color: #000; /* Black button */
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-left:70px;
 }
 
 button:hover {
-    background-color: #2f855a;  /* Darker green on hover */
+    background-color: #1c1c1c; /* Slightly lighter black */
+    transform: scale(1.02); /* Subtle scale effect */
 }
 
 /* Link to Sign Up */
@@ -68,10 +96,11 @@ button:hover {
 }
 
 .signup-link a {
-    color: #38a169;  /* Green color for the link */
+    color: #000; /* Black link */
+    font-weight: bold;
     text-decoration: none;
 }
 
 .signup-link a:hover {
-    text-decoration: underline;  /* Underline effect on hover */
+    text-decoration: underline;
 }

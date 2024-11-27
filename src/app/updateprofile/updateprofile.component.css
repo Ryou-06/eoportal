@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+body {
+  
+}
+
 p, h2, b {
   font-family: 'Poppins', sans-serif;
   color: black;
@@ -74,7 +78,60 @@ p, h2, b {
   font-weight: 600; /* Emphasize labels */
 }
 
+/* Inline dropdown and label */
 
+  
+  /* Dropdown styles */
+  .dropdown {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    flex: 1; /* Ensures dropdown adjusts size within the line */
+    max-width: 300px;
+  }
+  
+  /* Button container styles */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  /* Button styles */
+  button {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Cancel button */
+  .cancel-btn {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+  
+  .cancel-btn:hover {
+    background-color: rgb(94, 93, 93);
+  }
+  
+  /* Save button */
+  .save-btn {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+  
+  .save-btn:hover {
+    background-color: rgb(94, 93, 93);
+  }
 /* Responsive design */
 @media (max-width: 480px) {
   .glass-container {
@@ -93,5 +150,22 @@ p, h2, b {
 
   .details-container p {
     font-size: 1em;
+  }
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .details-container p {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dropdown {
+    width: 100%;
   }
 }
