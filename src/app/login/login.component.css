@@ -53,14 +53,14 @@ input[type="password"] {
     border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
     border-radius: 10px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.25); /* Transparent input */
+    background: rgba(3, 3, 3, 0.404); /* Transparent input */
     color: #000;
     outline: none;
 }
 
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
-    color: rgba(0, 0, 0, 0.5); /* Dark placeholder */
+    color: rgba(255, 255, 255, 0.664); /* Dark placeholder */
 }
 
 /* Focus Effect */

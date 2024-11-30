@@ -2,10 +2,15 @@
   <div class="signup-form">
     <h2>Sign Up</h2>
     <form (ngSubmit)="onSignup()">
+      <label for="name">Name:</label>
       <input type="text" id="signup-name" [(ngModel)]="name" name="name" placeholder="Full Name" required />
+      <label for="email">Email:</label>
       <input type="email" id="signup-email" [(ngModel)]="email" name="email" placeholder="Email" required />
+      <label for="password">Password:</label>
       <input type="password" id="signup-password" [(ngModel)]="password" name="password" placeholder="Password" required />
-      <input type="date" id="signup-birthday" [(ngModel)]="birthday" name="birthday" placeholder="Birthday" required />
+      <label for="birthday">Birthday:</label>
+      <input id="birthday" type="date" [(ngModel)]="birthday" name="birthday" required />
+      <label for="department">Department:</label>
       <select id="signup-department" [(ngModel)]="department" name="department" required>
         <option value="" disabled selected>Select Department</option>
         <option value="Accounting">Accounting</option>

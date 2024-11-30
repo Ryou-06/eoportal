@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-h2, input, p{
+h2, input, p, label{
   font-family: 'Poppins', sans-serif;
 }
 /* Signup Container */
@@ -48,7 +48,7 @@ input[type="date"]
   border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
   border-radius: 10px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.25); /* Transparent input background */
+  background: rgba(3, 3, 3, 0.404); /* Transparent input background */
   color: #000; /* Black text */
   outline: none;
 }
@@ -56,7 +56,7 @@ input[type="date"]
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
-  color: rgba(0, 0, 0, 0.5); /* Darker placeholder text */
+  color: rgba(255, 255, 255, 0.664); /* Darker placeholder text */
 }
 
 /* Focus Effect */
@@ -75,7 +75,7 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
   border-radius: 10px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.25); /* Transparent input background */
+  background: rgba(3, 3, 3, 0.404); /* Transparent input background */
   color: #000; /* Black text */
   outline: none;
 }

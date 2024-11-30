@@ -13,18 +13,34 @@ export class SignupComponent {
   name: string = '';
   email: string = '';
   password: string = '';
-  birthday: string = ''; // Add birthday field
-  department: string = ''; // Add department field
+  birthday: string = ''; // ISO format (YYYY-MM-DD)
+  department: string = '';
+
   constructor(private router: Router) {}
 
   onSignup() {
-    // Here, handle your signup logic, e.g., API request to create a new user
-    console.log('Signup credentials:', this.name, this.email, this.password);
-    // Navigate to the login page after successful signup
+    // Ensure all required fields are filled
+    if (!this.name || !this.email || !this.password || !this.birthday || !this.department) {
+      alert('Please fill in all fields before signing up.');
+      return;
+    }
+
+    // Log form data (replace with actual signup logic, such as API integration)
+    console.log('Signup credentials:', {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      birthday: this.birthday,
+      department: this.department,
+    });
+
+    // Navigate to login page after successful signup
+    alert('Signup successful! Redirecting to login...');
     this.router.navigate(['/login']);
   }
 
   navigateToLogIn() {
+    // Navigate to login page
     this.router.navigate(['/login']);
   }
 }
