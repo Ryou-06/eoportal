@@ -2,18 +2,24 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [
+    CommonModule, 
+    RouterOutlet, 
+    FormsModule, 
+    ReactiveFormsModule, 
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
   showSidenav = true; // Default value
 
   constructor(private router: Router) {
@@ -26,5 +32,4 @@ export class AppComponent {
     });
   }
 }
-
 

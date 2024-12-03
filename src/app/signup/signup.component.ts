@@ -1,46 +1,68 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  birthday: string = ''; // ISO format (YYYY-MM-DD)
-  department: string = '';
 
-  constructor(private router: Router) {}
+  signupForm: FormGroup;
 
-  onSignup() {
-    // Ensure all required fields are filled
-    if (!this.name || !this.email || !this.password || !this.birthday || !this.department) {
-      alert('Please fill in all fields before signing up.');
-      return;
-    }
-
-    // Log form data (replace with actual signup logic, such as API integration)
-    console.log('Signup credentials:', {
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      birthday: this.birthday,
-      department: this.department,
+  constructor(
+    private fb: FormBuilder,
+    private dataService: DataService,
+    private router: Router
+  ) {
+    // Define the form structure here
+    this.signupForm = this.fb.group({
+      fullname: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      birthday: ['', Validators.required],
+      department: ['', Validators.required]
     });
-
-    // Navigate to login page after successful signup
-    alert('Signup successful! Redirecting to login...');
-    this.router.navigate(['/login']);
   }
 
+  ngOnInit(): void {}
+
+  // Method to handle form submission
+  onSignup(): void {
+    if (this.signupForm.valid) {
+      const { fullname, email, password, birthday, department } = this.signupForm.value;
+
+      // Call the service to register the user
+      this.dataService.userRegistration(fullname, email, password, birthday, department)
+        .subscribe(
+          (response) => {
+            // After successful registration, navigate to the login page
+            this.router.navigate(['/login']);
+          },
+          (error) => {
+            console.error('Registration failed:', error);
+            // You can add error handling here, such as showing a message to the user
+          }
+        );
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  // Getters for form controls
+  get fullname() { return this.signupForm.get('fullname'); }
+  get email() { return this.signupForm.get('email'); }
+  get password() { return this.signupForm.get('password'); }
+  get birthday() { return this.signupForm.get('birthday'); }
+  get department() { return this.signupForm.get('department'); }
+
+  // Handle navigation to the login page
   navigateToLogIn() {
-    // Navigate to login page
     this.router.navigate(['/login']);
   }
 }

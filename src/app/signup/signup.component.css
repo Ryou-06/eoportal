@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-h2, input, p, label{
+h2, input, p, label {
   font-family: 'Poppins', sans-serif;
 }
+
 /* Signup Container */
 .signup-container {
   display: flex;
@@ -40,8 +41,7 @@ h2, input, p, label{
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="date"]
- {
+input[type="date"] {
   width: 95%;
   padding: 12px;
   margin-bottom: 1rem;
@@ -68,6 +68,8 @@ select:focus {
   border-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
+
+/* Select Box */
 select {
   width: 101%;
   padding: 12px;
@@ -84,6 +86,7 @@ select option {
   color: #000; /* Black text */
   background: #fff; /* White background for options */
 }
+
 /* Submit Button */
 button {
   width: 100%;

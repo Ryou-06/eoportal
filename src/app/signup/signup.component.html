@@ -1,17 +1,36 @@
 <div class="signup-container">
   <div class="signup-form">
     <h2>Sign Up</h2>
-    <form (ngSubmit)="onSignup()">
-      <label for="name">Name:</label>
-      <input type="text" id="signup-name" [(ngModel)]="name" name="name" placeholder="Full Name" required />
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+      <label for="fullname">Name:</label>
+      <input type="text" id="signup-name" formControlName="fullname" placeholder="Full Name" required />
+      <div *ngIf="fullname?.invalid && fullname?.touched">
+        <small *ngIf="fullname?.errors?.['required']">Name is required.</small>
+        <small *ngIf="fullname?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+      </div>
+
       <label for="email">Email:</label>
-      <input type="email" id="signup-email" [(ngModel)]="email" name="email" placeholder="Email" required />
+      <input type="email" id="signup-email" formControlName="email" placeholder="Email" required />
+      <div *ngIf="email?.invalid && email?.touched">
+        <small *ngIf="email?.errors?.['required']">Email is required.</small>
+        <small *ngIf="email?.errors?.['email']">Enter a valid email.</small>
+      </div>
+
       <label for="password">Password:</label>
-      <input type="password" id="signup-password" [(ngModel)]="password" name="password" placeholder="Password" required />
+      <input type="password" id="signup-password" formControlName="password" placeholder="Password" required />
+      <div *ngIf="password?.invalid && password?.touched">
+        <small *ngIf="password?.errors?.['required']">Password is required.</small>
+        <small *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+      </div>
+
       <label for="birthday">Birthday:</label>
-      <input id="birthday" type="date" [(ngModel)]="birthday" name="birthday" required />
+      <input type="date" id="birthday" formControlName="birthday" required />
+      <div *ngIf="birthday?.invalid && birthday?.touched">
+        <small *ngIf="birthday?.errors?.['required']">Birthday is required.</small>
+      </div>
+
       <label for="department">Department:</label>
-      <select id="signup-department" [(ngModel)]="department" name="department" required>
+      <select id="signup-department" formControlName="department" required>
         <option value="" disabled selected>Select Department</option>
         <option value="Accounting">Accounting</option>
         <option value="Human Resources">Human Resources</option>
@@ -19,7 +38,11 @@
         <option value="Marketing">Marketing</option>
         <option value="Operations">Operations</option>
       </select>
-      <button type="submit">Sign Up</button>
+      <div *ngIf="department?.invalid && department?.touched">
+        <small *ngIf="department?.errors?.['required']">Department is required.</small>
+      </div>
+
+      <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
     </form>
     <div class="login-link">
       <p>Already have an account? <a (click)="navigateToLogIn()">Log In</a></p>

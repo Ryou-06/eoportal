@@ -16,7 +16,8 @@
         <ul *ngIf="isProfileDropdownVisible" class="dropdown-menu">
           <li><a routerLink="/profile">View Profile</a></li>
           <li><a routerLink="/updateprofile">Update Profile</a></li>
-          <li><a routerLink="/login">Logout</a></li>
+          <!-- Add the logout button here -->
+          <li><a (click)="logout()">Logout</a></li> <!-- Logout link -->
         </ul>
       </li>
     </ul>

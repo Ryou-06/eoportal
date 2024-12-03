@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-h2, p, a, input{
+h2, p, a, input {
     font-family: 'Poppins', sans-serif;
 }
+
 /* Login Container */
 .login-container {
     display: flex;
@@ -81,7 +82,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-left:70px;
+    margin-left: 70px;
 }
 
 button:hover {
@@ -103,4 +104,11 @@ button:hover {
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+/* Error Messages */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
 }
