@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { CommonModule } from '@angular/common';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -15,6 +15,25 @@ export class HomeComponent {
   selectedFiles: File[] = []; // Array to hold selected files
   isModalOpen = false; // For file upload modal
   isViewModalOpen = false; // For "View" modal
+  username: string = ''; // Store the employee's name
+
+  ngOnInit() {
+    // Retrieve the fullname from localStorage
+    this.username = localStorage.getItem('fullname') || 'Employee';
+  
+    // Trigger SweetAlert when Home page loads
+    Swal.fire({
+      icon: 'success',
+      title: 'Welcome!',
+      text: `Welcome to the Home Page, ${this.username}!`,  // Use username here
+      position: 'top-end', // Top-right position
+      timer: 2000,
+      timerProgressBar: true,
+      toast: true, // Makes it look like a notification
+      showConfirmButton: false,
+    });
+  }
+  
 
   // Open the file upload modal
   openModal() {

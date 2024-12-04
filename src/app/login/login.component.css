@@ -112,3 +112,23 @@ button:hover {
     font-size: 0.9em;
     margin-top: 0.5rem;
 }
+.swal2-popup {
+    font-family: 'Poppins', sans-serif !important; /* Use Poppins font */
+  }
+  
+  .swal2-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700; /* Bold for the title */
+    font-size: 24px;   /* Adjust font size */
+  }
+  
+  .swal2-html-container {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 16px;   /* Adjust font size for content */
+  }
+  
+  .swal2-confirm {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600; /* Semi-bold for the button */
+    font-size: 14px;
+  }

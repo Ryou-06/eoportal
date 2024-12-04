@@ -64,6 +64,7 @@ export class DataService {
           if (response && response.length > 0) {
             const user = response[0]; // Extract user data from the array
             this.setToken(user.email);  // Store the user's email (or token) in localStorage
+            localStorage.setItem('fullname', user.fullname);  // Store the fullname
             this.loggedInSubject.next(true);  // Emit true for successful login
             return { success: true, user };  // Return a successful response with user data
           } else {
@@ -77,6 +78,7 @@ export class DataService {
         })
       );
   }
+  
   
 
   // Registration method with error handling

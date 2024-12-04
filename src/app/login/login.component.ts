@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -22,23 +22,42 @@ export class LoginComponent {
 
 
   onLogin() {
-    console.log('Login attempt:', { email: this.email, password: this.password }); // Debugging line
+    console.log('Login attempt:', { email: this.email, password: this.password });
     this.dataService.userLogin(this.email, this.password).subscribe({
       next: (response) => {
-        console.log('Login response:', response); // Log the response from the backend
+        console.log('Login response:', response);
         if (response.success) {
           console.log('Login successful');
-          // Check if there's a returnUrl to redirect to
-          const returnUrl = this.dataService.redirectUrl || '/home';
-          this.router.navigate([returnUrl]); // Redirect to the original route or default to home
+          const userName = response.user?.fullname || 'User'; // Get user's name or fallback to 'User'
+
+          // Show SweetAlert welcome message
+          Swal.fire({
+            title: 'Welcome!',
+            text: `Hello, ${userName}! We're glad to have you back.`,
+            icon: 'success',
+            confirmButtonText: 'Continue'
+          }).then(() => {
+            const returnUrl = this.dataService.redirectUrl || '/home';
+            this.router.navigate([returnUrl]); // Navigate to the home page or redirect URL
+          });
         } else {
-          console.log('Login failed: ', response.message); // Log failure message if any
-          alert(response.message); // Show failure message to the user
+          console.log('Login failed:', response.message);
+          Swal.fire({
+            title: 'Login Failed',
+            text: response.message || 'Invalid email or password.',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+          });
         }
       },
       error: (error) => {
         console.error('Login error', error);
-        alert('Login failed. Please try again.');
+        Swal.fire({
+          title: 'Error',
+          text: 'Login failed. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        });
       }
     });
   }
