@@ -1,24 +1,23 @@
 <div class="main-content">
     <div class="glass-container">
         <img src="https://via.placeholder.com/180" alt="Profile Picture" class="profile-pic">
-        <b class="employee-text">Employee</b>
+        <b class="employee-text">Update Profile</b>
         <div class="details-container">
-            <p>John Ron Diza</p>
-            <p>Birthday: November 6, 2003</p>
+            <p><strong>Name:</strong> {{ fullname }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Birthday:</strong> {{ birthday }}</p>
             <p>
-                Department: <select id="department" class="dropdown">
-                    <option>Accounting</option>
-                    <option>Human Resources</option>
-                    <option>IT Department</option>
-                    <option>Marketing</option>
-                    <option>Operations</option>
+                <strong>Department:</strong> 
+                <select [(ngModel)]="selectedDepartment" class="dropdown">
+                    <option *ngFor="let dept of departments" [value]="dept">
+                        {{ dept }}
+                    </option>
                 </select>
-                
             </p>
         </div>
         <div class="button-container">
-            <button class="cancel-btn">Cancel</button>
-            <button class="save-btn">Save</button>
+            <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+            <button class="save-btn" (click)="onSave()">Save</button>
         </div>
     </div>
 </div>

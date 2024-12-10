@@ -55,7 +55,7 @@ input[type="password"] {
     border-radius: 10px;
     font-size: 16px;
     background: rgba(3, 3, 3, 0.404); /* Transparent input */
-    color: #000;
+    color: white;
     outline: none;
 }
 

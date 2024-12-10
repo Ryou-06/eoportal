@@ -11,29 +11,35 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent {
   
-  totalDocuments = 5; // Example: Total number of documents needed
-  selectedFiles: File[] = []; // Array to hold selected files
-  isModalOpen = false; // For file upload modal
-  isViewModalOpen = false; // For "View" modal
-  username: string = ''; // Store the employee's name
+  totalDocuments = 5;
+  selectedFiles: File[] = [];
+  isModalOpen = false;
+  isViewModalOpen = false;
+  username: string = '';
 
   ngOnInit() {
     // Retrieve the fullname from localStorage
     this.username = localStorage.getItem('fullname') || 'Employee';
   
-    // Trigger SweetAlert when Home page loads
-    Swal.fire({
-      icon: 'success',
-      title: 'Welcome!',
-      text: `Welcome to the Home Page, ${this.username}!`,  // Use username here
-      position: 'top-end', // Top-right position
-      timer: 2000,
-      timerProgressBar: true,
-      toast: true, // Makes it look like a notification
-      showConfirmButton: false,
-    });
+    // Get the current login timestamp
+    const currentLoginTimestamp = new Date().getTime();
+    
+    // Retrieve the last login timestamp
+    const lastLoginTimestamp = localStorage.getItem('lastLoginTimestamp');
+
+    // Check if this is a new login or a page refresh
+    if (!lastLoginTimestamp || this.isNewLogin(currentLoginTimestamp, parseInt(lastLoginTimestamp))) {
+      
+      // Update the last login timestamp
+      localStorage.setItem('lastLoginTimestamp', currentLoginTimestamp.toString());
+    }
   }
-  
+
+  // Check if this is a new login (more than 5 minutes since last login)
+  private isNewLogin(currentTimestamp: number, lastLoginTimestamp: number): boolean {
+    const FIVE_MINUTES = 5 * 60 * 1000; // 5 minutes in milliseconds
+    return (currentTimestamp - lastLoginTimestamp) > FIVE_MINUTES;
+  }
 
   // Open the file upload modal
   openModal() {

@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
 
@@ -15,26 +15,22 @@ interface User {
 interface AuthResponse {
   success: boolean;
   message?: string;
-  user?: User; // The user data should be stored here
+  user?: User;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   private baseUrl: string = "http://localhost/eoportal/api";
   
-  // Maintain a BehaviorSubject to track login status
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
 
-  // Property to store the redirect URL after login
-  public redirectUrl: string = ''; // Add this property
+  public redirectUrl: string = '';
 
-  // Token management
   private setToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -44,49 +40,52 @@ export class DataService {
   }
 
   public deleteToken() {
+    // Clear all user-related localStorage items
     localStorage.removeItem('token');
-    this.loggedInSubject.next(false); // Update login status
+    localStorage.removeItem('fullname');
+    localStorage.removeItem('email');
+    localStorage.removeItem('birthday');
+    localStorage.removeItem('department');
+    this.loggedInSubject.next(false);
   }
 
   public isLoggedIn(): boolean {
-    return this.getToken() !== null;  // Checks if a token is stored in localStorage
+    return this.getToken() !== null;
   }
 
-  // Login method with proper error handling
   public userLogin(email: string, password: string) {
-    console.log('Login request:', { email, password });  // Debugging line
     return this.httpClient.post<User[]>(`${this.baseUrl}/login.php`, { email, password })
       .pipe(
         map(response => {
-          console.log('Login response received:', response); // Log the response
-  
-          // Check if we received a user in the response array
           if (response && response.length > 0) {
-            const user = response[0]; // Extract user data from the array
-            this.setToken(user.email);  // Store the user's email (or token) in localStorage
-            localStorage.setItem('fullname', user.fullname);  // Store the fullname
-            this.loggedInSubject.next(true);  // Emit true for successful login
-            return { success: true, user };  // Return a successful response with user data
+            const user = response[0];
+            
+            // Store user details in localStorage
+            this.setToken(user.email);
+            localStorage.setItem('fullname', user.fullname);
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('birthday', user.birthday);
+            localStorage.setItem('department', user.department);
+            
+            this.loggedInSubject.next(true);
+            return { success: true, user };
           } else {
-            return { success: false, message: 'Invalid email or password' };  // Handle invalid login
+            return { success: false, message: 'Invalid email or password' };
           }
         }),
         catchError((error: HttpErrorResponse) => {
           console.error('Login failed:', error);
           alert('Login failed. Please try again.');
-          return throwError(error);  // Return an observable error
+          return throwError(error);
         })
       );
   }
-  
-  
 
-  // Registration method with error handling
   public userRegistration(fullname: string, email: string, password: string, birthday: string, department: string) {
     return this.httpClient.post<AuthResponse>(`${this.baseUrl}/register.php`, { fullname, email, password, birthday, department })
       .pipe(
         map(response => {
-          console.log('Registration response:', response);  // Log the response for debugging
+          console.log('Registration response:', response);
           return response;
         }),
         catchError((error: HttpErrorResponse) => {
@@ -101,8 +100,24 @@ export class DataService {
       );
   }
 
-  // Get the current logged-in status (BehaviorSubject will reflect this state)
   public getLoggedInStatus(): boolean {
     return this.loggedInSubject.value;
   }
+
+   // New method to update department
+   public updateDepartment(email: string, department: string) {
+    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/update_department.php`, { email, department })
+      .pipe(
+        map(response => {
+          console.log('Update department response:', response);
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Department update failed:', error);
+          alert('Failed to update department. Please try again.');
+          return throwError(error);
+        })
+      );
+  }
+  
 }
