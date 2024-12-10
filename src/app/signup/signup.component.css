@@ -10,7 +10,7 @@ h2, input, p, label {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #000000, #434343); /* Same background as login */
+  background: linear-gradient(135deg, #1a202c, #2d3748); /* Same background as login */
 }
 
 /* Glassmorphic Form */
@@ -89,22 +89,35 @@ select option {
 
 /* Submit Button */
 button {
-  width: 100%;
-  padding: 12px;
-  background-color: #000; /* Black button */
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 20px; /* Smaller padding */
+  border: 2px solid #ccc; /* Light border for a clean look */
+  border-radius: 8px; /* Slightly smaller border radius */
+  font-size: 1em; /* Smaller font size */
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease-in-out;
+  width: 48%; /* Ensures both buttons are side by side */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: white; /* White background for both buttons */
+  color: #333; /* Dark text color for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  width: 420px;
 }
 
 button:hover {
-  background-color: #1c1c1c; /* Slightly lighter black */
-  transform: scale(1.02); /* Subtle scaling */
+  background-color: #2b3e5e; /* Light red background on hover */
+  border-color: #2d3748; /* Stronger red border */
+  color:white; /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px #2d3748; /* Stronger shadow */
 }
 
+button:focus {
+  outline: none;
+  box-shadow: 0 0 8px #464e5a; /* Focus effect */
+}
 /* Link to Login */
 .login-link {
   text-align: center;

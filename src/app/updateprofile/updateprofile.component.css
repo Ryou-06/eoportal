@@ -1,171 +1,307 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-body {
-  
-}
-
-p, h2, b {
+span, p, h1{
   font-family: 'Poppins', sans-serif;
-  color: black;
-  
+}
+h1{
+  color:white !important;
+}
+/* Color Variables */
+:root {
+  --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --text-primary: #333;
+  --text-secondary: #666;
+  --accent-color: #5e3dd4;
 }
 
-/* Outer glass container styles */
-.glass-container {
+/* Profile Wrapper */
+.profile-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers items horizontally */
-  justify-content: center; /* Centers items vertically */
-  max-width: 500px;
-  padding: 40px;
-  margin: 50px auto;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--primary-bg);
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+/* Glass Container */
+.glass-container {
+  width: 100%;
+  max-width: 450px;
+  background: var(--glass-bg);
   border-radius: 20px;
-  background: rgba(105, 103, 103, 0.5); /* Slight white tint */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
-  backdrop-filter: blur(15px); /* Stronger glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  height: 600px;
+  transition: all 0.3s ease;
+  margin-top:-150px;
 }
 
 .glass-container:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Profile picture styles */
-.profile-pic {
-  display: block;
-
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+/* Profile Header */
+.profile-header {
   margin-bottom: 30px;
 }
 
-
-/* Employee text */
-.employee-text {
-  font-size: 1.6em;
-  color: rgb(0, 0, 0);
-  margin-bottom: 50px;
-  letter-spacing: 0.8px;
-  text-align: center; /* Ensure it's centered */
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Updated details-container for text alignment */
-.details-container {
-  background: rgba(107, 107, 107, 0.678); /* Lighter tint */
-  padding: 20px; /* Smaller padding for compact look */
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.profile-pic:hover {
+  transform: scale(1.05);
+}
+
+.employee-name {
   margin-top: 15px;
-  text-align: left; /* Aligns text to the left */
-  width: 100%; /* Full width inside container */
-  height:200px;
+  font-size: 1.8em;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
-/* Remove strong letter-spacing and margins */
-.details-container p {
-  margin: 5px 0; /* Reduced margin between lines */
-  font-size: 1.6em; /* Smaller font size */
-  color: black;
+/* Details Container */
+.details-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.details-container p b {
-  font-weight: 600; /* Emphasize labels */
+.profile-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
 }
 
-/* Inline dropdown and label */
+.profile-detail:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
 
-  
-  /* Dropdown styles */
-  .dropdown {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1em;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #333;
-    flex: 1; /* Ensures dropdown adjusts size within the line */
-    max-width: 300px;
-  }
-  
-  /* Button container styles */
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  /* Button styles */
-  button {
-    font-family: 'Poppins', sans-serif;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Cancel button */
-  .cancel-btn {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-  }
-  
-  .cancel-btn:hover {
-    background-color: rgb(94, 93, 93);
-  }
-  
-  /* Save button */
-  .save-btn {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-  }
-  
-  .save-btn:hover {
-    background-color: rgb(94, 93, 93);
-  }
-/* Responsive design */
+.profile-detail i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.detail-content {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.8em;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detail-content p {
+  margin: 0;
+  font-size: 1em;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.styled-select {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  width: 100%;
+  appearance: none; /* Removes default styling */
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D"http%3A//www.w3.org/2000/svg"%20viewBox%3D"0%200%2010%206"%3E%3Cpath%20fill%3D"%23fff"%20d%3D"M0%200l5%204l5-4z"%20/%3E%3C/svg%3E'); /* Custom down arrow */
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 12px;
+  text-align: left;
+  outline: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect */
+.styled-select:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Focus effect */
+.styled-select:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(94, 93, 93, 0.3);
+}
+
+/* Option Styling */
+.styled-select option {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.styled-select option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Arrow Indicator */
+.styled-select:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent-color);
+}
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Button Styles */
+button {
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 20px; /* Smaller padding */
+  border: 2px solid #ccc; /* Light border for a clean look */
+  border-radius: 8px; /* Slightly smaller border radius */
+  font-size: 1em; /* Smaller font size */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 48%; /* Ensures both buttons are side by side */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: white; /* White background for both buttons */
+  color: #333; /* Dark text color for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Hover Effects for Cancel Button (White with Red Borders) */
+.cancel-btn {
+  border-color: rgba(255, 0, 0, 0.6);
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.cancel-btn:hover {
+  background-color: rgba(255, 0, 0, 0.1); /* Light red background on hover */
+  border-color: rgba(255, 0, 0, 1); /* Stronger red border */
+  color: rgba(255, 0, 0, 1); /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2); /* Stronger shadow */
+}
+
+.cancel-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); /* Focus effect */
+}
+
+/* Hover Effects for Save Button (White with Green Borders) */
+.save-btn {
+  border-color: rgba(0, 255, 0, 0.6);
+  color: rgba(0, 255, 0, 0.8);
+}
+
+.save-btn:hover {
+  background-color: rgba(0, 255, 0, 0.1); /* Light green background on hover */
+  border-color: rgba(0, 255, 0, 1); /* Stronger green border */
+  color: rgba(0, 255, 0, 1); /* Strong green text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px rgba(0, 255, 0, 0.2); /* Stronger shadow */
+}
+
+.save-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.5); /* Focus effect */
+}
+
+/* Inner Glow Effect for Hover */
+button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: white;
+  opacity: 0.1;
+  border-radius: 50%;
+  transition: width 0.4s, height 0.4s, opacity 0.4s;
+  transform: translate(-50%, -50%);
+}
+
+button:hover::before {
+  width: 0;
+  height: 0;
+  opacity: 0.3;
+}
+
+
+
+/* Responsive Design */
 @media (max-width: 480px) {
   .glass-container {
+    margin: 20px;
     padding: 20px;
-    margin: 20px auto;
   }
 
   .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
   }
 
-  .details-container h2 {
-    font-size: 1.8em;
+  .employee-name {
+    font-size: 1.5em;
   }
 
-  .details-container p {
-    font-size: 1em;
-  }
-  .button-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  .details-container p {
+  .profile-detail {
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
   }
 
-  .dropdown {
-    width: 100%;
+  .profile-detail i {
+    margin-bottom: 5px;
+    margin-right: 0;
   }
+  /* Styled Select */
+
 }
+
+/* Pseudo Icon Styles (since actual icons aren't provided) */
+.icon-email::before { content: '✉️'; }
+.icon-calendar::before { content: '📅'; }
+.icon-department::before { content: '🏢'; }
+.icon-clock::before { content: '🕒'; }
+.icon-logout::before { content: '🚪'; }
+

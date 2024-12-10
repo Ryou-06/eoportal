@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   birthday: string = '';
   department: string = '';
   email: string = '';
+  profileImage: string = '';
+  
 
   constructor(
     private dataService: DataService, 
@@ -28,16 +30,40 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
+    
     // Retrieve user information from localStorage
     this.fullname = localStorage.getItem('fullname') || 'Unknown';
     this.email = localStorage.getItem('email') || 'N/A';
-    this.birthday = localStorage.getItem('birthday') || 'N/A';
+    this.birthday = this.formatBirthday(localStorage.getItem('birthday') || 'N/A');
     this.department = localStorage.getItem('department') || 'N/A';
+    this.profileImage = localStorage.getItem('profileImage') || 'https://via.placeholder.com/180';
+   
   }
 
+  // Helper method to format birthday
+  private formatBirthday(birthday: string): string {
+    if (birthday === 'N/A') return birthday;
+    try {
+      return new Date(birthday).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch {
+      return birthday;
+    }
+  }
+
+  
+  // Logout method
   logout() {
     this.dataService.deleteToken();
-    this.router.navigate(['/login']);
+    localStorage.clear(); // Clear all localStorage data
+    
+  }
+
+  // Method to handle profile image error
+  onImageError(event: any) {
+    event.target.src = 'https://via.placeholder.com/180';
   }
 }

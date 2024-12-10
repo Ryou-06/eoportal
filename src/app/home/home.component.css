@@ -9,7 +9,7 @@ p, h1, h3, h4, li{
   flex-direction: column;
   padding: 2rem;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -152,13 +152,20 @@ input[type="file"] {
 }
 
 button {
-  padding: 0.5rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 20px; /* Smaller padding */
+  border: 2px solid #ccc; /* Light border for a clean look */
+  border-radius: 8px; /* Slightly smaller border radius */
+  font-size: 1em; /* Smaller font size */
   cursor: pointer;
-  backdrop-filter: blur(3px);
+  transition: all 0.3s ease-in-out;
+  width: 48%; /* Ensures both buttons are side by side */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: white; /* White background for both buttons */
+  color: #333; /* Dark text color for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 button:hover {
@@ -170,15 +177,84 @@ button:hover {
   top: 20px;
   right: 20px;
   padding: 0.5rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
   color: black;
   border-radius: 10px;
   font-size: x-large;
+  width: 150px;
+  
 }
 
 .view-btn:hover {
-  background-color: #1976D2;
+  background-color: #2b3e5e; /* Light red background on hover */
+  border-color: #2d3748; /* Stronger red border */
+  color:white; /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px #2d3748; /* Stronger shadow */
 }
+
+.view-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px #464e5a; /* Focus effect */
+}
+.cancel-btn:hover {
+  background-color: #2b3e5e; /* Light red background on hover */
+  border-color: #2d3748; /* Stronger red border */
+  color:white; /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px #2d3748; /* Stronger shadow */
+}
+
+.cancel-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px #464e5a; /* Focus effect */
+}
+.submit-btn:hover {
+  background-color: #2b3e5e; /* Light red background on hover */
+  border-color: #2d3748; /* Stronger red border */
+  color:white; /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px #2d3748; /* Stronger shadow */
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px #464e5a; /* Focus effect */
+}
+.back-btn{
+  margin-left: 270px;
+}
+.back-btn:hover {
+  background-color: #2b3e5e; /* Light red background on hover */
+  border-color: #2d3748; /* Stronger red border */
+  color:white; /* Strong red text on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 8px 16px #2d3748; /* Stronger shadow */
+}
+
+.back-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px #464e5a; /* Focus effect */
+}
+button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: white;
+  opacity: 0.1;
+  border-radius: 50%;
+  transition: width 0.4s, height 0.4s, opacity 0.4s;
+  transform: translate(-50%, -50%);
+}
+
+button:hover::before {
+  width: 0;
+  height: 0;
+  opacity: 0.3;
+}
+
 
 .total-documents p {
   margin-top: 1rem;

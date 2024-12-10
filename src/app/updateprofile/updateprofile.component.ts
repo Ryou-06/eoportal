@@ -17,6 +17,7 @@ export class UpdateprofileComponent implements OnInit {
   birthday: string = '';
   department: string = '';
   selectedDepartment: string = '';
+  profileImage: string = '';
 
   departments: string[] = [
     'Accounting', 
@@ -44,6 +45,7 @@ export class UpdateprofileComponent implements OnInit {
     this.birthday = localStorage.getItem('birthday') || 'N/A';
     this.department = localStorage.getItem('department') || 'N/A';
     this.selectedDepartment = this.department;
+    this.profileImage = localStorage.getItem('profileImage') || 'https://via.placeholder.com/180';
   }
 
   onSave() {
@@ -75,5 +77,8 @@ export class UpdateprofileComponent implements OnInit {
   onCancel() {
     // Navigate back to profile
     this.router.navigate(['/profile']);
+  }
+  onImageError(event: any) {
+    event.target.src = 'https://via.placeholder.com/180';
   }
 }

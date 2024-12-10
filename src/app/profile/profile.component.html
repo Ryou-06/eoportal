@@ -1,11 +1,39 @@
-<div class="main-content">
+<div class="profile-wrapper">
   <div class="glass-container">
-    <img src="https://via.placeholder.com/180" alt="Profile Picture" class="profile-pic">
-    <b class="employee-text">Employee Profile</b>
+    <div class="profile-header">
+      <img 
+        [src]="profileImage" 
+        alt="Profile Picture" 
+        class="profile-pic"
+        (error)="onImageError($event)"
+      >
+      <h1 class="employee-name">{{ fullname }}</h1>
+    </div>
+
     <div class="details-container">
-      <p><strong>Name:</strong> {{ fullname }}</p>
-      <p><strong>Email:</strong> {{ email }}</p>
-      <p><strong>Birthday:</strong> {{ birthday }}</p>
-      <p><strong>Department:</strong> {{ department }}</p>
-    
+      <div class="profile-detail">
+        <i class="icon-email"></i>
+        <div class="detail-content">
+          <span class="detail-label">Email</span>
+          <p>{{ email }}</p>
+        </div>
+      </div>
+
+      <div class="profile-detail">
+        <i class="icon-calendar"></i>
+        <div class="detail-content">
+          <span class="detail-label">Birthday</span>
+          <p>{{ birthday }}</p>
+        </div>
+      </div>
+
+      <div class="profile-detail">
+        <i class="icon-department"></i>
+        <div class="detail-content">
+          <span class="detail-label">Department</span>
+          <p>{{ department }}</p>
+        </div>
+      </div>
+      
+  </div>
 </div>

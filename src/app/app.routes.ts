@@ -22,7 +22,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent }, // Public route
       { path: 'signup', component: SignupComponent }, // Public route
     ],
-  },
+  },    
   {
     path: 'login', component: LoginComponent, // Public route
   },
