@@ -19,8 +19,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'updateprofile', component: UpdateprofileComponent },
-      { path: 'login', component: LoginComponent }, // Public route
-      { path: 'signup', component: SignupComponent }, // Public route
+      
     ],
   },    
   {
