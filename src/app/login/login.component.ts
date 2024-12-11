@@ -23,14 +23,28 @@ export class LoginComponent {
 
   onLogin() {
     console.log('Login attempt:', { email: this.email, password: this.password });
+  
+    // Basic validation before sending a request
+    this.emailValid = this.isEmailValid(this.email);
+    this.passwordValid = this.password.length >= 6;
+  
+    if (!this.emailValid || !this.passwordValid) {
+      Swal.fire({
+        title: 'Invalid Input',
+        text: 'Please enter a valid email and password.',
+        icon: 'warning',
+        confirmButtonText: 'Okay'
+      });
+      return;
+    }
+  
     this.dataService.userLogin(this.email, this.password).subscribe({
       next: (response) => {
         console.log('Login response:', response);
         if (response.success) {
           console.log('Login successful');
-          const userName = response.user?.fullname || 'User'; // Get user's name or fallback to 'User'
-
-          // Show SweetAlert welcome message
+          const userName = response.user?.fullname || 'User';
+  
           Swal.fire({
             title: 'Welcome!',
             text: `Hello, ${userName}! We're glad to have you back.`,
@@ -38,9 +52,10 @@ export class LoginComponent {
             confirmButtonText: 'Continue'
           }).then(() => {
             const returnUrl = this.dataService.redirectUrl || '/home';
-            this.router.navigate([returnUrl]); // Navigate to the home page or redirect URL
+            this.router.navigate([returnUrl]);
           });
         } else {
+          // Show error message when email or password is incorrect
           console.log('Login failed:', response.message);
           Swal.fire({
             title: 'Login Failed',
@@ -54,7 +69,7 @@ export class LoginComponent {
         console.error('Login error', error);
         Swal.fire({
           title: 'Error',
-          text: 'Login failed. Please try again.',
+          text: 'Login failed. Please try again later.',
           icon: 'error',
           confirmButtonText: 'Close'
         });

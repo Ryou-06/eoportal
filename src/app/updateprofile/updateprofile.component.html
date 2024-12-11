@@ -1,24 +1,28 @@
 <div class="profile-wrapper">
-    <div class="glass-container">
-        <div class="profile-header">
-       <img 
-        [src]="profileImage" 
-        alt="Profile Picture" 
-        class="profile-pic"
-        (error)="onImageError($event)"
-      >
-      <h1 class="employee-name">{{ fullname }}</h1>
+  <div class="glass-container">
+      <div class="profile-header">
+        <img 
+          src="https://via.placeholder.com/180" 
+          alt="Profile Picture" 
+          class="profile-pic"
+        >
+        <h1 class="employee-name">{{ fullname }}</h1>
 
-      <div class="details-container">
-        <div class="profile-detail">
-          <i class="icon-email"></i>
-          <div class="detail-content">
-            <span class="detail-label">Email</span>
-            <p>{{ email }}</p>
+        <div class="details-container">
+          <div class="profile-detail">
+            <i class="icon-email"></i>
+            <div class="detail-content">
+              <span class="detail-label">Email</span>
+              <input 
+                type="email" 
+                [(ngModel)]="newEmail" 
+                class="styled-input" 
+                placeholder="Enter new email"
+              >
+            </div>
           </div>
-        </div>
 
-        <div class="profile-detail">
+          <div class="profile-detail">
             <i class="icon-calendar"></i>
             <div class="detail-content">
               <span class="detail-label">Birthday</span>
@@ -37,13 +41,12 @@
               </select>
             </div>
           </div>
-          
         </div>
 
         <div class="button-container">
-            <button class="cancel-btn" (click)="onCancel()">Cancel</button>
-            <button class="save-btn" (click)="onSave()">Save</button>
+          <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+          <button class="save-btn" (click)="onSave()">Save</button>
         </div>
-    </div>
-</div>
+      </div>
+  </div>
 </div>

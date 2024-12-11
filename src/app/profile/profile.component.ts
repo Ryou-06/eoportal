@@ -63,7 +63,5 @@ export class ProfileComponent implements OnInit {
   }
 
   // Method to handle profile image error
-  onImageError(event: any) {
-    event.target.src = 'https://via.placeholder.com/180';
-  }
+
 }

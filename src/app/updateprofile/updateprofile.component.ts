@@ -13,11 +13,11 @@ import { DataService } from '../data.service';
 })
 export class UpdateprofileComponent implements OnInit {
   fullname: string = '';
-  email: string = '';
+  currentEmail: string = '';
+  newEmail: string = '';
   birthday: string = '';
   department: string = '';
   selectedDepartment: string = '';
-  profileImage: string = '';
 
   departments: string[] = [
     'Accounting', 
@@ -41,35 +41,41 @@ export class UpdateprofileComponent implements OnInit {
 
     // Retrieve user information from localStorage
     this.fullname = localStorage.getItem('fullname') || 'Unknown';
-    this.email = localStorage.getItem('email') || 'N/A';
+    this.currentEmail = localStorage.getItem('email') || 'N/A';
     this.birthday = localStorage.getItem('birthday') || 'N/A';
     this.department = localStorage.getItem('department') || 'N/A';
     this.selectedDepartment = this.department;
-    this.profileImage = localStorage.getItem('profileImage') || 'https://via.placeholder.com/180';
+    
+    // Set new email to current email by default
+    this.newEmail = this.currentEmail;
   }
 
+
   onSave() {
-    // Call service method to update department
-    this.dataService.updateDepartment(this.email, this.selectedDepartment)
+    // Validate email
+    if (!this.isValidEmail(this.newEmail)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Call service method to update profile
+    this.dataService.updateProfile(this.currentEmail, this.newEmail, this.selectedDepartment)
       .subscribe({
         next: (response) => {
           if (response.success) {
-            // Update localStorage
-            localStorage.setItem('department', this.selectedDepartment);
-            
             // Show success message
-            alert('Department updated successfully');
+            alert('Profile updated successfully');
             
             // Navigate back to profile
             this.router.navigate(['/profile']);
           } else {
             // Show error message
-            alert(response.message || 'Failed to update department');
+            alert(response.message || 'Failed to update profile');
           }
         },
         error: (error) => {
           console.error('Update failed:', error);
-          alert('Failed to update department. Please try again.');
+          // Error handling is now done in the service
         }
       });
   }
@@ -78,7 +84,8 @@ export class UpdateprofileComponent implements OnInit {
     // Navigate back to profile
     this.router.navigate(['/profile']);
   }
-  onImageError(event: any) {
-    event.target.src = 'https://via.placeholder.com/180';
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 }

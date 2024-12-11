@@ -104,20 +104,41 @@ export class DataService {
     return this.loggedInSubject.value;
   }
 
-   // New method to update department
-   public updateDepartment(email: string, department: string) {
-    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/update_department.php`, { email, department })
-      .pipe(
-        map(response => {
-          console.log('Update department response:', response);
-          return response;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          console.error('Department update failed:', error);
-          alert('Failed to update department. Please try again.');
-          return throwError(error);
-        })
-      );
+  // Updated method to update department and email
+  public updateProfile(currentEmail: string, newEmail: string, department: string) {
+    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/updateprofile.php`, { 
+      currentEmail, 
+      newEmail, 
+      department 
+    })
+    .pipe(
+      map(response => {
+        console.log('Update profile response:', response);
+        
+        // If update is successful, update localStorage
+        if (response.success) {
+          if (newEmail !== currentEmail) {
+            localStorage.setItem('email', newEmail);
+            // Update token with new email
+            this.setToken(newEmail);
+          }
+          localStorage.setItem('department', department);
+        }
+        
+        return response;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Profile update failed:', error);
+        
+        // More specific error handling
+        if (error.error && error.error.message) {
+          alert(error.error.message);
+        } else {
+          alert('Failed to update profile. Please try again.');
+        }
+        
+        return throwError(error);
+      })
+    );
   }
-  
 }
