@@ -13,7 +13,7 @@ if (isset($postdata) && !empty($postdata)) {
     $pwd = trim($request->password);
 
     try {
-        $sql = "SELECT id, fullname, email, password, birthday, department FROM users WHERE email = :email";
+        $sql = "SELECT user_id, fullname, email, password, birthday, department FROM users WHERE email = :email";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

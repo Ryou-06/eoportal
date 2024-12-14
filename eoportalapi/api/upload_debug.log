@@ -1,0 +1,20 @@
+[2024-12-13 15:40:19] POST Data: Array
+(
+    [user_id] => 4333
+)
+
+[2024-12-13 15:40:19] FILES Data: Array
+(
+    [file] => Array
+        (
+            [name] => Fontelera.JohnAdrian_ITE_Lab_ACT _2.pdf
+            [full_path] => Fontelera.JohnAdrian_ITE_Lab_ACT _2.pdf
+            [type] => application/pdf
+            [tmp_name] => C:\xampppp\tmp\php81C4.tmp
+            [error] => 0
+            [size] => 67686
+        )
+
+)
+
+[2024-12-13 15:40:19] File upload error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`fourward_db`.`user_documents`, CONSTRAINT `user_documents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE)

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
 
 interface User {
-  id: number;
+  user_id: number;
   fullname: string;
   email: string;
   password: string;
@@ -24,7 +24,7 @@ interface AuthResponse {
 export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  private baseUrl: string = "http://localhost/eoportal/api";
+  private baseUrl: string = "http://localhost/eoportal/eoportalapi/api";
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
@@ -66,6 +66,9 @@ export class DataService {
             localStorage.setItem('email', user.email);
             localStorage.setItem('birthday', user.birthday);
             localStorage.setItem('department', user.department);
+            
+            // IMPORTANT: Set the user ID here
+            localStorage.setItem('user_id', user.user_id.toString());
             
             this.loggedInSubject.next(true);
             return { success: true, user };
@@ -140,5 +143,29 @@ export class DataService {
         return throwError(error);
       })
     );
+  }
+  uploadFile(userId: number, file: File) {
+    const formData = new FormData();
+    formData.append('id', userId.toString());
+    formData.append('file', file, file.name);
+  
+    return this.httpClient.post(`${this.baseUrl}/uploadfile.php`, formData, {
+      headers: {
+        'Accept': 'application/json'
+      },
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Upload error:', error);
+        // Your existing error handling
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+  fetchUserFiles(userId: number) {
+    return this.httpClient.get<File[]>(`${this.baseUrl}/fetchfiles.php`, {
+      params: { user_id: userId.toString() },
+    });
   }
 }
