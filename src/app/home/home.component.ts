@@ -1,105 +1,166 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { CommonModule } from '@angular/common';
-import { HttpEvent, HttpEventType } from '@angular/common/http'; // Add this import
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+
+interface FileWithType {
+  file: File;
+  documentType: string;
+  preview: string;
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidenavComponent, CommonModule],
+  imports: [SidenavComponent, CommonModule, FormsModule, MatIconModule, MatButtonModule, MatDividerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   
   totalDocuments = 5;
-  selectedFiles: File[] = [];
+  totalAssignedTasks = 0;
+  selectedFiles: FileWithType[] = [];
   userFiles: any[] = [];
+  userTasks: any[] = [];
   isModalOpen = false;
   isViewModalOpen = false;
+  isTaskViewModalOpen = false;
+  isCompanyResourcesModalOpen = false; // New modal for company resources
   username: string = '';
+  currentView: 'documents' | 'tasks' = 'documents';
 
-  // Inject DataService in the constructor
+
+
+  documentTypes = [
+    'Government-issued ID',
+    'Tax Identification Number',
+    'Resume', 
+    'Bank Account Details',
+    'Signed Employment Contract'
+  ];
+
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    // Retrieve the fullname from localStorage
     this.username = localStorage.getItem('fullname') || 'Employee';
-
     const userId = parseInt(localStorage.getItem('user_id') || '0');
     const email = localStorage.getItem('email');
-    console.log('Stored User ID:', userId);
-    console.log('Stored Email:', email);
-  
-    // Get the current login timestamp
-    const currentLoginTimestamp = new Date().getTime();
     
-    // Retrieve the last login timestamp
+    const currentLoginTimestamp = new Date().getTime();
     const lastLoginTimestamp = localStorage.getItem('lastLoginTimestamp');
 
-    // Check if this is a new login or a page refresh
     if (!lastLoginTimestamp || this.isNewLogin(currentLoginTimestamp, parseInt(lastLoginTimestamp))) {
-      
-      // Update the last login timestamp
       localStorage.setItem('lastLoginTimestamp', currentLoginTimestamp.toString());
     }
     this.fetchUserFiles();
   }
 
-  // Check if this is a new login (more than 5 minutes since last login)
   private isNewLogin(currentTimestamp: number, lastLoginTimestamp: number): boolean {
-    const FIVE_MINUTES = 5 * 60 * 1000; // 5 minutes in milliseconds
+    const FIVE_MINUTES = 5 * 60 * 1000;
     return (currentTimestamp - lastLoginTimestamp) > FIVE_MINUTES;
   }
-
-  // Open the file upload modal
+  
   openModal() {
     this.isModalOpen = true;
   }
 
-  // Close the file upload modal
   closeModal() {
     this.isModalOpen = false;
+    this.selectedFiles = [];
   }
 
-  // Open the "View" modal
   openViewModal() {
     this.isViewModalOpen = true;
   }
 
-  // Close the "View" modal
   closeViewModal() {
     this.isViewModalOpen = false;
   }
 
-  // Handle file selection (from input)
-  onFileSelected(event: any): void {
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedFiles = Array.from(event.target.files);
+  // Add this method to handle dragover event
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.processFiles(Array.from(input.files));
     }
   }
 
-  // Handle file drop (from drag-and-drop)
-  onFileDrop(event: any) {
+  onFileDrop(event: DragEvent): void {
     event.preventDefault();
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      // Add files to the selectedFiles array
-      this.selectedFiles = Array.from(files);
-      console.log('Files dropped:', this.selectedFiles);
+    event.stopPropagation();
+    
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.processFiles(Array.from(files));
     }
   }
 
-  // Prevent default behavior for drag over
-  onDragOver(event: any) {
-    event.preventDefault();
+  processFiles(files: File[]) {
+    files.forEach(file => {
+      // Check file type and size
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+
+      if (!allowedTypes.includes(file.type)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid File Type',
+          text: 'Only JPEG, PNG, GIF, and PDF files are allowed.'
+        });
+        return;
+      }
+
+      if (file.size > maxSize) {
+        Swal.fire({
+          icon: 'error',
+          title: 'File Too Large',
+          text: 'File must be less than 5MB.'
+        });
+        return;
+      }
+
+      // Create file preview
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedFiles.push({
+          file: file,
+          documentType: '', // Initially no type selected
+          preview: e.target.result
+        });
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
-  // Upload the document (file submission)
+  removeFile(index: number) {
+    this.selectedFiles.splice(index, 1);
+  }
+
   submitFile(): void {
     const userId = parseInt(localStorage.getItem('user_id') || '0');
+    
+    // Validate document types are selected
+    const unselectedTypes = this.selectedFiles.filter(f => !f.documentType);
+    if (unselectedTypes.length > 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Document Type Missing',
+        text: 'Please select a document type for all uploaded files.'
+      });
+      return;
+    }
     
     if (this.selectedFiles.length === 0) {
       Swal.fire({
@@ -119,23 +180,21 @@ export class HomeComponent implements OnInit {
       return;
     }
   
-    this.selectedFiles.forEach((file) => {
-      this.dataService.uploadFile(userId, file).subscribe({
+    this.selectedFiles.forEach((fileObj) => {
+      this.dataService.uploadFile(userId, fileObj.file, fileObj.documentType).subscribe({
         next: (event: HttpEvent<any>) => {
           switch (event.type) {
-            case HttpEventType.UploadProgress:
-              console.log('Upload progress', Math.round(100 * event.loaded / (event.total || 1)));
-              break;
             case HttpEventType.Response:
               const body = event.body;
               if (body && body.success) {
                 Swal.fire({
                   icon: 'success',
                   title: 'Upload Successful',
-                  text: `${file.name} uploaded successfully`
+                  text: `${fileObj.file.name} uploaded successfully`
                 });
                 this.fetchUserFiles();
                 this.isModalOpen = false;
+                this.selectedFiles = [];
               } else {
                 Swal.fire({
                   icon: 'error',
@@ -157,6 +216,7 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+
   fetchUserFiles(): void {
     const userId = parseInt(localStorage.getItem('user_id') || '0');
     if (userId) {
@@ -164,12 +224,82 @@ export class HomeComponent implements OnInit {
         next: (files: any[]) => {
           console.log('Fetched files:', files);
           this.userFiles = files;
+          // Update totalDocuments to reflect the number of files
+          this.totalDocuments = files.length;
         },
         error: (error: any) => {
           console.error('Error fetching files:', error);
+          // Reset totalDocuments if there's an error
+          this.totalDocuments = 0;
+        }
+      });
+    } else {
+      // Reset totalDocuments if no user ID
+      this.totalDocuments = 0;
+    }
+  }
+  // Add this method to your component
+canSubmit(): boolean {
+  return this.selectedFiles.length > 0 && 
+         this.selectedFiles.every(file => file.documentType);
+}
+
+deleteFile(fileId: number) {
+  // Show confirmation dialog
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to delete this file?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.dataService.deleteFile(fileId).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            Swal.fire(
+              'Deleted!', 
+              'Your file has been deleted.', 
+              'success'
+            );
+            // Refresh the user files list
+            this.fetchUserFiles();
+          } else {
+            Swal.fire(
+              'Error!', 
+              response.message || 'Failed to delete file', 
+              'error'
+            );
+          }
+        },
+        error: (error) => {
+          console.error('Delete file error:', error);
+          Swal.fire(
+            'Error!', 
+            'Unable to delete file', 
+            'error'
+          );
         }
       });
     }
+  });
+}
+navigateToTasks() {
+    this.currentView = 'tasks';
   }
 
+  navigateToDocuments() {
+    this.currentView = 'documents';
+  }
+
+  openTaskViewModal() {
+    this.isTaskViewModalOpen = true;
+  }
+
+  closeTaskViewModal() {
+    this.isTaskViewModalOpen = false;
+  }
+  
 }

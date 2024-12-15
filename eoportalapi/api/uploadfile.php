@@ -17,8 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Proceed with POST request handling
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve user ID from POST data
+    // Retrieve user ID and document type from POST data
     $inputUserId = $_POST['id']; 
+    $documentType = $_POST['documentType'] ?? ''; // Use null coalescing operator for default empty string
+
 
     try {
         // Verify that the user exists in the users table
@@ -41,11 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filename = basename($file['name']);
         $uploadDir = '../uploads/files/';
         
-        // Create a unique filename to prevent overwriting
         $uniqueFilename = uniqid() . '_' . $filename;
         $filePath = $uploadDir . $uniqueFilename;
 
-        // Ensure upload directory exists
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
@@ -53,11 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Move the uploaded file to the upload directory
         if (move_uploaded_file($file['tmp_name'], $filePath)) {
             // Insert file record into the user_documents table
-            $insertSql = "INSERT INTO user_documents (user_id, filename, filepath) VALUES (:user_id, :filename, :filepath)";
+            $insertSql = "INSERT INTO user_documents (user_id, filename, filepath, docstype) VALUES (:user_id, :filename, :filepath, :docstype)";
             $insertStmt = $pdo->prepare($insertSql);
             $insertStmt->bindParam(':user_id', $inputUserId, PDO::PARAM_INT);
             $insertStmt->bindParam(':filename', $filename);
             $insertStmt->bindParam(':filepath', $filePath);
+            $insertStmt->bindParam(':docstype', $documentType);
             $insertStmt->execute();
 
             // Return success response

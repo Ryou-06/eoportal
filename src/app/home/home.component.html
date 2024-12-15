@@ -1,59 +1,158 @@
 <div class="container">
-    <div class="top-container">
-      <h1 style="color:rgb(255, 255, 255)">Welcome Back, {{ username }}!</h1>
-      <div class="content-container">
-        <div class="total-documents">
-          <h3>Total Documents Needed</h3>
+  <div class="top-container">
+    <h1>Welcome Back, {{ username }}!</h1>
+    <div class="content-container">
+       <!-- Documents Section -->
+       <div *ngIf="currentView === 'documents'" class="total-documents">
+        <div class="section-header">
+          <button class="forward-btn" aria-label="Go to Tasks" (click)="navigateToTasks()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <h3>Total of Documents Submitted</h3>
           <button class="view-btn" (click)="openViewModal()">View</button>
-          <!-- Display the number of total documents below the "View" button -->
-          <p>{{ totalDocuments }}</p>
         </div>
-        
-        <!-- Button for triggering the upload modal -->
-        <div class="upload-section">
-          <h3>Document Upload</h3>
-          <button (click)="openModal()">+</button>
+        <p>{{ totalDocuments }}</p>
+      </div>
+      
+      <!-- Tasks Section -->
+      <div *ngIf="currentView === 'tasks'" class="total-tasks">
+        <div class="section-header">
+          <button class="back-btn" aria-label="Go to Documents" (click)="navigateToDocuments()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          
+          <h3>Total of Assigned Tasks</h3>
+          <button class="view-btn" (click)="openTaskViewModal()">View</button>
         </div>
+        <p>{{ totalAssignedTasks }}</p>
       </div>
-    </div>
-    
-    <!-- Company Resources Section -->
-    <div class="company-resources">
-      <h3>Company Resources</h3>
-      <p>Here you can upload or view company-related resources such as guides, templates, etc.</p>
-    </div>
-  </div>
-  
-  <!-- Modal for file upload -->
-  <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
-    <div class="modal" (click)="$event.stopPropagation()">
-      <div class="drag-area" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
-        <p>Drag your files here</p>
-        <input type="file" (change)="onFileSelected($event)" />
-      </div>
-  
-      <!-- Display the selected files as a list -->
-      <div class="file-list" *ngIf="selectedFiles.length > 0">
-        <h4>Selected Files:</h4>
-        <ul>
-          <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
-        </ul>
-      </div>
-  
-      <!-- Buttons Container -->
-      <div class="buttons-container">
-        <button class="cancel-btn"(click)="closeModal()">Cancel</button>
-        <button class="submit-btn" (click)="submitFile()">Submit</button>
+      
+      <div class="upload-section">
+        <h3>Document Upload</h3>
+        <button class="upload" (click)="openModal()">+</button>
       </div>
     </div>
   </div>
   
-  <!-- Modal for viewing total documents -->
+  <div class="company-resources">
+    <h3>Company Resources</h3>
+    <p>Here you can upload or view company-related resources such as guides, templates, etc.</p>
+  </div>
+</div>
+
+<!-- File Upload Modal -->
+<div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="drag-area" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+      <p>Drag your files here</p>
+      <input type="file" (change)="onFileSelected($event)" multiple accept=".jpg,.jpeg,.png,.gif,.pdf" />
+    </div>
+
+    <!-- File Preview and Type Selection -->
+    <div class="scrollable-container">
+      <div class="file-preview-container">
+        <div *ngIf="selectedFiles.length > 0; else noFilesTemplate">
+          <div *ngFor="let fileObj of selectedFiles; let i = index" class="file-preview-item">
+            <button class="remove-file-btn" (click)="removeFile(i)">×</button>
+            <div class="preview-content">
+              <img *ngIf="fileObj.preview.startsWith('data:image')" [src]="fileObj.preview" alt="File Preview" />
+              <div *ngIf="fileObj.preview.startsWith('data:application/pdf')" class="pdf-preview">
+                PDF
+              </div>
+              
+              <div class="file-details">
+                <p>{{ fileObj.file.name }}</p>
+                <select [(ngModel)]="fileObj.documentType" class="document-type-select">
+                  <option value="">Select Document Type</option>
+                  <option *ngFor="let type of documentTypes" [value]="type">{{ type }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Placeholder Template -->
+        <ng-template #noFilesTemplate>
+          <p class="placeholder-text">No files uploaded. Start by uploading your documents.</p>
+        </ng-template>
+      </div>
+    </div>
+
+
+
+    <div class="buttons-container">
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="submit-btn" (click)="submitFile()">Submit</button>
+    </div>
+  </div>
+</div>
+
+  <!-- View Documents Modal -->
   <div *ngIf="isViewModalOpen" class="modal-overlay" (click)="closeViewModal()">
-    <div class="modal" (click)="$event.stopPropagation()">
-      <h3>View Total Documents</h3>
-      <p>Here you can view the details of the total documents needed.</p>
-      <!-- Add more details or dynamic content here -->
-      <button class="back-btn" (click)="closeViewModal()">Back</button>
+    <div class="modal-view" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeViewModal()">×</button>
+      <h3>View Submitted Documents</h3>
+      <div class="documents-list">
+        <table *ngIf="userFiles.length > 0; else noDocumentsTemplate">
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Document Type</th>
+              <th>Upload Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of userFiles">
+              <td>{{ file.filename }}</td>
+              <td>{{ file.docstype }}</td>
+              <td>{{ file.upload_date }}</td>
+              <td>
+                <button class="delete-file-btn" (click)="deleteFile(file.id)">
+                  🗑️
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #noDocumentsTemplate>
+          <p>No documents have been uploaded yet.</p>
+        </ng-template>
+      </div>
     </div>
   </div>
+  <!-- New Tasks View Modal -->
+<div *ngIf="isTaskViewModalOpen" class="modal-overlay" (click)="closeTaskViewModal()">
+  <div class="modal-view" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeTaskViewModal()">×</button>
+    <h3>View Assigned Tasks</h3>
+    <div class="tasks-list">
+      <table *ngIf="userTasks.length > 0; else noTasksTemplate">
+        <thead>
+          <tr>
+            <th>Task Name</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of userTasks">
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noTasksTemplate>
+        <p>No tasks have been assigned yet.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
 
+export interface UserFile {
+  id: number;
+  filename: string;
+  filepath: string;
+  upload_date: string;
+  document_type: string;
+}
+
 interface User {
   user_id: number;
   fullname: string;
@@ -144,10 +152,11 @@ export class DataService {
       })
     );
   }
-  uploadFile(userId: number, file: File) {
+  uploadFile(userId: number, file: File, documentType: string) {
     const formData = new FormData();
     formData.append('id', userId.toString());
     formData.append('file', file, file.name);
+    formData.append('documentType', documentType); // Add document type
   
     return this.httpClient.post(`${this.baseUrl}/uploadfile.php`, formData, {
       headers: {
@@ -158,7 +167,6 @@ export class DataService {
     }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Upload error:', error);
-        // Your existing error handling
         return throwError(() => new Error(error.message));
       })
     );
@@ -167,5 +175,15 @@ export class DataService {
     return this.httpClient.get<File[]>(`${this.baseUrl}/fetchfiles.php`, {
       params: { user_id: userId.toString() },
     });
+  }
+  deleteFile(fileId: number) {
+    return this.httpClient.delete<{success: boolean, message?: string}>(`${this.baseUrl}/deletefile.php`, {
+      params: { file_id: fileId.toString() }
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Delete file error:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
   }
 }

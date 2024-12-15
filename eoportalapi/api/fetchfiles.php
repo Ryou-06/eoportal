@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $userId = $_GET['user_id']; // ID of the logged-in user
 
     try {
-        $sql = "SELECT id, filename, filepath, upload_date FROM user_documents WHERE user_id = :user_id";
+        $sql = "SELECT id, filename, upload_date, docstype FROM user_documents WHERE user_id = :user_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
