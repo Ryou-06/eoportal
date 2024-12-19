@@ -59,7 +59,10 @@ export class HomeComponent implements OnInit {
     if (!lastLoginTimestamp || this.isNewLogin(currentLoginTimestamp, parseInt(lastLoginTimestamp))) {
       localStorage.setItem('lastLoginTimestamp', currentLoginTimestamp.toString());
     }
-    this.fetchUserFiles();
+    if (userId) {
+      this.fetchUserTasks(userId);
+      this.fetchUserFiles();
+    }
   }
 
   private isNewLogin(currentTimestamp: number, lastLoginTimestamp: number): boolean {
@@ -301,5 +304,31 @@ navigateToTasks() {
   closeTaskViewModal() {
     this.isTaskViewModalOpen = false;
   }
-  
+  fetchUserTasks(userId: number): void {
+    this.dataService.fetchUserTasks(userId).subscribe({
+      next: (tasks: any[]) => {
+        console.log('Fetched tasks:', tasks);
+        this.userTasks = tasks;
+        this.totalAssignedTasks = tasks.length;
+      },
+      error: (error: any) => {
+        console.error('Error fetching tasks:', error);
+        this.totalAssignedTasks = 0;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to fetch tasks. Please try again later.'
+        });
+      }
+    });
+  }
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
 }

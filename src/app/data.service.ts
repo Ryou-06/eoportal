@@ -27,6 +27,17 @@ interface AuthResponse {
   user?: User;
   profilePicture?: string;  // Add this line to include the profilePicture property
 }
+export interface Task {
+  id: number;
+  task_name: string;
+  task_description: string;
+  task_instructions: string | null;
+  due_date: string;
+  status: 'Pending' | 'In Progress' | 'Completed';
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -211,5 +222,15 @@ export class DataService {
           return throwError(() => error);
         })
       );
+  }
+  fetchUserTasks(userId: number) {
+    return this.httpClient.get<Task[]>(`${this.baseUrl}/fetchtasks.php`, {
+      params: { user_id: userId.toString() }
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching tasks:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
   }
 }

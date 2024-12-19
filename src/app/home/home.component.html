@@ -137,16 +137,20 @@
           <tr>
             <th>Task Name</th>
             <th>Description</th>
+            <th>Instructions</th>
             <th>Due Date</th>
             <th>Status</th>
+            <th>Created By</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let task of userTasks">
-            <td>{{ task.name }}</td>
-            <td>{{ task.description }}</td>
-            <td>{{ task.due_date }}</td>
+            <td>{{ task.task_name }}</td>
+            <td>{{ task.task_description }}</td>
+            <td>{{ task.task_instructions }}</td>
+            <td>{{ formatDate(task.due_date) }}</td>
             <td>{{ task.status }}</td>
+            <td>{{ task.created_by }}</td>
           </tr>
         </tbody>
       </table>
