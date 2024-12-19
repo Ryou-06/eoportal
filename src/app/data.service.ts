@@ -34,8 +34,8 @@ interface AuthResponse {
 export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  private baseUrl: string = "http://localhost/eoportal/eoportalapi/api";
-  private uploadBaseUrl: string = "http://localhost/eoportal/eoportalapi"; // Add this line
+  private baseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api";
+  private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; // Add this line
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
