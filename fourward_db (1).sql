@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 16, 2024 at 04:11 PM
--- Server version: 10.4.32-MariaDB
+-- Host: localhost:3306
+-- Generation Time: Dec 19, 2024 at 07:47 PM
+-- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,10 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `admin_id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password_hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `admin_username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `admin_username`, `password`) VALUES
+(1, 'admin1', 'adminpassword');
 
 -- --------------------------------------------------------
 
@@ -45,22 +52,6 @@ CREATE TABLE `task_logs` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `status_change` enum('Assigned','In Progress','Completed') DEFAULT NULL,
   `comment` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `task_table`
---
-
-CREATE TABLE `task_table` (
-  `task_id` int(10) UNSIGNED NOT NULL,
-  `task_title` varchar(255) NOT NULL,
-  `task_description` text DEFAULT NULL,
-  `due_date` date DEFAULT NULL,
-  `status` enum('Pending','In Progress','Completed') NOT NULL,
-  `assigned_to` int(10) UNSIGNED DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -93,7 +84,8 @@ INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `birthday`, `de
 (13, 'Dave Justin', 'dave@gmail.com', '$2y$10$LhHuMmVuHKyCmowpanpGo.NvgSCITk.Rp6AUNDQfkidsqUFMCZstO', '2024-12-13', 'IT Department'),
 (14, 'jaq', 'ja@gmail.com', '$2y$10$uL/Z/qbxW3faIAvoG79uAOx793uAzYAXp5w7MBGfQ1TrqtKDbgNXS', '2024-12-18', 'IT Department'),
 (15, 'try', 'try@gmail.com', '$2y$10$umb9NQbd1Em8HJFmktPs9.vJHJR3lttCcIy1WqOw01QoouZ/Ghozq', '2024-12-12', 'Accounting'),
-(16, 'Jayvee Mayor', 'jayvee@gmail.com', '$2y$10$0lUzH5AqF6.pv0jV5GsgleDyCZo8BubIe4kxFyPpkJ1bvz8ElBdNS', '1994-10-12', 'IT Department');
+(16, 'Jayvee Mayor', 'jayvee@gmail.com', '$2y$10$0lUzH5AqF6.pv0jV5GsgleDyCZo8BubIe4kxFyPpkJ1bvz8ElBdNS', '1994-10-12', 'IT Department'),
+(17, 'John Ron Diza', 'johnrondiza1106@gmail.com', '$2y$10$rHWiVqmsDgAt.5ITwi8PNOjlMiji6I9hTz3FvAhVCl5JqUilcpUfm', '2003-11-06', 'IT Department');
 
 -- --------------------------------------------------------
 
@@ -146,20 +138,13 @@ INSERT INTO `user_documents` (`id`, `user_id`, `filename`, `filepath`, `upload_d
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `task_logs`
 --
 ALTER TABLE `task_logs`
   ADD PRIMARY KEY (`log_id`);
-
---
--- Indexes for table `task_table`
---
-ALTER TABLE `task_table`
-  ADD PRIMARY KEY (`task_id`);
 
 --
 -- Indexes for table `users`
@@ -183,19 +168,13 @@ ALTER TABLE `user_documents`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `task_table`
---
-ALTER TABLE `task_table`
-  MODIFY `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_documents`

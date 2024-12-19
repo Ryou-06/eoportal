@@ -18,12 +18,14 @@ interface User {
   password: string;
   birthday: string;
   department: string;
+  profile_picture?: string; // Add this field
 }
 
 interface AuthResponse {
   success: boolean;
   message?: string;
   user?: User;
+  profilePicture?: string;  // Add this line to include the profilePicture property
 }
 
 @Injectable({
@@ -33,6 +35,7 @@ export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   private baseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api";
+  private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; // Add this line
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
@@ -74,9 +77,12 @@ export class DataService {
             localStorage.setItem('email', user.email);
             localStorage.setItem('birthday', user.birthday);
             localStorage.setItem('department', user.department);
-            
-            // IMPORTANT: Set the user ID here
             localStorage.setItem('user_id', user.user_id.toString());
+            
+            // Store profile picture URL if available
+            if (user.profile_picture) {
+              localStorage.setItem('profilePicture', user.profile_picture);
+            }
             
             this.loggedInSubject.next(true);
             return { success: true, user };
@@ -91,6 +97,7 @@ export class DataService {
         })
       );
   }
+
 
   public userRegistration(fullname: string, email: string, password: string, birthday: string, department: string) {
     return this.httpClient.post<AuthResponse>(`${this.baseUrl}/register.php`, { fullname, email, password, birthday, department })
@@ -116,41 +123,42 @@ export class DataService {
   }
 
   // Updated method to update department and email
-  public updateProfile(currentEmail: string, newEmail: string, department: string) {
-    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/updateprofile.php`, { 
-      currentEmail, 
-      newEmail, 
-      department 
-    })
-    .pipe(
-      map(response => {
-        console.log('Update profile response:', response);
-        
-        // If update is successful, update localStorage
-        if (response.success) {
-          if (newEmail !== currentEmail) {
-            localStorage.setItem('email', newEmail);
-            // Update token with new email
-            this.setToken(newEmail);
+  public updateProfile(currentEmail: string, newEmail: string, department: string, profilePicture?: File) {
+    const formData = new FormData();
+    formData.append('currentEmail', currentEmail);
+    formData.append('newEmail', newEmail);
+    formData.append('department', department);
+    
+    if (profilePicture) {
+      formData.append('profilePicture', profilePicture);
+    }
+
+    return this.httpClient.post<{success: boolean, message: string, profilePicture?: string}>
+      (`${this.baseUrl}/updateprofile.php`, formData)
+      .pipe(
+        map(response => {
+          if (response.success) {
+            if (newEmail !== currentEmail) {
+              localStorage.setItem('email', newEmail);
+              this.setToken(newEmail);
+            }
+            localStorage.setItem('department', department);
+            
+            // If a new profile picture URL is returned, update localStorage
+            if (response.profilePicture) {
+              const fullUrl = response.profilePicture.startsWith('http') 
+                ? response.profilePicture 
+                : `${this.uploadBaseUrl}${response.profilePicture}`;
+              localStorage.setItem('profilePicture', fullUrl);
+            }
           }
-          localStorage.setItem('department', department);
-        }
-        
-        return response;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        console.error('Profile update failed:', error);
-        
-        // More specific error handling
-        if (error.error && error.error.message) {
-          alert(error.error.message);
-        } else {
-          alert('Failed to update profile. Please try again.');
-        }
-        
-        return throwError(error);
-      })
-    );
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Profile update failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
   uploadFile(userId: number, file: File, documentType: string) {
     const formData = new FormData();
@@ -185,5 +193,23 @@ export class DataService {
         return throwError(() => new Error(error.message));
       })
     );
+  }
+  public getProfilePicture(userId: number) {
+    return this.httpClient.get<{success: boolean, profile_picture: string | null}>
+      (`${this.baseUrl}/getprofilepicture.php?user_id=${userId}`)
+      .pipe(
+        map(response => {
+          if (response.success && response.profile_picture) {
+            // Store the full URL in localStorage
+            localStorage.setItem('profilePicture', response.profile_picture);
+            return response;
+          }
+          return { success: false, profile_picture: null };
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Failed to fetch profile picture:', error);
+          return throwError(() => error);
+        })
+      );
   }
 }
