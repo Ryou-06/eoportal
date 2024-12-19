@@ -32,7 +32,7 @@ interface AuthResponse {
 export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  private baseUrl: string = "http://localhost/eoportal/eoportalapi/api";
+  private baseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api";
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
