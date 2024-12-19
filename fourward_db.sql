@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2024 at 04:11 PM
+-- Generation Time: Dec 19, 2024 at 03:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,25 +75,27 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `birthday` date NOT NULL,
-  `department` varchar(255) NOT NULL
+  `department` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `birthday`, `department`) VALUES
-(6, 'Dave Arcilla', 'davearcilla@gmail.com', '$2y$10$/qoIFe.LKxJZfjwbvxh48eVQyQC/ZAluO/PiFqnkaJg8St33boVDS', '2024-12-12', 'IT Department'),
-(7, 'John Adrian Fontelera', 'jaa@gmail.com', '$2y$10$cnfXeQSoa2czJYkvF.QI3OGkGvgiKUmU2FPtwPunhlBU0rqoqwxhS', '2024-12-28', 'Marketing'),
-(8, 'Stephany Galo', 'steph@gmail.com', '$2y$10$o6.ysOdD43E.MFLMRr8sducf8UekbZJIEnMu0S0zVRz591IATL2VO', '2003-09-15', 'IT Department'),
-(9, 'Jaqt', 'jaqt@gmail.com', '$2y$10$j51nkGCQWyAMY.9Y8AjQp.2AJ/IhXR2NP8MmtT.DrzPXlLOJaAdmm', '2004-08-04', 'Accounting'),
-(10, 'lumiere', 'lumiere@gmail.com', '$2y$10$Oemw3TzWrye8oN2CVybJJO1XJJNaIHoE/0yBam5JDC54/lLOm1d7G', '2024-12-04', 'Human Resources'),
-(11, 'John Adrian F. Fontelera', 'fonteleraja@gmail.com', '$2y$10$PFTV7KK5v96autfpnuSsnuqzFGRKWAg/CCz0gpSp7exFWdr3GEDBS', '2004-08-04', 'Accounting'),
-(12, 'Boyet Muni', 'boyet@gmail.com', '$2y$10$DGV5owOs4n7ybu343dfaP.2RUH/dlLB0Zselfix1dGWDHUeK.S6T.', '1994-07-18', 'Marketing'),
-(13, 'Dave Justin', 'dave@gmail.com', '$2y$10$LhHuMmVuHKyCmowpanpGo.NvgSCITk.Rp6AUNDQfkidsqUFMCZstO', '2024-12-13', 'IT Department'),
-(14, 'jaq', 'ja@gmail.com', '$2y$10$uL/Z/qbxW3faIAvoG79uAOx793uAzYAXp5w7MBGfQ1TrqtKDbgNXS', '2024-12-18', 'IT Department'),
-(15, 'try', 'try@gmail.com', '$2y$10$umb9NQbd1Em8HJFmktPs9.vJHJR3lttCcIy1WqOw01QoouZ/Ghozq', '2024-12-12', 'Accounting'),
-(16, 'Jayvee Mayor', 'jayvee@gmail.com', '$2y$10$0lUzH5AqF6.pv0jV5GsgleDyCZo8BubIe4kxFyPpkJ1bvz8ElBdNS', '1994-10-12', 'IT Department');
+INSERT INTO `users` (`user_id`, `fullname`, `email`, `password`, `birthday`, `department`, `profile_picture`) VALUES
+(6, 'Dave Arcilla', 'davearcilla@gmail.com', '$2y$10$/qoIFe.LKxJZfjwbvxh48eVQyQC/ZAluO/PiFqnkaJg8St33boVDS', '2024-12-12', 'IT Department', NULL),
+(7, 'John Adrian Fontelera', 'jaa@gmail.com', '$2y$10$cnfXeQSoa2czJYkvF.QI3OGkGvgiKUmU2FPtwPunhlBU0rqoqwxhS', '2024-12-28', 'Marketing', NULL),
+(8, 'Stephany Galo', 'steph@gmail.com', '$2y$10$o6.ysOdD43E.MFLMRr8sducf8UekbZJIEnMu0S0zVRz591IATL2VO', '2003-09-15', 'IT Department', NULL),
+(9, 'Jaqt', 'jaqt@gmail.com', '$2y$10$j51nkGCQWyAMY.9Y8AjQp.2AJ/IhXR2NP8MmtT.DrzPXlLOJaAdmm', '2004-08-04', 'Accounting', NULL),
+(10, 'lumiere', 'lumiere@gmail.com', '$2y$10$Oemw3TzWrye8oN2CVybJJO1XJJNaIHoE/0yBam5JDC54/lLOm1d7G', '2024-12-04', 'Human Resources', NULL),
+(11, 'John Adrian F. Fontelera', 'fonteleraja@gmail.com', '$2y$10$PFTV7KK5v96autfpnuSsnuqzFGRKWAg/CCz0gpSp7exFWdr3GEDBS', '2004-08-04', 'Accounting', 'uploads/profile_pictures/1734616783_66354316131e99faae26fa4c_National Women\'s Health Month 2024.png'),
+(12, 'Boyet Muni', 'boyet@gmail.com', '$2y$10$DGV5owOs4n7ybu343dfaP.2RUH/dlLB0Zselfix1dGWDHUeK.S6T.', '1994-07-18', 'Marketing', NULL),
+(13, 'Dave Justin', 'dave@gmail.com', '$2y$10$LhHuMmVuHKyCmowpanpGo.NvgSCITk.Rp6AUNDQfkidsqUFMCZstO', '2024-12-13', 'IT Department', NULL),
+(14, 'jaq', 'ja@gmail.com', '$2y$10$uL/Z/qbxW3faIAvoG79uAOx793uAzYAXp5w7MBGfQ1TrqtKDbgNXS', '2024-12-18', 'IT Department', NULL),
+(15, 'try', 'try@gmail.com', '$2y$10$umb9NQbd1Em8HJFmktPs9.vJHJR3lttCcIy1WqOw01QoouZ/Ghozq', '2024-12-12', 'Accounting', NULL),
+(16, 'Jayvee Mayor', 'jayvee@gmail.com', '$2y$10$0lUzH5AqF6.pv0jV5GsgleDyCZo8BubIe4kxFyPpkJ1bvz8ElBdNS', '1994-10-12', 'IT Department', NULL),
+(17, 'jaa', 'ja123@gmail.com', '$2y$10$bW/1AvIOHMt4d4fPg1EaVu17VIuBqOCvwCyuxawOrouS3db8S5Rf.', '2024-12-06', 'Accounting', 'uploads/profile_picture/1734617798_66354316131e99faae26fa4c_National Women\'s Health Month 2024.png');
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,6 @@ INSERT INTO `user_documents` (`id`, `user_id`, `filename`, `filepath`, `upload_d
 (44, 11, 'John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e488e828ab_John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:10:06', 'Government-issued ID'),
 (45, 11, 'John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e4cf59f89f_John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:28:53', 'Resume'),
 (46, 11, 'Preview.png', '../uploads/files/675e4cf5ae679_Preview.png', '2024-12-15 03:28:53', 'Government-issued ID'),
-(47, 11, 'JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e4cf5ca65c_JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:28:53', 'Bank Account Details'),
 (48, 13, 'JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e4d1633022_JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:29:26', 'Government-issued ID'),
 (49, 13, 'Preview.png', '../uploads/files/675e4d163350a_Preview.png', '2024-12-15 03:29:26', 'Government-issued ID'),
 (50, 13, 'John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e4d1634ad6_John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:29:26', 'Tax Identification Number'),
@@ -136,7 +137,9 @@ INSERT INTO `user_documents` (`id`, `user_id`, `filename`, `filepath`, `upload_d
 (52, 15, 'John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e4dc305fc0_John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 03:32:19', 'Resume'),
 (55, 13, 'John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e5822267db_John AdrianFontelera-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 04:16:34', 'Bank Account Details'),
 (56, 13, 'JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '../uploads/files/675e58224ddf2_JayveeApiag-NETWORKING 2 BSI-certificate.pdf', '2024-12-15 04:16:34', 'Government-issued ID'),
-(58, 16, 'DATA_SURGE_CHAPTER_1.pdf', '../uploads/files/675fc78059951_DATA_SURGE_CHAPTER_1.pdf', '2024-12-16 06:24:00', 'Government-issued ID');
+(58, 16, 'DATA_SURGE_CHAPTER_1.pdf', '../uploads/files/675fc78059951_DATA_SURGE_CHAPTER_1.pdf', '2024-12-16 06:24:00', 'Government-issued ID'),
+(59, 17, 'BSIT-RM-EVALUATION-COMPLIANCE-FORM (2).pdf', '../uploads/files/6764272eb497a_BSIT-RM-EVALUATION-COMPLIANCE-FORM (2).pdf', '2024-12-19 14:01:18', 'Government-issued ID'),
+(60, 17, 'BSIT-RM-EVALUATION-COMPLIANCE-FORM (1).pdf', '../uploads/files/6764272eb73f7_BSIT-RM-EVALUATION-COMPLIANCE-FORM (1).pdf', '2024-12-19 14:01:18', 'Resume');
 
 --
 -- Indexes for dumped tables
@@ -195,13 +198,13 @@ ALTER TABLE `task_table`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_documents`
 --
 ALTER TABLE `user_documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables

@@ -15,8 +15,7 @@ export class ProfileComponent implements OnInit {
   birthday: string = '';
   department: string = '';
   email: string = '';
-  profileImage: string = '';
-  
+  profilePicture: string = '';
 
   constructor(
     private dataService: DataService, 
@@ -24,9 +23,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Check if user is logged in
     if (!this.dataService.isLoggedIn()) {
-      // Redirect to login if not logged in
       this.router.navigate(['/login']);
       return;
     }
@@ -36,11 +33,31 @@ export class ProfileComponent implements OnInit {
     this.email = localStorage.getItem('email') || 'N/A';
     this.birthday = this.formatBirthday(localStorage.getItem('birthday') || 'N/A');
     this.department = localStorage.getItem('department') || 'N/A';
-    this.profileImage = localStorage.getItem('profileImage') || 'https://via.placeholder.com/180';
-   
+    
+    // Get profile picture
+    const userId = Number(localStorage.getItem('user_id'));
+    if (!userId) {
+      this.handleProfilePictureError();
+      return;
+    }
+
+    // Always fetch fresh profile picture from server
+    this.dataService.getProfilePicture(userId).subscribe({
+      next: (response) => {
+        if (response.success && response.profile_picture) {
+          this.profilePicture = response.profile_picture;
+          // Update localStorage with the latest URL
+          localStorage.setItem('profilePicture', response.profile_picture);
+        } else {
+          this.handleProfilePictureError();
+        }
+      },
+      error: () => {
+        this.handleProfilePictureError();
+      }
+    });
   }
 
-  // Helper method to format birthday
   private formatBirthday(birthday: string): string {
     if (birthday === 'N/A') return birthday;
     try {
@@ -53,15 +70,14 @@ export class ProfileComponent implements OnInit {
       return birthday;
     }
   }
-
   
-  // Logout method
   logout() {
     this.dataService.deleteToken();
-    localStorage.clear(); // Clear all localStorage data
-    
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
-  // Method to handle profile image error
-
+  handleProfilePictureError() {
+    this.profilePicture = 'https://via.placeholder.com/180';
+  }
 }

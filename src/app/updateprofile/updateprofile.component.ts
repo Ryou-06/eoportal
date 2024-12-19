@@ -18,6 +18,8 @@ export class UpdateprofileComponent implements OnInit {
   birthday: string = '';
   department: string = '';
   selectedDepartment: string = '';
+  selectedFile: File | null = null;
+  profilePictureUrl: string | null = null;
 
   departments: string[] = [
     'Accounting', 
@@ -33,57 +35,85 @@ export class UpdateprofileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Check if user is logged in
     if (!this.dataService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
 
-    // Retrieve user information from localStorage
     this.fullname = localStorage.getItem('fullname') || 'Unknown';
     this.currentEmail = localStorage.getItem('email') || 'N/A';
     this.birthday = localStorage.getItem('birthday') || 'N/A';
     this.department = localStorage.getItem('department') || 'N/A';
     this.selectedDepartment = this.department;
-    
-    // Set new email to current email by default
     this.newEmail = this.currentEmail;
+
+    const userId = Number(localStorage.getItem('user_id'));
+    if (userId) {
+      this.dataService.getProfilePicture(userId).subscribe({
+        next: (response) => {
+          if (response.success && response.profile_picture) {
+            this.profilePictureUrl = response.profile_picture;
+          } else {
+            this.handleProfilePictureError();
+          }
+        },
+        error: () => {
+          this.handleProfilePictureError();
+        }
+      });
+    } else {
+      this.handleProfilePictureError();
+    }
   }
 
+  handleProfilePictureError() {
+    this.profilePictureUrl = 'https://via.placeholder.com/180';
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profilePictureUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   onSave() {
-    // Validate email
     if (!this.isValidEmail(this.newEmail)) {
       alert('Please enter a valid email address.');
       return;
     }
 
-    // Call service method to update profile
-    this.dataService.updateProfile(this.currentEmail, this.newEmail, this.selectedDepartment)
-      .subscribe({
-        next: (response) => {
-          if (response.success) {
-            // Show success message
-            alert('Profile updated successfully');
-            
-            // Navigate back to profile
-            this.router.navigate(['/profile']);
-          } else {
-            // Show error message
-            alert(response.message || 'Failed to update profile');
-          }
-        },
-        error: (error) => {
-          console.error('Update failed:', error);
-          // Error handling is now done in the service
+    this.dataService.updateProfile(
+      this.currentEmail, 
+      this.newEmail, 
+      this.selectedDepartment,
+      this.selectedFile || undefined
+    ).subscribe({
+      next: (response) => {
+        if (response.success) {
+          alert('Profile updated successfully');
+          this.router.navigate(['/profile']);
+        } else {
+          alert(response.message || 'Failed to update profile');
         }
-      });
+      },
+      error: (error) => {
+        console.error('Update failed:', error);
+      }
+    });
   }
 
   onCancel() {
     // Navigate back to profile
     this.router.navigate(['/profile']);
   }
+
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

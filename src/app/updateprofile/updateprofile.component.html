@@ -1,11 +1,25 @@
 <div class="profile-wrapper">
   <div class="glass-container">
-      <div class="profile-header">
+    <div class="profile-header">
+      <div class="profile-pic-container">
         <img 
-          src="https://via.placeholder.com/180" 
+          [src]="profilePictureUrl" 
           alt="Profile Picture" 
           class="profile-pic"
         >
+        <div class="profile-pic-overlay">
+          <input 
+            type="file" 
+            (change)="onFileSelected($event)" 
+            accept="image/*" 
+            id="profile-pic-input"
+            class="hidden"
+          >
+          <label for="profile-pic-input" class="change-pic-btn">
+            Change Picture
+          </label>
+        </div>
+      </div>
         <h1 class="employee-name">{{ fullname }}</h1>
 
         <div class="details-container">
