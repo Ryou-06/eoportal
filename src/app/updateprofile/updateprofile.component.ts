@@ -57,7 +57,8 @@ export class UpdateprofileComponent implements OnInit {
             this.handleProfilePictureError();
           }
         },
-        error: () => {
+        error: (error) => {
+          console.error('Error fetching profile picture:', error);
           this.handleProfilePictureError();
         }
       });

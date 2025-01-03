@@ -46,7 +46,7 @@ export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   private baseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api";
-  private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api"; // Add this line
+private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; // Remove /api
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
@@ -211,7 +211,7 @@ export class DataService {
       .pipe(
         map(response => {
           if (response.success && response.profile_picture) {
-            // Store the full URL in localStorage
+            // Use the full URL returned from the server
             localStorage.setItem('profilePicture', response.profile_picture);
             return response;
           }

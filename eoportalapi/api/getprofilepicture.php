@@ -9,8 +9,8 @@ include_once("database.php");
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json');
 
-// Handle GET request for profile picture
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id'])) {
     $userId = filter_var($_GET['user_id'], FILTER_VALIDATE_INT);
     
@@ -21,24 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id'])) {
     }
 
     try {
-        // Get user's profile picture path
         $stmt = $pdo->prepare("SELECT profile_picture FROM users WHERE user_id = :userId");
         $stmt->bindParam(':userId', $userId);
         $stmt->execute();
         
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if ($result && $result['profile_picture']) {
+        if ($result && !empty($result['profile_picture'])) {
             // Construct the full URL for the profile picture
-            $baseUrl = 'http://localhost/eoportal/eoportalapi';  // Update this to match your server configuration
+            $baseUrl = 'http://localhost/4ward/eoportal/eoportalapi'; // Update this to match your actual base URL
             $profilePicture = $result['profile_picture'];
             
-            // Ensure the path starts with a forward slash
-            if (!str_starts_with($profilePicture, '/')) {
-                $profilePicture = '/' . $profilePicture;
-            }
+            // Remove any leading slashes to prevent double slashes in URL
+            $profilePicture = ltrim($profilePicture, '/');
             
-            $fullUrl = $baseUrl . $profilePicture;
+            $fullUrl = $baseUrl . '/' . $profilePicture;
             
             echo json_encode([
                 'success' => true,
