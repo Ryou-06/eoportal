@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { TasksComponent } from './tasks/tasks.component';
 export const routes: Routes = [
   
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'updateprofile', component: UpdateprofileComponent },
+      { path: 'tasks', component: TasksComponent},
       
     ],
   },    

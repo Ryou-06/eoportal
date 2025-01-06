@@ -1,0 +1,87 @@
+<!-- tasks.component.html -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4 sm:p-8">
+    <div class="container mx-auto max-w-7xl">
+        <h2 class="text-4xl font-bold animate-gradient mb-6">My Tasks</h2>
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Tasks List Container -->
+            <div class="w-full md:w-2/5 lg:w-1/3">
+                <div class="glass-container p-6 h-[calc(100vh-180px)]">
+                    <div class="flex flex-col sm:flex-row gap-6 justify-between items-center mb-8">
+                        <select 
+                            (change)="onSortChange($event)"
+                            class="sort-button rounded-xl text-white font-medium"
+                        >
+                            <option value="created_at">Sort by Created Date</option>
+                            <option value="due_date">Sort by Due Date</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-4 overflow-y-auto task-list-container">
+                        <div *ngFor="let task of tasks" 
+                             [ngClass]="{'selected-task': selectedTask?.id === task.id}"
+                             (click)="selectTask(task)"
+                             class="task-card p-5 rounded-xl cursor-pointer transition-all duration-300 hover:scale-[1.02]">
+                            <div class="flex flex-col gap-3">
+                                <h3 class="text-xl font-semibold text-white">{{task.task_name}}</h3>
+                                <div class="flex flex-wrap gap-3">
+                                    <span class="date-chip text-blue-200">
+                                        Created: {{formatDate(task.created_at)}}
+                                    </span>
+                                    <span class="date-chip text-purple-200">
+                                        Due: {{formatDate(task.due_date)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Details Container -->
+            <div class="flex-1">
+                <div class="glass-container p-6 h-[calc(100vh-180px)]" *ngIf="selectedTask" style="margin-left:700px; margin-top:-780px; width: 55%;">
+                    <div class="space-y-6 overflow-y-auto h-full details-container">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-white">{{selectedTask.task_name}}</h3>
+                            <span [ngClass]="{
+                                'bg-yellow-500': selectedTask.status === 'Pending',
+                                'bg-blue-500': selectedTask.status === 'In Progress',
+                                'bg-green-500': selectedTask.status === 'Completed'
+                            }" class="px-4 py-2 rounded-full text-white text-sm font-medium">
+                                {{selectedTask.status}}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <p class="text-gray-400 text-sm">Created By</p>
+                                <p class="text-white">{{selectedTask.created_by}}</p>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <p class="text-gray-400 text-sm">Due Date</p>
+                                <p class="text-white">{{formatDate(selectedTask.due_date)}}</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-white mb-2">Description</h4>
+                                <p class="text-gray-200">{{selectedTask.task_description}}</p>
+                            </div>
+
+                            <div class="bg-white/10 p-4 rounded-lg" *ngIf="selectedTask.task_instructions">
+                                <h4 class="text-lg font-semibold text-white mb-2">Instructions</h4>
+                                <p class="text-gray-200">{{selectedTask.task_instructions}}</p>
+                            </div>
+                        </div>
+
+                        <div class="text-sm text-gray-400">
+                            <p>Created: {{formatDateTime(selectedTask.created_at)}}</p>
+                            <p>Last Updated: {{formatDateTime(selectedTask.updated_at)}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

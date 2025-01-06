@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+select, h3, h2, span {
+    font-family: 'Poppins', sans-serif;
+}
+
+h3, h2, span {
+    color: white;
+}
+
+h3, span {
+    margin-left: 10px;
+}
+
+.glass-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 40%;
+}
+
+/* Task List Container Specific Styles */
+.task-list-container {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 0 8px;
+}
+
+.task-list-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Task Details Container Specific Styles */
+.details-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.details-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.details-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin: 4px;
+}
+
+.details-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.details-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.task-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: visible; /* Changed from hidden to show the bookmark */
+    border-radius: 10px;
+    margin-bottom: 16px;
+    padding: 15px;
+}
+
+/* Add this new CSS for the bookmark design */
+.task-card::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    width: 20px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+}
+
+/* Add hover effect for the bookmark */
+.task-card:hover::after {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(2px);
+}
+
+.task-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06));
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(59, 130, 246, 0.1);
+}
+
+.task-card:hover::before {
+    opacity: 1;
+}
+
+.sort-button {
+    background: none;
+    padding: 1rem 1rem;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 207px;
+    color: white;
+    margin-left: 420px;
+    border: none;
+    transition: opacity 0.3s ease;
+}
+option{
+    color:black;
+}
+.sort-button:hover {
+    opacity: 0.8;
+    transform: none;
+    box-shadow: none;
+}
+
+.date-chip {
+    background: rgba(59, 130, 246, 0.15);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+    .glass-container {
+        width: 100%;
+        height: 70vh;
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+    
+    .task-card {
+        padding: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .sort-button {
+        width: 100%;
+        padding: 0.75rem 1rem;
+    }
+}
