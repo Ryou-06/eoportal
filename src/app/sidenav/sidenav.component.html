@@ -1,26 +1,41 @@
+<!-- sidenav.component.html -->
 <div class="main-layout">
-  <div class="top-nav">
-    <div class="top-nav-header">
-      <span>Portal</span>
+  <div class="side-nav">
+    <div class="main-nav-content">
+      <div class="side-nav-header">
+        <span>Portal</span>
+      </div>
+      <ul class="side-nav-links">
+        <li class="profile-link">
+          <a (click)="toggleProfileDropdown()">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <ul class="dropdown-menu" [class.show]="isProfileDropdownVisible">
+            <li><a routerLink="/profile">View Profile</a></li>
+            <li><a routerLink="/updateprofile">Update Profile</a></li>
+          </ul>
+        </li>
+        <li [class.shifted]="isProfileDropdownVisible">
+          <a routerLink="/home" routerLinkActive="active-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li [class.shifted]="isProfileDropdownVisible">
+          <a routerLink="/tasks" routerLinkActive="active-link">
+            <i class="fas fa-tasks"></i>
+            <span>Tasks</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <ul class="top-nav-links">
-      <li>
-        <a routerLink="/home" routerLinkActive="active-link">
-          <i class="fas fa-home"></i> <p>Home</p>
-        </a>
-      </li>
-      <li class="profile-link" (click)="toggleProfileDropdown()">
-        <a>
-          <i class="fas fa-user" style="margin-top: 5px;"></i>
-        </a>
-        <ul *ngIf="isProfileDropdownVisible" class="dropdown-menu">
-          <li><a routerLink="/profile">View Profile</a></li>
-          <li><a routerLink="/updateprofile">Update Profile</a></li>
-          <!-- Add the logout button here -->
-          <li><a (click)="logout()">Logout</a></li> <!-- Logout link -->
-        </ul>
-      </li>
-    </ul>
+    <div class="logout-container">
+      <button class="logout-button" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </button>
+    </div>
   </div>
   <div class="main-content">
     <div class="floating-object floating-object-1"></div>

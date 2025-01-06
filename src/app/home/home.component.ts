@@ -8,6 +8,7 @@ import { DataService } from '../data.service';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { TaskTimelineChartComponent } from '../task-timeline-chart/task-timeline-chart.component';
 
 interface FileWithType {
   file: File;
@@ -18,7 +19,7 @@ interface FileWithType {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidenavComponent, CommonModule, FormsModule, MatIconModule, MatButtonModule, MatDividerModule],
+  imports: [SidenavComponent, CommonModule, FormsModule, MatIconModule, MatButtonModule, MatDividerModule, TaskTimelineChartComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -34,10 +35,7 @@ export class HomeComponent implements OnInit {
   isTaskViewModalOpen = false;
   isCompanyResourcesModalOpen = false; // New modal for company resources
   username: string = '';
-  currentView: 'documents' | 'tasks' = 'documents';
-
-
-
+ 
   documentTypes = [
     'Government-issued ID',
     'Tax Identification Number',
@@ -289,13 +287,6 @@ deleteFile(fileId: number) {
     }
   });
 }
-navigateToTasks() {
-    this.currentView = 'tasks';
-  }
-
-  navigateToDocuments() {
-    this.currentView = 'documents';
-  }
 
   openTaskViewModal() {
     this.isTaskViewModalOpen = true;
@@ -331,4 +322,5 @@ navigateToTasks() {
       minute: '2-digit'
     });
   }
+  
 }

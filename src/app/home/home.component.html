@@ -1,50 +1,43 @@
-<div class="container">
-  <div class="top-container">
+<div class="top-container">
+  <div class="header-container">
     <h1>Welcome Back, {{ username }}!</h1>
-    <div class="content-container">
-       <!-- Documents Section -->
-       <div *ngIf="currentView === 'documents'" class="total-documents">
-        <div class="section-header">
-          <button class="forward-btn" aria-label="Go to Tasks" (click)="navigateToTasks()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
-          <h3>Total of Documents Submitted</h3>
-          <button class="view-btn" (click)="openViewModal()">View</button>
-        </div>
-        <p>{{ totalDocuments }}</p>
+    <button class="view-btn" (click)="openViewModal()">View</button>
+    <button class="upload-btn" (click)="openModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      Upload Documents
+    </button>
+  </div>
+  <div class="content-container">
+    <!-- Documents Section -->
+    <div class="total-documents">
+      <div class="section-header">
+        <h3>Total of Documents Submitted</h3>
+        
       </div>
-      
-      <!-- Tasks Section -->
-      <div *ngIf="currentView === 'tasks'" class="total-tasks">
-        <div class="section-header">
-          <button class="back-btn" aria-label="Go to Documents" (click)="navigateToDocuments()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-          </button>
-          
-          <h3>Total of Assigned Tasks</h3>
-          <button class="view-btn" (click)="openTaskViewModal()">View</button>
-        </div>
-        <p>{{ totalAssignedTasks }}</p>
+      <p>{{ totalDocuments }}</p>
+    </div>
+    
+    <!-- Tasks Section -->
+    <div class="total-tasks">
+      <div class="section-header">
+        <h3>Total of Assigned Tasks</h3>
+        
       </div>
-      
-      <div class="upload-section">
-        <h3>Document Upload</h3>
-        <button class="upload" (click)="openModal()">+</button>
-      </div>
+      <p>{{ totalAssignedTasks }}</p>
     </div>
   </div>
-  
-  <div class="company-resources">
-    <h3>Company Resources</h3>
-    <p>Here you can upload or view company-related resources such as guides, templates, etc.</p>
-  </div>
 </div>
+
+<div class="company-resources">
+  <h3>Company Resources</h3>
+  <p>Here you can upload or view company-related resources such as guides, templates, etc.</p>
+</div>
+
+<app-task-timeline-chart [tasks]="userTasks"></app-task-timeline-chart>
 
 <!-- File Upload Modal -->
 <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
