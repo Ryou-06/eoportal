@@ -18,12 +18,26 @@ h3, span {
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 24px;
     height: 85vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: 40%;
+    width: 100%;
+    margin-left:-80px;
+}
+
+.task-details-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 110%;
+    padding:30px;
 }
 
 /* Task List Container Specific Styles */
@@ -123,16 +137,18 @@ h3, span {
     opacity: 1;
 }
 
-.sort-button {
-    background: none;
-    padding: 1rem 1rem;
-    font-size: 0.9rem;
-    width: 100%;
-    max-width: 207px;
-    color: white;
-    margin-left: 420px;
-    border: none;
-    transition: opacity 0.3s ease;
+select {
+    appearance: none; /* Removes the default select dropdown styling */
+    background: none; /* No background */
+    border: none; /* No border */
+    color: white; /* Text color */
+    font-family: 'Poppins', sans-serif; /* Ensure consistent font styling */
+    font-size: 1rem; /* Adjust the font size if necessary */
+    font-weight: 500; /* Medium font weight */
+    padding: 0; /* Remove padding for a clean look */
+    margin: 0; /* No margin */
+    outline: none; /* Remove focus outline */
+    cursor: pointer; /* Indicate it’s clickable */
 }
 option{
     color:black;
@@ -165,8 +181,4 @@ option{
         margin-bottom: 12px;
     }
     
-    .sort-button {
-        width: 100%;
-        padding: 0.75rem 1rem;
-    }
 }

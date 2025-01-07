@@ -1,0 +1,6 @@
+2025-01-07 15:38:48 - Received request - File ID: 15, Task ID: 15
+2025-01-07 15:38:48 - PDO Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+2025-01-07 15:39:13 - Received request - File ID: 15, Task ID: 15
+2025-01-07 15:39:13 - PDO Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'
+2025-01-07 15:41:57 - Received request - File ID: 15, Task ID: 15
+2025-01-07 15:41:57 - PDO Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'

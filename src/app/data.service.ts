@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
+
 
 export interface UserFile {
   id: number;
@@ -27,6 +28,13 @@ interface AuthResponse {
   user?: User;
   profilePicture?: string;  // Add this line to include the profilePicture property
 }
+
+export interface TaskFileSubmission {
+  task_id: number;
+  files: File[];
+  progress: number;
+}
+
 export interface Task {
   id: number;
   task_name: string;
@@ -37,6 +45,33 @@ export interface Task {
   created_at: string;
   updated_at: string;
   created_by: string;
+  progress?: number;  // Add progress property
+  attachments?: { name: string; url: string; }[];  // Add attachments property
+}
+
+
+export interface TaskWithProgress extends Task {
+  progress?: number;
+  priority?: 'High' | 'Medium' | 'Low';
+}
+
+export interface TaskFileResponse {
+  success: boolean;
+  message: string;
+  files?: {
+    id: number;
+    filename: string;
+    filepath: string;
+  }[];
+}
+
+export interface TaskFile {
+  id: number;
+  file_id: number;
+  task_id: number;
+  filename: string;
+  filepath: string;
+  upload_date: string;
 }
 
 @Injectable({
@@ -229,6 +264,77 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
     }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching tasks:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+  
+  submitTaskFiles(submission: TaskFileSubmission) {
+    const formData = new FormData();
+    formData.append('task_id', submission.task_id.toString());
+    formData.append('progress', submission.progress.toString());
+    
+    // Debug log the files being sent
+    console.log('Files to upload:', submission.files);
+    
+    if (submission.files && submission.files.length > 0) {
+      submission.files.forEach((file, index) => {
+        console.log(`Appending file ${index}:`, file.name, file.size);
+        formData.append(`files[${index}]`, file);
+      });
+    }
+
+    // Debug log the FormData entries with type assertion
+    (Array.from((formData as any).entries()) as [string, FormDataEntryValue][]).forEach(([key, value]) => {
+      if (value instanceof File) {
+        console.log(`${key}: File - ${value.name}, size: ${value.size}`);
+      } else {
+        console.log(`${key}: ${value}`);
+      }
+    });
+  
+    return this.httpClient.post<TaskFileResponse>(
+      `${this.baseUrl}/submittaskfiles.php`,
+      formData
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('File submission error details:', {
+          status: error.status,
+          statusText: error.statusText,
+          error: error.error,
+          message: error.message
+        });
+        
+        // Check if there's a more specific error message in the response
+        const errorMessage = error.error?.error || error.message || 'An unknown error occurred';
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+  fetchTaskFiles(taskId: number) {
+    return this.httpClient.get<TaskFile[]>(`${this.baseUrl}/fetchtaskfiles.php`, {
+      params: { task_id: taskId.toString() },
+    }).pipe(
+      map(response => {
+        console.log('Raw response from fetchTaskFiles:', response);
+        return response.map(file => ({
+          ...file,
+          id: file.id || file.file_id // Use file.id if available, otherwise use file.file_id
+        }));
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching task files:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+  deleteTaskFile(fileId: number) {
+    return this.httpClient.delete<{ success: boolean; message: string }>(
+      `${this.baseUrl}/deletetaskfile.php`,
+      { params: { file_id: fileId.toString() } }
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Delete file error:', error);
         return throwError(() => new Error(error.message));
       })
     );

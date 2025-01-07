@@ -1,7 +1,6 @@
 <!-- tasks.component.html -->
-<div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4 sm:p-8">
     <div class="container mx-auto max-w-7xl">
-        <h2 class="text-4xl font-bold animate-gradient mb-6">My Tasks</h2>
+        <h2 class="text-4xl animate-gradient mb-6" style="margin-left:-70px;">My Tasks</h2>
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Tasks List Container -->
             <div class="w-full md:w-2/5 lg:w-1/3">
@@ -9,7 +8,7 @@
                     <div class="flex flex-col sm:flex-row gap-6 justify-between items-center mb-8">
                         <select 
                             (change)="onSortChange($event)"
-                            class="sort-button rounded-xl text-white font-medium"
+                            class="rounded-xl text-white font-medium"
                         >
                             <option value="created_at">Sort by Created Date</option>
                             <option value="due_date">Sort by Due Date</option>
@@ -37,48 +36,106 @@
                 </div>
             </div>
 
-            <!-- Task Details Container -->
-            <div class="flex-1">
-                <div class="glass-container p-6 h-[calc(100vh-180px)]" *ngIf="selectedTask" style="margin-left:700px; margin-top:-780px; width: 55%;">
-                    <div class="space-y-6 overflow-y-auto h-full details-container">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-bold text-white">{{selectedTask.task_name}}</h3>
-                            <span [ngClass]="{
-                                'bg-yellow-500': selectedTask.status === 'Pending',
-                                'bg-blue-500': selectedTask.status === 'In Progress',
-                                'bg-green-500': selectedTask.status === 'Completed'
-                            }" class="px-4 py-2 rounded-full text-white text-sm font-medium">
-                                {{selectedTask.status}}
-                            </span>
-                        </div>
+         <!-- Task Details Container -->
+<div class="flex-1">
+    <div class="task-details-container p-6 h-[calc(100vh-180px)]" *ngIf="selectedTask">
+        <div class="space-y-6 overflow-y-auto h-full details-container">
+            <!-- Header with Task Name and Status -->
+            <div class="flex justify-between items-start mb-8">
+                <div class="flex items-center space-x-4">
+                    <h3 class="text-2xl font-bold text-white">{{selectedTask.task_name}}</h3>
+                    <div class="animate-pulse" *ngIf="selectedTask.priority === 'High'">
+                        <span class="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end">
+                    <span [ngClass]="{
+                        'bg-yellow-500': selectedTask.status === 'Pending',
+                        'bg-blue-500': selectedTask.status === 'In Progress',
+                        'bg-green-500': selectedTask.status === 'Completed'
+                    }" class="px-4 py-2 rounded-full text-white text-sm font-medium transition-all duration-300 hover:scale-105">
+                        {{selectedTask.status}}
+                    </span>
+                    <div class="mt-2 text-xs text-gray-400" *ngIf="selectedTask.status !== 'Completed'">
+                        {{ getDaysRemaining(selectedTask.due_date) }} days remaining
+                    </div>
+                </div>
+            </div>
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white/10 p-4 rounded-lg">
-                                <p class="text-gray-400 text-sm">Created By</p>
-                                <p class="text-white">{{selectedTask.created_by}}</p>
-                            </div>
-                            <div class="bg-white/10 p-4 rounded-lg">
-                                <p class="text-gray-400 text-sm">Due Date</p>
-                                <p class="text-white">{{formatDate(selectedTask.due_date)}}</p>
-                            </div>
-                        </div>
+            <!-- Task Progress Bar -->
+            <div class="bg-white/10 p-4 rounded-lg mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-300">Progress</span>
+                    <span class="text-sm text-gray-300">{{getProgressPercentage(selectedTask)}}%</span>
+                </div>
+                <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                         [style.width]="getProgressPercentage(selectedTask) + '%'"></div>
+                </div>
+            </div>
 
-                        <div class="space-y-4">
-                            <div class="bg-white/10 p-4 rounded-lg">
-                                <h4 class="text-lg font-semibold text-white mb-2">Description</h4>
-                                <p class="text-gray-200">{{selectedTask.task_description}}</p>
-                            </div>
-
-                            <div class="bg-white/10 p-4 rounded-lg" *ngIf="selectedTask.task_instructions">
-                                <h4 class="text-lg font-semibold text-white mb-2">Instructions</h4>
-                                <p class="text-gray-200">{{selectedTask.task_instructions}}</p>
-                            </div>
+            <!-- Task Info Grid -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 p-4 rounded-lg transform hover:scale-105 transition-all duration-300">
+                    <p class="text-gray-400 text-sm mb-1">Created By</p>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                            {{getInitials(selectedTask.created_by)}}
                         </div>
+                        <p class="text-white">{{selectedTask.created_by}}</p>
+                    </div>
+                </div>
+                <div class="bg-white/10 p-4 rounded-lg transform hover:scale-105 transition-all duration-300">
+                    <p class="text-gray-400 text-sm mb-1">Due Date</p>
+                    <div class="flex items-center space-x-2">
+                        <i class="far fa-calendar text-blue-400"></i>
+                        <p class="text-white">{{formatDate(selectedTask.due_date)}}</p>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="text-sm text-gray-400">
-                            <p>Created: {{formatDateTime(selectedTask.created_at)}}</p>
-                            <p>Last Updated: {{formatDateTime(selectedTask.updated_at)}}</p>
-                        </div>
+            <!-- Description and Instructions -->
+            <div class="space-y-4">
+                <div class="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all duration-300">
+                    <h4 class="text-lg font-semibold text-white mb-2 flex items-center">
+                        <span class="mr-2">Description</span>
+                        <div class="flex-grow h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                    </h4>
+                    <p class="text-gray-200 leading-relaxed">{{selectedTask.task_description}}</p>
+                </div>
+
+                <div class="bg-white/10 p-4 rounded-lg hover:bg-white/15 transition-all duration-300" 
+                     *ngIf="selectedTask.task_instructions">
+                    <h4 class="text-lg font-semibold text-white mb-2 flex items-center">
+                        <span class="mr-2">Instructions</span>
+                        <div class="flex-grow h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                    </h4>
+                    <p class="text-gray-200 leading-relaxed">{{selectedTask.task_instructions}}</p>
+                </div>
+            </div>
+
+            <!-- Footer Information -->
+            <div class="mt-6 border-t border-white/10 pt-4">
+                <div class="flex justify-between text-sm text-gray-400">
+                    <div class="flex flex-col">
+                        <p class="mb-1">Created: {{formatDateTime(selectedTask.created_at)}}</p>
+                        <p>Last Updated: {{formatDateTime(selectedTask.updated_at)}}</p>
+                    </div>
+                    <div class="flex items-center space-x-2" *ngIf="selectedTask.attachments">
+                        <i class="fas fa-paperclip"></i>
+                        <span>{{selectedTask.attachments.length}} attachments</span>
+                        <button 
+    (click)="openFileSubmissionModal()" 
+    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+>
+    Submit Files
+</button>
+<app-file-submission-modal
+    [isOpen]="isModalOpen"
+    [taskId]="selectedTask ? selectedTask.id : undefined"
+    (close)="closeFileSubmissionModal()"
+    (submit)="handleFileSubmission($event)"
+></app-file-submission-modal>
                     </div>
                 </div>
             </div>
