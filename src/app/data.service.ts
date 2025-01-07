@@ -339,4 +339,10 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
       })
     );
   }
+  fetchTaskProgress(taskId: number) {
+    return this.httpClient.get<{success: boolean, progress: number}>(
+      `${this.baseUrl}/fetchTaskProgress.php`,
+      { params: { task_id: taskId.toString() }}
+    );
+  }
 }

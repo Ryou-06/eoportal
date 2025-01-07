@@ -108,23 +108,13 @@ export class TasksComponent implements OnInit {
   }
 
   getProgressPercentage(task: TaskWithProgress): number {
-    if (task.progress !== undefined) {
-      return task.progress;
-    }
-    return this.calculateTaskProgress(task);
+    return task.progress || 0;  // Use the progress directly from the task object
   }
+  
 
   private calculateTaskProgress(task: Task): number {
-    switch(task.status.toLowerCase()) {
-      case 'completed':
-        return 100;
-      case 'in progress':
-        return 50;
-      case 'pending':
-        return 0;
-      default:
-        return 0;
-    }
+    // Return the actual progress from database instead of hardcoded values
+    return task.progress || 0;
   }
 
   private determineTaskPriority(task: Task): 'High' | 'Medium' | 'Low' {
