@@ -2,7 +2,7 @@
 include_once("database.php");
 
 // CORS Headers
-header('Access-Control-Allow-Origin: http://localhost:4200');
+header('Access-Control-Allow-Origin: http://localhost:57833');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Accept');
 header('Access-Control-Max-Age: 1728000');
