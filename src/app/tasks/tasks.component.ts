@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService, Task, TaskFileSubmission, TaskFileResponse } from '../data.service';
+import { DataService, Task, TaskFileSubmission, TaskFileResponse, TaskComment } from '../data.service';
 import { FileSubmissionModalComponent } from '../file-submission-modal/file-submission-modal.component';
 
 interface TaskWithProgress extends Task {
@@ -21,7 +21,8 @@ export class TasksComponent implements OnInit {
   selectedTask: TaskWithProgress | null = null;
   sortOption = 'created_at';
   isModalOpen = false;
-  
+  taskComments: TaskComment[] = [];
+
   constructor(private dataService: DataService) {}
   
   ngOnInit() {
@@ -47,8 +48,11 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  selectTask(task: TaskWithProgress) {
+ selectTask(task: TaskWithProgress) {
     this.selectedTask = task;
+    if (task) {
+      this.loadTaskComments(task.id);
+    }
   }
 
   sortTasks() {
@@ -113,7 +117,15 @@ export class TasksComponent implements OnInit {
   
 
   private calculateTaskProgress(task: Task): number {
-    // Return the actual progress from database instead of hardcoded values
+    this.dataService.checkTaskFiles(task.id).subscribe({
+      next: (result) => {
+        task.progress = result.progress;
+      },
+      error: () => {
+        task.progress = 0;
+      }
+    });
+    
     return task.progress || 0;
   }
 
@@ -226,5 +238,15 @@ export class TasksComponent implements OnInit {
         error: (error) => console.error('Error refreshing tasks:', error)
       });
     }
+  }
+  loadTaskComments(taskId: number) {
+    this.dataService.fetchTaskComments(taskId).subscribe({
+      next: (comments) => {
+        this.taskComments = comments;
+      },
+      error: (error) => {
+        console.error('Error loading comments:', error);
+      }
+    });
   }
 }

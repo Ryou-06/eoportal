@@ -10,14 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_id'])) {
     
     try {
         $sql = "SELECT t.id, t.task_name, t.task_description, t.task_instructions, 
-               t.due_date, t.status, t.created_at, t.updated_at,
-               t.progress, /* Add this line */
-               a.admin_username as created_by
-        FROM task_table t
-        JOIN admin a ON t.created_by = a.id
-        WHERE t.assigned_to = :user_id
-        ORDER BY t.due_date ASC";
-                
+       t.due_date, t.status, t.created_at, t.updated_at,
+       COALESCE(
+           CASE 
+               WHEN (SELECT COUNT(*) FROM task_files WHERE task_id = t.id) = 0 THEN 0
+               ELSE t.progress 
+           END,
+           0
+       ) as progress,
+       a.admin_username as created_by
+FROM task_table t
+JOIN admin a ON t.created_by = a.id
+WHERE t.assigned_to = :user_id
+ORDER BY t.due_date ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();

@@ -168,6 +168,34 @@ option{
     border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
+.comments-scroll-container {
+    max-height: 100px; /* Adjust to desired height */
+    overflow-y: auto;
+    padding-right: 8px;
+}
+/* Scrollbar customization for better visuals */
+.comments-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comments-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.comments-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.comments-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.submit-btn{
+    margin-left:430px;
+}
+
 @media (max-width: 768px) {
     .glass-container {
         width: 100%;

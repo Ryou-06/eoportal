@@ -24,7 +24,7 @@ h2, input, p, label {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25); /* Shadow for depth */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
   width: 100%;
-  max-width: 420px;
+  max-width: 490px;
   overflow: hidden;
 }
 
@@ -42,7 +42,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"] {
-  width: 95%;
+  width: 100%;
   padding: 12px;
   margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
@@ -71,7 +71,7 @@ select:focus {
 
 /* Select Box */
 select {
-  width: 101%;
+  width: 100%;
   padding: 12px;
   margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */

@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
-
+import { BehaviorSubject, catchError, map, throwError, Observable, switchMap, of} from 'rxjs';
 
 export interface UserFile {
   id: number;
@@ -58,20 +57,28 @@ export interface TaskWithProgress extends Task {
 export interface TaskFileResponse {
   success: boolean;
   message: string;
-  files?: {
-    id: number;
-    filename: string;
-    filepath: string;
-  }[];
+  files?: TaskFile[];
 }
 
 export interface TaskFile {
   id: number;
-  file_id: number;
   task_id: number;
   filename: string;
   filepath: string;
   upload_date: string;
+}
+
+export interface DeleteFileResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface TaskComment {
+  comment_id: number;
+  task_id: number;
+  admin_username: string;
+  comment: string;
+  created_at: string;
 }
 
 @Injectable({
@@ -311,31 +318,39 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
       })
     );
   }
-  fetchTaskFiles(taskId: number) {
-    return this.httpClient.get<TaskFile[]>(`${this.baseUrl}/fetchtaskfiles.php`, {
-      params: { task_id: taskId.toString() },
-    }).pipe(
+  fetchTaskFiles(taskId: number): Observable<TaskFile[]> {
+    return this.httpClient.get<TaskFileResponse>(
+      `${this.baseUrl}/fetchtaskfiles.php`,
+      { params: { task_id: taskId.toString() }}
+    ).pipe(
       map(response => {
-        console.log('Raw response from fetchTaskFiles:', response);
-        return response.map(file => ({
-          ...file,
-          id: file.id || file.file_id // Use file.id if available, otherwise use file.file_id
-        }));
+        if (response.success && response.files) {
+          console.log('Fetched task files:', response.files);
+          return response.files;
+        }
+        // If no files or success is false, return empty array
+        return [];
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching task files:', error);
-        return throwError(() => new Error(error.message));
+        return throwError(() => new Error(error.message || 'Failed to fetch task files'));
       })
     );
   }
-  deleteTaskFile(fileId: number) {
-    return this.httpClient.delete<{ success: boolean; message: string }>(
+  deleteTaskFile(fileId: number): Observable<DeleteFileResponse> {
+    return this.httpClient.delete<DeleteFileResponse>(
       `${this.baseUrl}/deletetaskfile.php`,
-      { params: { file_id: fileId.toString() } }
+      {
+        params: { file_id: fileId.toString() },
+        headers: {
+          'Accept': 'application/json'
+        }
+      }
     ).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Delete file error:', error);
-        return throwError(() => new Error(error.message));
+        const errorMessage = error.error?.message || error.message || 'Failed to delete file';
+        return throwError(() => new Error(errorMessage));
       })
     );
   }
@@ -345,4 +360,46 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
       { params: { task_id: taskId.toString() }}
     );
   }
+  fetchTaskComments(taskId: number): Observable<TaskComment[]> {
+    return this.httpClient.get<{success: boolean, comments: TaskComment[]}>(
+      `${this.baseUrl}/fetchcomments.php`,
+      { params: { task_id: taskId.toString() }}
+    ).pipe(
+      map(response => {
+        if (response.success && response.comments) {
+          return response.comments;
+        }
+        return [];
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching comments:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+  checkTaskFiles(taskId: number): Observable<{hasFiles: boolean, progress: number}> {
+    return this.fetchTaskFiles(taskId).pipe(
+      switchMap(files => {
+        if (files.length === 0) {
+          return of({ hasFiles: false, progress: 0 });
+        }
+        return this.fetchTaskProgress(taskId).pipe(
+          map(progressResponse => ({
+            hasFiles: true,
+            progress: progressResponse.success ? progressResponse.progress : 0
+          })),
+          catchError(() => of({ hasFiles: true, progress: 0 }))
+        );
+      }),
+      catchError(() => of({ hasFiles: false, progress: 0 }))
+    );
+  }
+
+  private getTaskProgress(taskId: number): Observable<number> {
+    return this.fetchTaskProgress(taskId).pipe(
+      map(response => response.success ? response.progress : 0),
+      catchError(() => of(0))
+    );
+  }
 }
+

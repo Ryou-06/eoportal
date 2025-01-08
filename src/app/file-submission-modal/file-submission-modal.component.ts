@@ -25,12 +25,23 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
 
   constructor(private dataService: DataService) {}
 
+  
   ngOnInit() {
     if (this.taskId) {
       this.loadTaskFiles();
+      this.dataService.checkTaskFiles(this.taskId).subscribe({
+        next: (result) => {
+          if (!result.hasFiles) {
+            this.progress = 0;
+          }
+        },
+        error: () => {
+          this.progress = 0;
+        }
+      });
     }
   }
-
+  
   ngOnChanges(changes: SimpleChanges) {
     if ((changes['taskId'] && !changes['taskId'].firstChange) || 
         (changes['isOpen'] && changes['isOpen'].currentValue === true)) {
@@ -49,21 +60,22 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
 
     this.dataService.fetchTaskFiles(this.taskId).subscribe({
       next: (files) => {
-        console.log('Raw task files data:', files);
-        this.pastFiles = files.map(file => ({
-          ...file,
-          id: file.id // Use file.id directly
-        }));
-        console.log('Processed pastFiles:', this.pastFiles);
+        console.log('Fetched task files:', files);
+        this.pastFiles = files;
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Failed to load task files:', error);
-        this.error = 'Failed to load files. Please try again.';
+        this.error = error.message || 'Failed to load files. Please try again.';
         this.isLoading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error Loading Files',
+          text: error.message || 'Failed to load files. Please try again.' // Ensure we always pass a string
+        });
       }
     });
-  }
+}
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -74,12 +86,20 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
 
   onSubmit() {
     if (!this.taskId) {
-      alert('No task selected');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No task selected'
+      });
       return;
     }
 
     if (this.selectedFiles.length === 0) {
-      alert('Please select at least one file to submit.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Files Selected',
+        text: 'Please select at least one file to submit.'
+      });
       return;
     }
 
@@ -104,17 +124,18 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
   }
 
   deletePastFile(fileId: number) {
-    console.log('Attempting to delete file with ID:', fileId);
     if (!fileId) {
-      console.error('Invalid fileId:', fileId);
-      Swal.fire('Error', 'File ID is missing or invalid.', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'File ID is missing or invalid.'
+      });
       return;
     }
-
-    // Show confirmation dialog
+  
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you want to delete this file?',
+      text: 'This action cannot be undone.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -122,18 +143,41 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
+        // Show loading state
+        Swal.fire({
+          title: 'Deleting...',
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        });
+  
         this.dataService.deleteTaskFile(fileId).subscribe({
           next: (response) => {
             if (response.success) {
-              Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-              this.loadTaskFiles(); // Refresh the list
+              Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+                text: response.message || 'File has been deleted successfully.'
+              });
+              // Update the UI by removing the deleted file
+              this.pastFiles = this.pastFiles.filter(file => file.id !== fileId);
             } else {
-              Swal.fire('Error!', response.message || 'Failed to delete file', 'error');
+              Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: response.message || 'Failed to delete file'
+              });
             }
           },
           error: (error) => {
             console.error('Delete file error:', error);
-            Swal.fire('Error!', 'Unable to delete file', 'error');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: error.message || 'Unable to delete file'
+            });
           }
         });
       }
@@ -154,5 +198,15 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       case 'gif': return '🖼️';
       default: return '📎';
     }
+  }
+
+  formatFileSize(size: number): string {
+    if (size < 1024) return size + ' B';
+    if (size < 1024 * 1024) return (size / 1024).toFixed(1) + ' KB';
+    return (size / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleString();
   }
 }

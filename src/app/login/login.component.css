@@ -24,7 +24,7 @@ h2, p, a, input {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle light border */
     width: 100%;
-    max-width: 420px; /* Increased maximum width */
+    max-width: 510px; /* Increased maximum width */
     overflow: auto; /* Enable scrolling for overflowing content */
 
     /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
@@ -47,7 +47,7 @@ h2, p, a, input {
 /* Input Fields */
 input[type="email"],
 input[type="password"] {
-    width: 95%;
+    width: 102%;
     padding: 12px;
     margin-bottom: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.4); /* Light border */
