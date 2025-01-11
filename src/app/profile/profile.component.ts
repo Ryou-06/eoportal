@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService } from '../data.service';
+import { DataService, Task } from '../data.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   department: string = '';
   email: string = '';
   profilePicture: string = '';
+  recentTasks: Task[] = [];
 
   constructor(
     private dataService: DataService, 
@@ -28,34 +29,49 @@ export class ProfileComponent implements OnInit {
       return;
     }
     
-    // Retrieve user information from localStorage
+    this.loadProfileData();
+    this.loadRecentTasks();
+  }
+
+  private loadProfileData(): void {
     this.fullname = localStorage.getItem('fullname') || 'Unknown';
     this.email = localStorage.getItem('email') || 'N/A';
     this.birthday = this.formatBirthday(localStorage.getItem('birthday') || 'N/A');
     this.department = localStorage.getItem('department') || 'N/A';
     
-    // Get profile picture
     const userId = Number(localStorage.getItem('user_id'));
-    if (!userId) {
-      this.handleProfilePictureError();
-      return;
+    if (userId) {
+      this.dataService.getProfilePicture(userId).subscribe({
+        next: (response) => {
+          if (response.success && response.profile_picture) {
+            this.profilePicture = response.profile_picture;
+            localStorage.setItem('profilePicture', response.profile_picture);
+          } else {
+            this.handleProfilePictureError();
+          }
+        },
+        error: () => this.handleProfilePictureError()
+      });
     }
+  }
 
-    // Always fetch fresh profile picture from server
-    this.dataService.getProfilePicture(userId).subscribe({
-      next: (response) => {
-        if (response.success && response.profile_picture) {
-          this.profilePicture = response.profile_picture;
-          // Update localStorage with the latest URL
-          localStorage.setItem('profilePicture', response.profile_picture);
-        } else {
-          this.handleProfilePictureError();
-        }
-      },
-      error: () => {
-        this.handleProfilePictureError();
-      }
-    });
+  private loadRecentTasks(): void {
+    const userId = Number(localStorage.getItem('user_id'));
+    if (userId) {
+      this.dataService.fetchUserTasks(userId).subscribe({
+        next: (tasks) => {
+          // Filter tasks created within the last 30 days
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+          
+          this.recentTasks = tasks
+            .filter(task => new Date(task.created_at) >= thirtyDaysAgo)
+            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+            .slice(0, 6); // Keep only the 6 most recent tasks
+        },
+        error: (error) => console.error('Error loading tasks:', error)
+      });
+    }
   }
 
   private formatBirthday(birthday: string): string {
@@ -70,14 +86,22 @@ export class ProfileComponent implements OnInit {
       return birthday;
     }
   }
-  
-  logout() {
+
+  formatDate(date: string): string {
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+
+  handleProfilePictureError(): void {
+    this.profilePicture = 'https://via.placeholder.com/200';
+  }
+
+  logout(): void {
     this.dataService.deleteToken();
     localStorage.clear();
     this.router.navigate(['/login']);
-  }
-
-  handleProfilePictureError() {
-    this.profilePicture = 'https://via.placeholder.com/180';
   }
 }

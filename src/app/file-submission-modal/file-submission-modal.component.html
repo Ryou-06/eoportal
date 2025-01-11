@@ -63,7 +63,6 @@
           <div *ngFor="let file of pastFiles" class="file-item">
             <span>{{ getFileIcon(file.filename) }} {{ file.filename }}</span>
             <div class="file-actions">
-              <a [href]="file.filepath" target="_blank" class="view-button">View</a>
               <button (click)="deletePastFile(file.id)" class="delete-button">Delete</button>
             </div>
           </div>

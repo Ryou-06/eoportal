@@ -1,39 +1,77 @@
-<div class="profile-wrapper">
-  <div class="glass-container">
-    <div class="profile-header">
-      <img 
-        [src]="profilePicture" 
-        alt="Profile Picture" 
-        class="profile-pic"
-        (error)="handleProfilePictureError()"
-        onerror="this.onerror=null; this.src='https://via.placeholder.com/180';"
-      >
-      <h1 class="employee-name">{{ fullname }}</h1>
-    </div>
-    <div class="details-container">
-      <div class="profile-detail">
-        <i class="icon-email"></i>
-        <div class="detail-content">
-          <span class="detail-label">Email</span>
-          <p>{{ email }}</p>
-        </div>
+<div class="profile-page-wrapper">
+  <!-- Profile Section -->
+  <div class="profile-landscape">
+    <div class="profile-content">
+      <div class="profile-left">
+        <img 
+          [src]="profilePicture" 
+          alt="Profile Picture" 
+          class="profile-pic"
+          (error)="handleProfilePictureError()"
+          onerror="this.onerror=null; this.src='https://via.placeholder.com/200';"
+        >
       </div>
+      <div class="profile-right">
+        <h1 class="employee-name">{{ fullname }}</h1>
+        <div class="details-grid">
+          <div class="profile-detail">
+            <i class="icon-email"></i>
+            <div class="detail-content">
+              <span class="detail-label">Email</span>
+              <p>{{ email }}</p>
+            </div>
+          </div>
 
-      <div class="profile-detail">
-        <i class="icon-calendar"></i>
-        <div class="detail-content">
-          <span class="detail-label">Birthday</span>
-          <p>{{ birthday }}</p>
-        </div>
-      </div>
+          <div class="profile-detail">
+            <i class="icon-calendar"></i>
+            <div class="detail-content">
+              <span class="detail-label">Birthday</span>
+              <p>{{ birthday }}</p>
+            </div>
+          </div>
 
-      <div class="profile-detail">
-        <i class="icon-department"></i>
-        <div class="detail-content">
-          <span class="detail-label">Department</span>
-          <p>{{ department }}</p>
+          <div class="profile-detail">
+            <i class="icon-department"></i>
+            <div class="detail-content">
+              <span class="detail-label">Department</span>
+              <p>{{ department }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Divider -->
+  <div class="section-divider">
+    <h2>Recent Tasks</h2>
+  </div>
+
+  <!-- Tasks Section -->
+  <div class="tasks-section">
+    
+    <div class="tasks-grid">
+      <div *ngFor="let task of recentTasks" class="task-card">
+        <div class="task-header">
+          <h3 class="task-title">{{ task.task_name }}</h3>
+          <span [class]="'status-badge ' + task.status.toLowerCase().replace(' ', '-')">
+            {{ task.status }}
+          </span>
+        </div>
+        <p class="task-description" [title]="task.task_description">
+          {{ task.task_description }}
+        </p>
+        <div class="task-footer">
+          <div class="task-dates">
+            <span class="created-date">Created: {{ formatDate(task.created_at) }}</span>
+            <span class="due-date">Due: {{ formatDate(task.due_date) }}</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width]="task.progress + '%'"></div>
+            </div>
+            <span class="progress-text">{{ task.progress }}% Complete</span>
+          </div>
+        </div>
+      </div>
+    </div>

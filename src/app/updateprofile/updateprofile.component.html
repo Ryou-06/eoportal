@@ -1,43 +1,33 @@
-<div class="profile-wrapper">
-  <div class="glass-container">
-    <div class="profile-header">
-      <div class="profile-pic-container">
+<div class="profile-page-wrapper">
+  <!-- Profile Section -->
+  <div class="profile-landscape">
+    <div class="profile-content">
+      <div class="profile-left">
         <img 
           [src]="profilePictureUrl" 
           alt="Profile Picture" 
           class="profile-pic"
+          (error)="handleProfilePictureError()"
         >
-        <div class="profile-pic-overlay">
-          <input 
-            type="file" 
-            (change)="onFileSelected($event)" 
-            accept="image/*" 
-            id="profile-pic-input"
-            class="hidden"
-          >
-          <label for="profile-pic-input" class="change-pic-btn">
-            Change Picture
-          </label>
-        </div>
       </div>
+      <div class="profile-right">
         <h1 class="employee-name">{{ fullname }}</h1>
-
-        <div class="details-container">
+        <div class="details-grid">
           <div class="profile-detail">
-            <i class="icon-email"></i>
+            <span class="icon-email"></span>
             <div class="detail-content">
               <span class="detail-label">Email</span>
               <input 
                 type="email" 
                 [(ngModel)]="newEmail" 
-                class="styled-input" 
+                class="styled-input"
                 placeholder="Enter new email"
               >
             </div>
           </div>
 
           <div class="profile-detail">
-            <i class="icon-calendar"></i>
+            <span class="icon-calendar"></span>
             <div class="detail-content">
               <span class="detail-label">Birthday</span>
               <p>{{ birthday }}</p>
@@ -45,7 +35,7 @@
           </div>
 
           <div class="profile-detail">
-            <i class="icon-department"></i>
+            <span class="icon-department"></span>
             <div class="detail-content">
               <span class="detail-label">Department</span>
               <select [(ngModel)]="selectedDepartment" class="styled-select">
@@ -56,11 +46,39 @@
             </div>
           </div>
         </div>
-
         <div class="button-container">
           <button class="cancel-btn" (click)="onCancel()">Cancel</button>
           <button class="save-btn" (click)="onSave()">Save</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="section-divider">
+    <h2>Update Profile Picture</h2>
+  </div>
+
+  <!-- Tasks Section -->
+  <div class="tasks-section">
+    <div class="tasks-grid">
+      <div class="task-card">
+        <div class="picture-upload-container">
+          <input 
+            type="file" 
+            (change)="onFileSelected($event)" 
+            accept="image/*" 
+            id="profile-pic-input"
+            class="file-input"
+          >
+          <label for="profile-pic-input" class="upload-button">
+            Choose New Picture
+          </label>
+          <p class="selected-file" *ngIf="selectedFile">
+            Selected: {{ selectedFile.name }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
