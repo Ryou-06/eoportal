@@ -25,8 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     }
 
     try {
-        // First, get the file path before deletion
-        $sqlSelect = "SELECT filepath FROM task_files WHERE id = :file_id";
+        // First, get the file info and task_id before deletion
+        $sqlSelect = "SELECT tf.filepath, tf.task_id 
+                     FROM task_files tf 
+                     WHERE tf.id = :file_id";
         $stmtSelect = $pdo->prepare($sqlSelect);
         $stmtSelect->bindParam(':file_id', $fileId, PDO::PARAM_INT);
         $stmtSelect->execute();
@@ -51,6 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         $stmtDelete->bindParam(':file_id', $fileId, PDO::PARAM_INT);
         $stmtDelete->execute();
 
+        // Check if this was the last file for the task
+        $sqlCheckFiles = "SELECT COUNT(*) as file_count FROM task_files WHERE task_id = :task_id";
+        $stmtCheckFiles = $pdo->prepare($sqlCheckFiles);
+        $stmtCheckFiles->bindParam(':task_id', $file['task_id'], PDO::PARAM_INT);
+        $stmtCheckFiles->execute();
+        $remainingFiles = $stmtCheckFiles->fetch(PDO::FETCH_ASSOC);
+
+        // If no files remain, update task progress and status
+        if ($remainingFiles['file_count'] === '0') {
+            $sqlUpdateTask = "UPDATE tasks 
+                            SET progress = 0, 
+                                status = 'In Progress' 
+                            WHERE id = :task_id";
+            $stmtUpdateTask = $pdo->prepare($sqlUpdateTask);
+            $stmtUpdateTask->bindParam(':task_id', $file['task_id'], PDO::PARAM_INT);
+            $stmtUpdateTask->execute();
+        }
+
         // Delete physical file
         $filepath = $_SERVER['DOCUMENT_ROOT'] . str_replace('..', '', $file['filepath']);
         if (file_exists($filepath)) {
@@ -66,7 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
         echo json_encode([
             'success' => true,
-            'message' => 'File deleted successfully'
+            'message' => 'File deleted successfully',
+            'hasRemainingFiles' => $remainingFiles['file_count'] > 0,
+            'taskId' => $file['task_id']
         ]);
 
     } catch (Exception $e) {

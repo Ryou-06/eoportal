@@ -40,7 +40,7 @@ export interface Task {
   task_description: string;
   task_instructions: string | null;
   due_date: string;
-  status: 'Pending' | 'In Progress' | 'Completed';
+  status: TaskStatus;
   created_at: string;
   updated_at: string;
   created_by: string;
@@ -79,6 +79,14 @@ export interface TaskComment {
   admin_username: string;
   comment: string;
   created_at: string;
+}
+
+export type TaskStatus = 'Pending' | 'In Progress' | 'Completed';
+
+export interface TaskUpdateEvent {
+  taskId: number;
+  progress: number;
+  status: TaskStatus;  // Update this to use the TaskStatus type
 }
 
 @Injectable({

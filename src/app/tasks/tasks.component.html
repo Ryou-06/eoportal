@@ -130,10 +130,11 @@
     Submit Files
 </button>
 <app-file-submission-modal
-    [isOpen]="isModalOpen"
-    [taskId]="selectedTask ? selectedTask.id : undefined"
-    (close)="closeFileSubmissionModal()"
-    (submit)="handleFileSubmission($event)"
+[isOpen]="isModalOpen"
+[taskId]="selectedTask ? selectedTask.id : undefined"
+(close)="closeFileSubmissionModal()"
+(submit)="handleFileSubmission($event)"
+(taskUpdate)="handleTaskUpdate($event)"
 ></app-file-submission-modal>
                     </div>
                 </div>

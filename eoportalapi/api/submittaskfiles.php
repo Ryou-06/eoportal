@@ -1,10 +1,11 @@
 <?php
 include_once("database.php");
 
-// CORS Headers
-header('Access-Control-Allow-Origin: http://localhost:4200');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Accept');
+// Updated CORS Headers to be more flexible for development
+header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']); // Dynamically set origin
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, Accept, Authorization');
 header('Access-Control-Max-Age: 1728000');
 header('Content-Type: application/json');
 

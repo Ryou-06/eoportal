@@ -13,7 +13,6 @@ p, h1, h3, h4, li{
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  border-radius: 15px;
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
@@ -52,7 +51,6 @@ h1 {
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
@@ -60,6 +58,7 @@ h1 {
   font-size: 1rem;
   font-weight: 500;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-right: -33px;
 }
 
 
@@ -83,7 +82,6 @@ h1 {
 .total-documents, .total-tasks {
   flex: 1;
   padding: 2.5rem;
-  border-radius: 24px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
@@ -129,7 +127,6 @@ h1 {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   margin-top: 1rem;
-  border-radius: 20px;
   color: white;
   width: 39%;
   margin-left:980px;
@@ -160,7 +157,6 @@ h1 {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
   padding: 2rem;
-  border-radius: 12px;
   width: 600px;
   max-height: 80vh;
   overflow-y: auto;
@@ -199,7 +195,6 @@ input[type="file"] {
   font-family: 'Poppins', sans-serif;
   padding: 10px 20px; /* Smaller padding */
   border: 2px solid #ccc; /* Light border for a clean look */
-  border-radius: 8px; /* Slightly smaller border radius */
   font-size: 1em; /* Smaller font size */
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -217,7 +212,6 @@ input[type="file"] {
   padding: 0.75rem 1.5rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
   color: white;
   font-size: 1rem;
   font-weight: 500;
@@ -281,7 +275,6 @@ input[type="file"] {
 
 .file-preview-item {
   position: relative; /* Ensure the child button is positioned relative to this container */
-  border-radius: 8px;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -317,7 +310,6 @@ input[type="file"] {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 8px;
   margin-right: 1rem;
 }
 
@@ -329,7 +321,6 @@ input[type="file"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
   margin-right: 1rem;
   font-weight: bold;
 }
@@ -342,7 +333,6 @@ input[type="file"] {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
-  border-radius: 6px;
   border: 1px solid #ccc;
 }
 
@@ -354,7 +344,6 @@ input[type="file"] {
   overflow-x: hidden; /* Disable horizontal scrolling */
   border: 1px solid grey;
   padding: 1rem;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Align items to the top */
@@ -376,7 +365,6 @@ input[type="file"] {
 
 .scrollable-container::-webkit-scrollbar-thumb {
   background-color: rgb(133, 133, 133);
-  border-radius: 4px;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
@@ -409,7 +397,6 @@ input[type="file"] {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.18);
   padding: 2rem;
-  border-radius: 12px;
   width: 800px;
   max-height: 80vh;
   overflow-y: auto;
@@ -471,34 +458,6 @@ input[type="file"] {
   outline: none; /* Remove focus outline */
   box-shadow: 0 0 8px rgba(224, 32, 32, 0.5); /* Add a focus shadow */
 }
-/* Shared button styles */
-button.forward-btn,
-button.back-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
-  background-color: transparent;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-button.forward-btn:hover,
-button.back-btn:hover {
-  background-color: #0056b3;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  transform: scale(1.1);
-}
-
-button.forward-btn:active,
-button.back-btn:active {
-  background-color: #003d82;
-  transform: scale(0.95);
-}
 
 /* SVG styling */
 button svg {
@@ -549,3 +508,81 @@ button:hover svg {
 .tasks-list tr:hover {
   background-color: #f5f5f5;
 }
+
+.policy-content {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  margin-top: 1.5rem;
+  height: calc(100% - 100px);
+  overflow-y: auto;
+}
+
+.policy-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.policy-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.policy-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.policy-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.policy-section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.policy-section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.policy-section ul {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.policy-section li {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+.policy-section li::before {
+  content: "•";
+  position: absolute;
+  left: -1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.closing-text {
+  text-align: center;
+  font-style: italic;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Adjust the existing company-resources class */

@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { DataService, TaskFile } from '../data.service';
 import Swal from 'sweetalert2';
 
+type TaskStatus = 'Pending' | 'In Progress' | 'Completed';
+
+
 @Component({
   selector: 'app-file-submission-modal',
   standalone: true,
@@ -16,6 +19,11 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
   @Input() taskId?: number;
   @Output() close = new EventEmitter<void>();
   @Output() submit = new EventEmitter<{files: File[], progress: number}>();
+  @Output() taskUpdate = new EventEmitter<{
+    taskId: number;
+    progress: number;
+    status: TaskStatus;
+  }>();
 
   progress = 0;
   selectedFiles: File[] = [];
@@ -42,6 +50,7 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
     }
   }
   
+  
   ngOnChanges(changes: SimpleChanges) {
     if ((changes['taskId'] && !changes['taskId'].firstChange) || 
         (changes['isOpen'] && changes['isOpen'].currentValue === true)) {
@@ -60,9 +69,12 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
 
     this.dataService.fetchTaskFiles(this.taskId).subscribe({
       next: (files) => {
-        console.log('Fetched task files:', files);
         this.pastFiles = files;
         this.isLoading = false;
+        // Update progress based on existing files
+        if (files.length === 0) {
+          this.progress = 0;
+        }
       },
       error: (error) => {
         console.error('Failed to load task files:', error);
@@ -71,11 +83,11 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
         Swal.fire({
           icon: 'error',
           title: 'Error Loading Files',
-          text: error.message || 'Failed to load files. Please try again.' // Ensure we always pass a string
+          text: error.message || 'Failed to load files. Please try again.'
         });
       }
     });
-}
+  }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -123,7 +135,8 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
     this.close.emit();
   }
 
-  deletePastFile(fileId: number) {
+  
+   deletePastFile(fileId: number) {
     if (!fileId) {
       Swal.fire({
         icon: 'error',
@@ -142,8 +155,7 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      if (result.isConfirmed) {
-        // Show loading state
+      if (result.isConfirmed && this.taskId) {
         Swal.fire({
           title: 'Deleting...',
           didOpen: () => {
@@ -156,13 +168,24 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
         this.dataService.deleteTaskFile(fileId).subscribe({
           next: (response) => {
             if (response.success) {
+              // Update the UI by removing the deleted file
+              this.pastFiles = this.pastFiles.filter(file => file.id !== fileId);
+              
+              // If no files remain, update progress and status
+              if (this.pastFiles.length === 0) {
+                this.progress = 0;
+                this.taskUpdate.emit({
+                  taskId: this.taskId!,
+                  progress: 0,
+                  status: 'In Progress' // Now TypeScript knows this is a valid TaskStatus
+                });
+              }
+
               Swal.fire({
                 icon: 'success',
                 title: 'Deleted!',
                 text: response.message || 'File has been deleted successfully.'
               });
-              // Update the UI by removing the deleted file
-              this.pastFiles = this.pastFiles.filter(file => file.id !== fileId);
             } else {
               Swal.fire({
                 icon: 'error',

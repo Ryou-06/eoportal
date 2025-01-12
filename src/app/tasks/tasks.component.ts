@@ -9,6 +9,12 @@ interface TaskWithProgress extends Task {
   attachments?: { name: string; url: string }[];
 }
 
+interface TaskUpdateEvent {
+  taskId: number;
+  progress: number;
+  status: 'Pending' | 'In Progress' | 'Completed';
+}
+
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -239,6 +245,27 @@ export class TasksComponent implements OnInit {
       });
     }
   }
+
+  handleTaskUpdate(event: TaskUpdateEvent) {
+    // Update the selected task if it matches
+    if (this.selectedTask && this.selectedTask.id === event.taskId) {
+      this.selectedTask.progress = event.progress;
+      this.selectedTask.status = event.status;
+    }
+
+    // Update the task in the tasks array
+    this.tasks = this.tasks.map(task => {
+      if (task.id === event.taskId) {
+        return {
+          ...task,
+          progress: event.progress,
+          status: event.status
+        };
+      }
+      return task;
+    });
+  }
+
   loadTaskComments(taskId: number) {
     this.dataService.fetchTaskComments(taskId).subscribe({
       next: (comments) => {
@@ -249,4 +276,5 @@ export class TasksComponent implements OnInit {
       }
     });
   }
+  
 }
