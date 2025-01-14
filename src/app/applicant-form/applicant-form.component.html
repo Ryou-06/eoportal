@@ -1,0 +1,213 @@
+<div class="applicant-container">
+  <div class="applicant-form">
+    <h2>Application Form</h2>
+    <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h3>Personal Information</h3>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            formControlName="lastName" 
+            placeholder="Enter your last name"
+            required 
+          />
+          <div *ngIf="formControls['lastName'].touched && formControls['lastName'].errors">
+            <small class="error" *ngIf="formControls['lastName'].errors?.['required']">Last name is required</small>
+            <small class="error" *ngIf="formControls['lastName'].errors?.['pattern']">Last name cannot contain numbers</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            formControlName="firstName" 
+            placeholder="Enter your first name"
+            required 
+          />
+          <div *ngIf="formControls['firstName'].touched && formControls['firstName'].errors">
+            <small class="error" *ngIf="formControls['firstName'].errors?.['required']">First name is required</small>
+            <small class="error" *ngIf="formControls['firstName'].errors?.['pattern']">First name cannot contain numbers</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="middleName">Middle Name:</label>
+          <input 
+            type="text" 
+            id="middleName" 
+            formControlName="middleName"
+            placeholder="Enter your middle name (optional)" 
+          />
+          <div *ngIf="formControls['middleName'].touched && formControls['middleName'].errors">
+            <small class="error" *ngIf="formControls['middleName'].errors?.['pattern']">Middle name cannot contain numbers</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="suffix">Suffix:</label>
+          <select id="suffix" formControlName="suffix">
+            <option value="">Select Suffix (optional)</option>
+            <option value="Jr">Jr.</option>
+            <option value="Sr">Sr.</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contactNumber">Contact Number:</label>
+          <input 
+            type="tel" 
+            id="contactNumber" 
+            formControlName="contactNumber" 
+            placeholder="Enter 10-11 digit number"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            required 
+          />
+          <div *ngIf="formControls['contactNumber'].touched && formControls['contactNumber'].errors">
+            <small class="error" *ngIf="formControls['contactNumber'].errors?.['required']">Contact number is required</small>
+            <small class="error" *ngIf="formControls['contactNumber'].errors?.['pattern']">Must be 10-11 digits</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address:</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="Enter your email address"
+            required 
+          />
+          <div *ngIf="formControls['email'].touched && formControls['email'].errors">
+            <small class="error" *ngIf="formControls['email'].errors?.['required']">Email is required</small>
+            <small class="error" *ngIf="formControls['email'].errors?.['email']">Invalid email format</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input 
+            type="date" 
+            id="dateOfBirth" 
+            formControlName="dateOfBirth" 
+            required 
+          />
+          <div *ngIf="formControls['dateOfBirth'].touched && formControls['dateOfBirth'].errors">
+            <small class="error" *ngIf="formControls['dateOfBirth'].errors?.['required']">Date of birth is required</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="placeOfBirth">Place of Birth:</label>
+          <input 
+            type="text" 
+            id="placeOfBirth" 
+            formControlName="placeOfBirth" 
+            placeholder="Enter your place of birth"
+            required 
+          />
+          <div *ngIf="formControls['placeOfBirth'].touched && formControls['placeOfBirth'].errors">
+            <small class="error" *ngIf="formControls['placeOfBirth'].errors?.['required']">Place of birth is required</small>
+            <small class="error" *ngIf="formControls['placeOfBirth'].errors?.['pattern']">Place of birth cannot contain numbers</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="nationality">Nationality:</label>
+          <input 
+            type="text" 
+            id="nationality" 
+            formControlName="nationality" 
+            placeholder="Enter your nationality"
+            required 
+          />
+          <div *ngIf="formControls['nationality'].touched && formControls['nationality'].errors">
+            <small class="error" *ngIf="formControls['nationality'].errors?.['required']">Nationality is required</small>
+            <small class="error" *ngIf="formControls['nationality'].errors?.['pattern']">Nationality cannot contain numbers</small>
+          </div>
+        </div>
+
+  
+          <div class="form-group">
+            <label for="civilStatus">Civil Status:</label>
+            <select id="civilStatus" formControlName="civilStatus" required>
+              <option value="">Select Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+            <div *ngIf="formControls['civilStatus'].touched && formControls['civilStatus'].errors">
+              <small class="error" *ngIf="formControls['civilStatus'].errors?.['required']">Civil status is required</small>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" formControlName="gender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="formControls['gender'].touched && formControls['gender'].errors">
+              <small class="error" *ngIf="formControls['gender'].errors?.['required']">Gender is required</small>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Document Upload Section -->
+        <div class="form-section">
+          <h3>Required Documents</h3>
+          
+          <div class="document-uploads">
+            <div class="dropzone" 
+                 [class.dragover]="isDragOver"
+                 (dragover)="onDragOver($event)"
+                 (dragleave)="onDragLeave($event)"
+                 (drop)="onDrop($event)">
+              <div class="dropzone-content" *ngIf="documentUploads.size === 0">
+                <i class="upload-icon">📄</i>
+                <h4>Drag and drop your files here</h4>
+                <p>or</p>
+                <label class="file-select-button">
+                  Select Files
+                  <input 
+                    type="file"
+                    multiple
+                    (change)="onFileSelected($event)"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    hidden
+                  />
+                </label>
+                <p class="file-hint">Accepted files: PDF, DOC, DOCX, JPG, PNG</p>
+              </div>
+  
+              <div class="file-list" *ngIf="documentUploads.size > 0">
+                <div class="file-item" *ngFor="let upload of documentUploads | keyvalue">
+                  <span class="file-name">{{upload.value.file.name}}</span>
+                  <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
+                </div>
+                <button type="button" class="add-more-files" (click)="triggerFileInput()">
+                  Add More Files
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="applicationForm.invalid || isSubmitting">
+          {{ isSubmitting ? 'Submitting...' : 'Submit Application' }}
+        </button>
+      </form>
+    </div>
+  </div>

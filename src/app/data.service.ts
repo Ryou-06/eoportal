@@ -89,6 +89,14 @@ export interface TaskUpdateEvent {
   status: TaskStatus;  // Update this to use the TaskStatus type
 }
 
+interface ApplicationResponse {
+  success: boolean;
+  applicantId: number;
+  message?: string;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -409,5 +417,34 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
       catchError(() => of(0))
     );
   }
-}
 
+  submitApplication(applicationData: any): Observable<ApplicationResponse> {
+    return this.httpClient.post<ApplicationResponse>(`${this.baseUrl}/submit-application.php`, applicationData)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Application submission failed:', error);
+          return throwError(() => new Error(error.message));
+        })
+      );
+  }
+  uploadDocument(formData: FormData): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}/upload-document.php`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      map((event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            const progress = event.total 
+              ? Math.round(100 * event.loaded / event.total)
+              : 0;
+            return { status: 'progress', percentage: progress };
+          case HttpEventType.Response:
+            return { status: 'completed', data: event.body };
+          default:
+            return { status: 'unknown', data: event };
+        }
+      })
+    );
+  }
+}

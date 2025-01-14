@@ -6,6 +6,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ApplicantFormComponent } from './applicant-form/applicant-form.component';
+
 export const routes: Routes = [
   
   {
@@ -28,7 +30,7 @@ export const routes: Routes = [
     path: 'login', component: LoginComponent, // Public route
   },
   {
-    path: 'signup', component: SignupComponent, // Public route
+    path: 'applicant-form', component: ApplicantFormComponent, // Public route
   },
   {
     path: '**', // Wildcard route for 404s
