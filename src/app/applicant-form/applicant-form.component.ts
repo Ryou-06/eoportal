@@ -9,9 +9,10 @@ import Swal from 'sweetalert2';
 
 interface DocumentUpload {
   file: File;
-  type: string;
-  progress?: number; // Add progress property
+  type: 'Resume' | 'Government ID' | 'Birth Certificate' | 'Diploma' | 'Training Certificates' | 'Other';
+  progress?: number;
 }
+
 @Component({
   selector: 'app-applicant-form',
   standalone: true,
@@ -25,7 +26,17 @@ export class ApplicantFormComponent {
   applicationForm: FormGroup;
   isSubmitting = false;
   isDragOver = false;
-  documentUploads: Map<string, DocumentUpload> = new Map();
+  documentUploads = new Map<string, DocumentUpload>();
+
+  documentTypes: Array<DocumentUpload['type']> = [
+    'Resume',
+    'Government ID',
+    'Birth Certificate',
+    'Diploma',
+    'Training Certificates',
+    'Other'
+  ];
+
 
   constructor(
     private fb: FormBuilder,
@@ -92,14 +103,19 @@ export class ApplicantFormComponent {
 
     files.forEach(file => {
       if (!allowedTypes.includes(file.type)) {
-        alert(`File "${file.name}" is not allowed. Please upload PDF, DOC, DOCX, JPG, or PNG files only.`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid File Type',
+          text: `File "${file.name}" is not allowed. Please upload PDF, DOC, DOCX, JPG, or PNG files only.`
+        });
         return;
       }
 
+      // Assign a default document type (can be changed by user)
       const fileId = `file-${Date.now()}-${file.name}`;
       this.documentUploads.set(fileId, {
         file: file,
-        type: file.type
+        type: 'Other' // Default type
       });
     });
   }
@@ -147,28 +163,6 @@ export class ApplicantFormComponent {
   }
 
   async onSubmit() {
-    const formErrors = this.validateForm();
-    
-    if (formErrors.length > 0) {
-      await Swal.fire({
-        icon: 'error',
-        title: 'Form Validation Error',
-        html: formErrors.join('<br>'),
-        confirmButtonText: 'OK'
-      });
-      return;
-    }
-
-    if (this.documentUploads.size === 0) {
-      await Swal.fire({
-        icon: 'warning',
-        title: 'No Documents Uploaded',
-        text: 'Please upload at least one required document before submitting.',
-        confirmButtonText: 'OK'
-      });
-      return;
-    }
-
     if (this.applicationForm.valid) {
       this.isSubmitting = true;
 
@@ -178,8 +172,17 @@ export class ApplicantFormComponent {
 
         if (response && response.applicantId) {
           const applicantId = response.applicantId;
+          
+          // Upload each document with its type
           const uploadPromises = Array.from(this.documentUploads.values()).map(
-            upload => this.uploadDocument(applicantId, upload)
+            upload => {
+              const formData = new FormData();
+              formData.append('file', upload.file);
+              formData.append('applicantId', applicantId.toString());
+              formData.append('documentType', upload.type);
+              
+              return firstValueFrom(this.dataService.uploadDocument(formData));
+            }
           );
           
           await Promise.all(uploadPromises);
@@ -187,13 +190,11 @@ export class ApplicantFormComponent {
           await Swal.fire({
             icon: 'success',
             title: 'Application Submitted',
-            text: 'Please wait for the application to be approved by the Administrator.',
+            text: 'Your application and documents have been submitted successfully.',
             confirmButtonText: 'OK'
           });
 
           this.router.navigate(['/login']);
-        } else {
-          throw new Error('No applicant ID received');
         }
       } catch (error) {
         console.error('Application submission failed:', error);
@@ -209,6 +210,7 @@ export class ApplicantFormComponent {
     }
   }
 
+
   private async uploadDocument(applicantId: number, upload: DocumentUpload): Promise<void> {
     const formData = new FormData();
     formData.append('file', upload.file);
@@ -220,6 +222,16 @@ export class ApplicantFormComponent {
     } catch (error) {
       console.error(`Failed to upload ${upload.type}:`, error);
       throw error;
+    }
+  }
+  updateDocumentType(fileId: string, event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const type = select.value as DocumentUpload['type'];
+    
+    const upload = this.documentUploads.get(fileId);
+    if (upload) {
+      upload.type = type;
+      this.documentUploads.set(fileId, upload);
     }
   }
 }

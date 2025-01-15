@@ -15,13 +15,13 @@ include_once("database.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Validate required data
-        if (!isset($_FILES['file']) || !isset($_POST['applicantId'])) {
-            throw new Exception('File and applicant ID are required');
+        if (!isset($_FILES['file']) || !isset($_POST['applicantId']) || !isset($_POST['documentType'])) {
+            throw new Exception('File, applicant ID, and document type are required');
         }
 
         $file = $_FILES['file'];
         $applicantId = $_POST['applicantId'];
-        $documentType = $_POST['documentType'] ?? 'Other';
+        $documentType = $_POST['documentType'];
 
         // Validate applicant exists
         $stmt = $pdo->prepare("SELECT applicant_id FROM applicants WHERE applicant_id = ?");
@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Validate file type
         $allowedTypes = [
-            'application/pdf', 
-            'application/msword', 
+            'application/pdf',
+            'application/msword',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'image/jpeg',
             'image/png'
@@ -129,4 +129,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'error' => 'Method not allowed'
     ]);
 }
-?>

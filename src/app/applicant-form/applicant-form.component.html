@@ -5,7 +5,7 @@
       <!-- Personal Information -->
       <div class="form-section">
         <h3>Personal Information</h3>
-        
+
         <div class="form-group">
           <label for="lastName">Last Name:</label>
           <input 
@@ -191,16 +191,24 @@
                 </label>
                 <p class="file-hint">Accepted files: PDF, DOC, DOCX, JPG, PNG</p>
               </div>
-  
+        
               <div class="file-list" *ngIf="documentUploads.size > 0">
-                <div class="file-item" *ngFor="let upload of documentUploads | keyvalue">
-                  <span class="file-name">{{upload.value.file.name}}</span>
-                  <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
-                </div>
-                <button type="button" class="add-more-files" (click)="triggerFileInput()">
-                  Add More Files
-                </button>
-              </div>
+  <div class="file-item" *ngFor="let upload of documentUploads | keyvalue">
+    <div class="file-info">
+      <span class="file-name">{{upload.value.file.name}}</span>
+      <select 
+        [value]="upload.value.type"
+        (change)="updateDocumentType(upload.key, $event)"
+        class="document-type-select">
+        <option *ngFor="let type of documentTypes" [value]="type">{{type}}</option>
+      </select>
+    </div>
+    <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
+  </div>
+  <button type="button" class="add-more-files" (click)="triggerFileInput()">
+    Add More Files
+  </button>
+</div>
             </div>
           </div>
         </div>
