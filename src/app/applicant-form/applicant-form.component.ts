@@ -13,6 +13,11 @@ interface DocumentUpload {
   progress?: number;
 }
 
+interface DepartmentPositions {
+  [key: string]: string[];
+}
+
+
 @Component({
   selector: 'app-applicant-form',
   standalone: true,
@@ -37,6 +42,74 @@ export class ApplicantFormComponent {
     'Other'
   ];
 
+  departments = [
+    'Human Resources',
+    'Information Technology',
+    'Marketing',
+    'Finance',
+    'Operations',
+    'Sales'
+  ];
+
+  departmentPositions: DepartmentPositions = {
+    'Human Resources': [
+      'HR Manager',
+      'HR Officer',
+      'Recruitment Specialist',
+      'Training and Development Officer',
+      'HR Assistant',
+      'Employee Relations Officer'
+    ],
+    'Information Technology': [
+      'IT Manager',
+      'Software Developer',
+      'System Administrator',
+      'Network Engineer',
+      'Database Administrator',
+      'IT Support Specialist',
+      'QA Engineer',
+      'Business Analyst'
+    ],
+    'Marketing': [
+      'Marketing Manager',
+      'Digital Marketing Specialist',
+      'Content Writer',
+      'Social Media Manager',
+      'Brand Manager',
+      'Marketing Coordinator',
+      'SEO Specialist'
+    ],
+    'Finance': [
+      'Finance Manager',
+      'Accountant',
+      'Financial Analyst',
+      'Budget Analyst',
+      'Bookkeeper',
+      'Treasury Analyst',
+      'Payroll Specialist'
+    ],
+    'Operations': [
+      'Operations Manager',
+      'Project Manager',
+      'Quality Assurance Manager',
+      'Process Improvement Specialist',
+      'Operations Coordinator',
+      'Logistics Coordinator',
+      'Supply Chain Manager'
+    ],
+    'Sales': [
+      'Sales Manager',
+      'Account Executive',
+      'Sales Representative',
+      'Business Development Manager',
+      'Sales Coordinator',
+      'Key Account Manager',
+      'Inside Sales Representative'
+    ]
+  };
+
+  availablePositions: string[] = [];
+
 
   constructor(
     private fb: FormBuilder,
@@ -54,9 +127,28 @@ export class ApplicantFormComponent {
       placeOfBirth: ['', Validators.required],
       nationality: ['', Validators.required],
       civilStatus: ['', Validators.required],
-      gender: ['', Validators.required]
+      gender: ['', Validators.required],
+      department: ['', Validators.required],
+      position: [{ value: '', disabled: true }, Validators.required]
+    });
+
+    // Subscribe to department changes to update available positions
+    this.applicationForm.get('department')?.valueChanges.subscribe(department => {
+      const positionControl = this.applicationForm.get('position');
+      if (department) {
+        this.availablePositions = this.departmentPositions[department] || [];
+        positionControl?.enable();
+      } else {
+        this.availablePositions = [];
+        positionControl?.disable();
+      }
+      positionControl?.setValue(''); // Reset position when department changes
     });
   }
+  isPositionDisabled(): boolean {
+    return !this.applicationForm.get('department')?.value;
+  }
+
   
   get formControls() {
     return this.applicationForm.controls;
@@ -165,27 +257,45 @@ export class ApplicantFormComponent {
   async onSubmit() {
     if (this.applicationForm.valid) {
       this.isSubmitting = true;
-
+  
       try {
-        const applicationData = this.applicationForm.value;
+        const formValue = this.applicationForm.getRawValue(); // Gets values including disabled controls
+        const applicationData = {
+          ...formValue,
+          department: formValue.department,
+          position: formValue.position
+        };
+  
         const response = await firstValueFrom(this.dataService.submitApplication(applicationData));
-
-        if (response && response.applicantId) {
+  
+        if (response && response.success && response.applicantId) {
           const applicantId = response.applicantId;
           
-          // Upload each document with its type
-          const uploadPromises = Array.from(this.documentUploads.values()).map(
-            upload => {
-              const formData = new FormData();
-              formData.append('file', upload.file);
-              formData.append('applicantId', applicantId.toString());
-              formData.append('documentType', upload.type);
-              
-              return firstValueFrom(this.dataService.uploadDocument(formData));
+          // Now upload each document sequentially
+          for (const [fileId, upload] of this.documentUploads.entries()) {
+            const formData = new FormData();
+            formData.append('file', upload.file);
+            formData.append('applicantId', applicantId.toString());
+            formData.append('documentType', upload.type);
+  
+            try {
+              const uploadResponse = await firstValueFrom(this.dataService.uploadDocument(formData));
+              // Update progress if needed
+              if (uploadResponse && uploadResponse.status === 'progress') {
+                upload.progress = uploadResponse.percentage;
+              }
+            } catch (uploadError) {
+              console.error(`Failed to upload document ${upload.file.name}:`, uploadError);
+              await Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: `Failed to upload ${upload.file.name}. Please try again.`,
+                confirmButtonText: 'OK'
+              });
+              throw uploadError;
             }
-          );
-          
-          await Promise.all(uploadPromises);
+          }
+  
 
           await Swal.fire({
             icon: 'success',
@@ -193,8 +303,10 @@ export class ApplicantFormComponent {
             text: 'Your application and documents have been submitted successfully.',
             confirmButtonText: 'OK'
           });
-
+  
           this.router.navigate(['/login']);
+        } else {
+          throw new Error('Failed to get applicant ID');
         }
       } catch (error) {
         console.error('Application submission failed:', error);
@@ -209,7 +321,6 @@ export class ApplicantFormComponent {
       }
     }
   }
-
 
   private async uploadDocument(applicantId: number, upload: DocumentUpload): Promise<void> {
     const formData = new FormData();

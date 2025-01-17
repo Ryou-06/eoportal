@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -12,82 +13,77 @@ import Swal from 'sweetalert2';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
   email: string = '';
   password: string = '';
-  emailValid: boolean = true;  // Add validation flag
-  passwordValid: boolean = true;  // Add validation flag
+  emailValid: boolean = true;
+  passwordValid: boolean = true;
+  returnUrl: string = '/home';
 
-  constructor(private dataService: DataService, private router: Router) {}
-
+  constructor(
+    private dataService: DataService, 
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    // Get return URL from route parameters or default to '/home'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+  }
 
   onLogin() {
-    console.log('Login attempt:', { email: this.email, password: this.password });
-  
-    // Basic validation before sending a request
+    // Reset validation flags
     this.emailValid = this.isEmailValid(this.email);
     this.passwordValid = this.password.length >= 6;
   
     if (!this.emailValid || !this.passwordValid) {
       Swal.fire({
         title: 'Invalid Input',
-        text: 'Please enter a valid email and password.',
-        icon: 'warning',
-        confirmButtonText: 'Okay'
+        text: 'Please enter a valid email and password (minimum 6 characters).',
+        icon: 'warning'
       });
       return;
     }
   
     this.dataService.userLogin(this.email, this.password).subscribe({
       next: (response) => {
-        console.log('Login response:', response);
-        if (response.success) {
-          console.log('Login successful');
-          const userName = response.user?.fullname || 'User';
-  
+        if (response.success && response.user) {
           Swal.fire({
             title: 'Welcome!',
-            text: `Hello, ${userName}! We're glad to have you back.`,
+            text: `Hello, ${response.user.fullname}!`,
             icon: 'success',
-            confirmButtonText: 'Continue'
+            timer: 1500,
+            showConfirmButton: false
           }).then(() => {
-            const returnUrl = this.dataService.redirectUrl || '/home';
-            this.router.navigate([returnUrl]);
+            this.router.navigate([this.returnUrl]);
           });
         } else {
-          // Show error message when email or password is incorrect
-          console.log('Login failed:', response.message);
           Swal.fire({
             title: 'Login Failed',
-            text: response.message || 'Invalid email or password.',
-            icon: 'error',
-            confirmButtonText: 'Try Again'
+            text: response.message || 'Invalid credentials',
+            icon: 'error'
           });
         }
       },
       error: (error) => {
-        console.error('Login error', error);
+        console.error('Login error:', error);
         Swal.fire({
-          title: 'Error',
-          text: 'Login failed. Please try again later.',
-          icon: 'error',
-          confirmButtonText: 'Close'
+          title: 'Login Failed',
+          text: error.message || 'An error occurred during login',
+          icon: 'error'
         });
       }
     });
   }
-  
 
-  // this.router.navigate(['/home']);
-
-  // Simple email validation
   isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email);
   }
 
-  // Example of navigating to sign-up page
-  navigateToSignUp() {
-    this.router.navigate(['/signup']);
+  navigateToApplicantForm() {
+    this.router.navigate(['/applicant-form']);
   }
+
+  navigateToChangePassword() {
+    this.router.navigate(['/change-password']);
+  }
+
 }

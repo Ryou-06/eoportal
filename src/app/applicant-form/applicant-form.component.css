@@ -278,3 +278,43 @@
     font-size: 0.9em;
     text-align: center;
   }
+
+  .form-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+  }
+  
+  .form-section h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  
+  select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .form-group select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .form-group select:valid {
+    border-color: #28a745;
+  }
+  
+  .form-group select.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }

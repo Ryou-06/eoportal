@@ -15,17 +15,15 @@ interface User {
   user_id: number;
   fullname: string;
   email: string;
-  password: string;
-  birthday: string;
+  date_of_birth: string;  // Changed from birthday to match DB
   department: string;
-  profile_picture?: string; // Add this field
+  profile_picture?: string;
 }
 
 interface AuthResponse {
   success: boolean;
   message?: string;
   user?: User;
-  profilePicture?: string;  // Add this line to include the profilePicture property
 }
 
 export interface TaskFileSubmission {
@@ -95,7 +93,10 @@ interface ApplicationResponse {
   message?: string;
 }
 
-
+interface ChangePasswordResponse {
+  success: boolean;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +105,7 @@ export class DataService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   private baseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api";
-private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; // Remove /api
+private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api"; // Remove /api
   
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
   public loggedIn$ = this.loggedInSubject.asObservable();
@@ -134,35 +135,46 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
   }
 
   public userLogin(email: string, password: string) {
-    return this.httpClient.post<User[]>(`${this.baseUrl}/login.php`, { email, password })
+    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login.php`, { email, password })
       .pipe(
         map(response => {
-          if (response && response.length > 0) {
-            const user = response[0];
-            
+          if (response.success && response.user) {
             // Store user details in localStorage
-            this.setToken(user.email);
-            localStorage.setItem('fullname', user.fullname);
-            localStorage.setItem('email', user.email);
-            localStorage.setItem('birthday', user.birthday);
-            localStorage.setItem('department', user.department);
-            localStorage.setItem('user_id', user.user_id.toString());
+            this.setToken(response.user.email);
+            localStorage.setItem('user_id', response.user.user_id.toString());
+            localStorage.setItem('fullname', response.user.fullname);
+            localStorage.setItem('email', response.user.email);
+            localStorage.setItem('date_of_birth', response.user.date_of_birth);
+            localStorage.setItem('department', response.user.department);
             
-            // Store profile picture URL if available
-            if (user.profile_picture) {
-              localStorage.setItem('profilePicture', user.profile_picture);
+            if (response.user.profile_picture) {
+              localStorage.setItem('profilePicture', response.user.profile_picture);
             }
             
             this.loggedInSubject.next(true);
-            return { success: true, user };
-          } else {
-            return { success: false, message: 'Invalid email or password' };
           }
+          return response;
         }),
         catchError((error: HttpErrorResponse) => {
           console.error('Login failed:', error);
-          alert('Login failed. Please try again.');
-          return throwError(error);
+          let errorMessage = 'An error occurred during login';
+          
+          if (error.error instanceof Object && error.error.message) {
+            errorMessage = error.error.message;
+          } else if (typeof error.error === 'string') {
+            try {
+              // Try to parse error message if it's a string
+              const parsedError = JSON.parse(error.error.replace(/.*?({.*})/s, '$1'));
+              errorMessage = parsedError.message || errorMessage;
+            } catch {
+              errorMessage = error.error;
+            }
+          }
+          
+          return throwError(() => ({
+            success: false,
+            message: errorMessage
+          }));
         })
       );
   }
@@ -419,13 +431,16 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
   }
 
   submitApplication(applicationData: any): Observable<ApplicationResponse> {
-    return this.httpClient.post<ApplicationResponse>(`${this.baseUrl}/submit-application.php`, applicationData)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Application submission failed:', error);
-          return throwError(() => new Error(error.message));
-        })
-      );
+    // Make sure applicationData includes department and position
+    return this.httpClient.post<ApplicationResponse>(
+      `${this.baseUrl}/submit-application.php`,
+      applicationData
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Application submission failed:', error);
+        return throwError(() => new Error(error.message));
+      })
+    );
   }
   uploadDocument(formData: FormData): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/upload-document.php`, formData, {
@@ -440,11 +455,35 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi"; /
               : 0;
             return { status: 'progress', percentage: progress };
           case HttpEventType.Response:
-            return { status: 'completed', data: event.body };
+            if (event.body && event.body.success) {
+              return { status: 'completed', data: event.body };
+            } else {
+              throw new Error(event.body?.error || 'Upload failed');
+            }
           default:
             return { status: 'unknown', data: event };
         }
+      }),
+      catchError(error => {
+        console.error('Upload error:', error);
+        throw error;
       })
     );
   }
+  public changePassword(email: string, currentPassword: string, newPassword: string) {
+  return this.httpClient.post<ChangePasswordResponse>(
+    `${this.baseUrl}/changepassword.php`,
+    {
+      email: email,
+      current_password: currentPassword,
+      new_password: newPassword
+    }
+  ).pipe(
+    catchError((error: HttpErrorResponse) => {
+      console.error('Password change failed:', error);
+      const errorMessage = error.error?.message || 'Failed to change password';
+      return throwError(() => new Error(errorMessage));
+    })
+  );
+}
 }

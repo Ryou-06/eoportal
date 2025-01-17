@@ -290,3 +290,34 @@ button {
     100% { transform: translateX(-70px) rotate(360deg); }
   }
   
+
+  .additional-links {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .forgot-password {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  .signup-link {
+    margin-top: 10px;
+  }
+  
+  .signup-link a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }

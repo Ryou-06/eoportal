@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ApplicantFormComponent } from './applicant-form/applicant-form.component';
-
+import { ChangePasswordComponent } from './change-password/change-password.component';
 export const routes: Routes = [
   
   {
@@ -24,6 +24,7 @@ export const routes: Routes = [
       { path: 'updateprofile', component: UpdateprofileComponent },
       { path: 'tasks', component: TasksComponent},
       
+      
     ],
   },    
   {
@@ -31,7 +32,9 @@ export const routes: Routes = [
   },
   {
     path: 'applicant-form', component: ApplicantFormComponent, // Public route
+    
   },
+  { path: 'change-password', component: ChangePasswordComponent },
   {
     path: '**', // Wildcard route for 404s
     redirectTo: '/home',

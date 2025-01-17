@@ -1,0 +1,38 @@
+[17-Jan-2025 15:32:52 Europe/Berlin] [2025-01-17 15:32:52] Processing application submission
+[17-Jan-2025 15:32:52 Europe/Berlin] [2025-01-17 15:32:52] Received data: stdClass Object
+(
+    [firstName] => dwasdadw
+    [lastName] => dadwas
+    [middleName] => adsadwas
+    [suffix] => Jr
+    [contactNumber] => 0993664065
+    [email] => testingtry1@gmail.com
+    [dateOfBirth] => 2025-01-28
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Information Technology
+    [position] => Software Developer
+)
+
+[17-Jan-2025 15:32:52 Europe/Berlin] [2025-01-17 15:32:52] Success: Application submitted for dwasdadw dadwas
+[17-Jan-2025 15:52:21 Europe/Berlin] [2025-01-17 15:52:21] Processing application submission
+[17-Jan-2025 15:52:21 Europe/Berlin] [2025-01-17 15:52:21] Received data: stdClass Object
+(
+    [firstName] => Ja
+    [lastName] => Fontelera
+    [middleName] => Fernandez
+    [suffix] => 
+    [contactNumber] => 09982664065
+    [email] => fontelerajohnadrian@gmail.com
+    [dateOfBirth] => 2025-01-15
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Information Technology
+    [position] => QA Engineer
+)
+
+[17-Jan-2025 15:52:21 Europe/Berlin] [2025-01-17 15:52:21] Success: Application submitted for Ja Fontelera

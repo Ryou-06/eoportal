@@ -164,6 +164,41 @@
             </div>
           </div>
         </div>
+
+        <div class="form-section">
+          <h3>Job Details</h3>
+          
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <select 
+              id="department" 
+              formControlName="department" 
+              required>
+              <option value="">Select Department</option>
+              <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+            </select>
+            <div *ngIf="formControls['department'].touched && formControls['department'].errors">
+              <small class="error" *ngIf="formControls['department'].errors?.['required']">Department is required</small>
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <label for="position">Position:</label>
+            <select 
+              id="position" 
+              formControlName="position" 
+              required
+              [attr.disabled]="isPositionDisabled()">
+              <option value="">Select Position</option>
+              <option *ngFor="let position of availablePositions" [value]="position">
+                {{position}}
+              </option>
+            </select>
+            <div *ngIf="formControls['position'].touched && formControls['position'].errors">
+              <small class="error" *ngIf="formControls['position'].errors?.['required']">Position is required</small>
+            </div>
+          </div>
+        </div>
   
         <!-- Document Upload Section -->
         <div class="form-section">

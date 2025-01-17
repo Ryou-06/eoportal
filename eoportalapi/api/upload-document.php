@@ -1,6 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type'); // Added this header
 header('Content-Type: application/json');
 
 // Handle OPTIONS request for CORS pre-flight
@@ -14,57 +15,40 @@ include_once("database.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        // Debug logging
+        error_log('Received file upload request');
+        error_log('FILES: ' . print_r($_FILES, true));
+        error_log('POST: ' . print_r($_POST, true));
+
         // Validate required data
         if (!isset($_FILES['file']) || !isset($_POST['applicantId']) || !isset($_POST['documentType'])) {
-            throw new Exception('File, applicant ID, and document type are required');
+            throw new Exception('Missing required fields: ' . 
+                (!isset($_FILES['file']) ? 'file ' : '') .
+                (!isset($_POST['applicantId']) ? 'applicantId ' : '') .
+                (!isset($_POST['documentType']) ? 'documentType' : '')
+            );
         }
 
         $file = $_FILES['file'];
         $applicantId = $_POST['applicantId'];
         $documentType = $_POST['documentType'];
 
-        // Validate applicant exists
-        $stmt = $pdo->prepare("SELECT applicant_id FROM applicants WHERE applicant_id = ?");
-        $stmt->execute([$applicantId]);
-        if ($stmt->rowCount() === 0) {
-            throw new Exception('Invalid applicant ID');
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            throw new Exception('File upload failed with error code: ' . $file['error']);
         }
 
-        // Validate document type
-        $validDocTypes = ['Resume', 'Government ID', 'Birth Certificate', 'Diploma', 'Training Certificates', 'Other'];
-        if (!in_array($documentType, $validDocTypes)) {
-            throw new Exception('Invalid document type');
-        }
-
-        // Validate file type
-        $allowedTypes = [
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'image/jpeg',
-            'image/png'
-        ];
-        
-        if (!in_array($file['type'], $allowedTypes)) {
-            throw new Exception('Invalid file type. Allowed types: PDF, DOC, DOCX, JPG, PNG');
-        }
-
-        // Validate file size (5MB max)
-        $maxSize = 5 * 1024 * 1024;
-        if ($file['size'] > $maxSize) {
-            throw new Exception('File size exceeds limit of 5MB');
-        }
-
-        // Create upload directory
-        $uploadDir = '../uploads/documents/' . $applicantId . '/';
+        // Create upload directory with full permissions
+        $uploadDir = dirname(__FILE__) . '/../uploads/documents/' . $applicantId . '/';
         if (!file_exists($uploadDir)) {
             if (!mkdir($uploadDir, 0777, true)) {
-                throw new Exception('Failed to create upload directory');
+                throw new Exception('Failed to create upload directory: ' . $uploadDir);
             }
+            chmod($uploadDir, 0777); // Ensure directory is writable
         }
 
         // Generate unique filename
-        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $filename = uniqid('doc_') . '_' . time() . '.' . $extension;
         $filepath = $uploadDir . $filename;
 
@@ -73,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Move uploaded file
         if (!move_uploaded_file($file['tmp_name'], $filepath)) {
-            throw new Exception('Failed to upload file');
+            throw new Exception('Failed to move uploaded file. Check permissions and path: ' . $filepath);
         }
 
         // Insert document record
@@ -89,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filename,
             'uploads/documents/' . $applicantId . '/' . $filename
         ])) {
-            throw new Exception('Failed to save document record');
+            throw new Exception('Failed to save document record to database');
         }
 
         $documentId = $pdo->lastInsertId();
@@ -109,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
     } catch (Exception $e) {
+        error_log('Document upload error: ' . $e->getMessage());
+        
         if ($pdo->inTransaction()) {
             $pdo->rollBack();
         }
@@ -120,12 +106,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         http_response_code(400);
         echo json_encode([
+            'success' => false,
             'error' => $e->getMessage()
         ]);
     }
 } else {
     http_response_code(405);
     echo json_encode([
+        'success' => false,
         'error' => 'Method not allowed'
     ]);
 }
+?>
