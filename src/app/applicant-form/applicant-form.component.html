@@ -204,6 +204,21 @@
         <div class="form-section">
           <h3>Required Documents</h3>
           
+          <div class="document-requirements">
+            <div class="required-docs">
+              <h4>Required Documents:</h4>
+              <ul>
+                <li *ngFor="let doc of requiredDocuments" 
+                    [class.uploaded]="isDocumentTypeUsed(doc)">
+                  {{ doc }}
+                  <span class="status-icon">
+                    {{ isDocumentTypeUsed(doc) ? '✓' : '!' }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
           <div class="document-uploads">
             <div class="dropzone" 
                  [class.dragover]="isDragOver"
@@ -228,22 +243,27 @@
               </div>
         
               <div class="file-list" *ngIf="documentUploads.size > 0">
-  <div class="file-item" *ngFor="let upload of documentUploads | keyvalue">
-    <div class="file-info">
-      <span class="file-name">{{upload.value.file.name}}</span>
-      <select 
-        [value]="upload.value.type"
-        (change)="updateDocumentType(upload.key, $event)"
-        class="document-type-select">
-        <option *ngFor="let type of documentTypes" [value]="type">{{type}}</option>
-      </select>
-    </div>
-    <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
-  </div>
-  <button type="button" class="add-more-files" (click)="triggerFileInput()">
-    Add More Files
-  </button>
-</div>
+                <div class="file-item" *ngFor="let upload of documentUploads | keyvalue">
+                  <div class="file-info">
+                    <span class="file-name">{{upload.value.file.name}}</span>
+                    <select 
+                      [value]="upload.value.type"
+                      (change)="updateDocumentType(upload.key, $event)"
+                      class="document-type-select">
+                      <option value="" disabled>Select Document Type</option>
+                      <option *ngFor="let type of documentTypes" 
+                              [value]="type"
+                              [disabled]="isDocumentTypeUsed(type) && upload.value.type !== type">
+                        {{type}}
+                      </option>
+                    </select>
+                  </div>
+                  <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
+                </div>
+                <button type="button" class="add-more-files" (click)="triggerFileInput()">
+                  Add More Files
+                </button>
+              </div>
             </div>
           </div>
         </div>

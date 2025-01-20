@@ -36,3 +36,1124 @@
 )
 
 [17-Jan-2025 15:52:21 Europe/Berlin] [2025-01-17 15:52:21] Success: Application submitted for Ja Fontelera
+[20-Jan-2025 07:57:43 Europe/Berlin] [2025-01-20 07:57:43] Processing application submission
+[20-Jan-2025 07:57:43 Europe/Berlin] [2025-01-20 07:57:43] Received data: stdClass Object
+(
+    [firstName] => John Adrian 
+    [lastName] => Fontelera
+    [middleName] => Fernandez
+    [suffix] => 
+    [contactNumber] => 0993664065
+    [email] => fontelerajohnadrian@gmail.com
+    [dateOfBirth] => 2004-08-04
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Information Technology
+    [position] => Network Engineer
+)
+
+[20-Jan-2025 07:57:43 Europe/Berlin] [2025-01-20 07:57:43] Success: Application submitted for John Adrian Fontelera
+[20-Jan-2025 08:08:51 Europe/Berlin] [2025-01-20 08:08:51] Processing application submission
+[20-Jan-2025 08:08:51 Europe/Berlin] [2025-01-20 08:08:51] Received data: stdClass Object
+(
+    [firstName] => yrtyrty
+    [lastName] => dsrtd
+    [middleName] => trydy5rd
+    [suffix] => 
+    [contactNumber] => 09984526213
+    [email] => teafsgdweta@gmail.com
+    [dateOfBirth] => 2025-01-10
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Divorced
+    [gender] => Male
+    [department] => Marketing
+    [position] => Social Media Manager
+)
+
+[20-Jan-2025 08:08:51 Europe/Berlin] [2025-01-20 08:08:51] Success: Application submitted for yrtyrty dsrtd
+[20-Jan-2025 08:20:53 Europe/Berlin] [2025-01-20 08:20:53] Processing application submission
+[20-Jan-2025 08:20:53 Europe/Berlin] [2025-01-20 08:20:53] Received data: stdClass Object
+(
+    [firstName] => dghfghkgf
+    [lastName] => htyufytfut
+    [middleName] => kkliioik
+    [suffix] => 
+    [contactNumber] => 0997853622
+    [email] => sghfgjgfhkuklopqaaa@gmail.com
+    [dateOfBirth] => 2005-06-25
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Operations
+    [position] => Operations Coordinator
+)
+
+[20-Jan-2025 08:20:53 Europe/Berlin] [2025-01-20 08:20:53] Success: Application submitted for dghfghkgf htyufytfut
+[20-Jan-2025 08:25:58 Europe/Berlin] [2025-01-20 08:25:58] Processing application submission
+[20-Jan-2025 08:25:58 Europe/Berlin] [2025-01-20 08:25:58] Received data: stdClass Object
+(
+    [firstName] => werwre
+    [lastName] => dadawgg
+    [middleName] => rwrerwrwg
+    [suffix] => 
+    [contactNumber] => 09321348182
+    [email] => gsfhhgfkhjhl2@gmail.com
+    [dateOfBirth] => 2025-01-25
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Information Technology
+    [position] => IT Manager
+)
+
+[20-Jan-2025 08:25:58 Europe/Berlin] [2025-01-20 08:25:58] Success: Application submitted for werwre dadawgg
+[20-Jan-2025 08:29:11 Europe/Berlin] [2025-01-20 08:29:11] Processing application submission
+[20-Jan-2025 08:29:11 Europe/Berlin] [2025-01-20 08:29:11] Received data: stdClass Object
+(
+    [firstName] => fiyuturu
+    [lastName] => rujiy
+    [middleName] => itiyiyiuiy
+    [suffix] => 
+    [contactNumber] => 0993664065
+    [email] => yuyyyryetyryz@gmail.com
+    [dateOfBirth] => 1998-12-28
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Sales
+    [position] => Key Account Manager
+)
+
+[20-Jan-2025 08:29:11 Europe/Berlin] [2025-01-20 08:29:11] Success: Application submitted for fiyuturu rujiy
+[20-Jan-2025 08:32:02 Europe/Berlin] [2025-01-20 08:32:02] Processing application submission
+[20-Jan-2025 08:32:02 Europe/Berlin] [2025-01-20 08:32:02] Received data: stdClass Object
+(
+    [firstName] => jlyoyutu
+    [lastName] => jtjhkjolu;ih
+    [middleName] => uitiuti
+    [suffix] => Sr
+    [contactNumber] => 12345678912
+    [email] => yumburger987@gmail.com
+    [dateOfBirth] => 2025-01-31
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Marketing
+    [position] => Content Writer
+)
+
+[20-Jan-2025 08:32:02 Europe/Berlin] [2025-01-20 08:32:02] Success: Application submitted for jlyoyutu jtjhkjolu;ih
+[20-Jan-2025 08:35:28 Europe/Berlin] [2025-01-20 08:35:28] Processing application submission
+[20-Jan-2025 08:35:28 Europe/Berlin] [2025-01-20 08:35:28] Received data: stdClass Object
+(
+    [firstName] => iuyiurty
+    [lastName] => jtyutut
+    [middleName] => ryyyryteyrt
+    [suffix] => 
+    [contactNumber] => 09321348182
+    [email] => yrwpqkeqe@gmail.com
+    [dateOfBirth] => 2025-01-15
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Marketing
+    [position] => Digital Marketing Specialist
+)
+
+[20-Jan-2025 08:35:28 Europe/Berlin] [2025-01-20 08:35:28] Success: Application submitted for iuyiurty jtyutut
+[20-Jan-2025 08:38:20 Europe/Berlin] [2025-01-20 08:38:20] Processing application submission
+[20-Jan-2025 08:38:20 Europe/Berlin] [2025-01-20 08:38:20] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:38:20 Europe/Berlin] [2025-01-20 08:38:20] Success: Application submitted for hgfxgdlghgg ruyoupoii
+[20-Jan-2025 08:40:38 Europe/Berlin] [2025-01-20 08:40:38] Processing application submission
+[20-Jan-2025 08:40:38 Europe/Berlin] [2025-01-20 08:40:38] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:38 Europe/Berlin] [2025-01-20 08:40:38] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Processing application submission
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Processing application submission
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:39 Europe/Berlin] [2025-01-20 08:40:39] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Processing application submission
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:40 Europe/Berlin] [2025-01-20 08:40:40] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Processing application submission
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Processing application submission
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:41 Europe/Berlin] [2025-01-20 08:40:41] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:43 Europe/Berlin] [2025-01-20 08:40:43] Processing application submission
+[20-Jan-2025 08:40:43 Europe/Berlin] [2025-01-20 08:40:43] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:43 Europe/Berlin] [2025-01-20 08:40:43] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:44 Europe/Berlin] [2025-01-20 08:40:44] Processing application submission
+[20-Jan-2025 08:40:44 Europe/Berlin] [2025-01-20 08:40:44] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:44 Europe/Berlin] [2025-01-20 08:40:44] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Processing application submission
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Processing application submission
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Processing application submission
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Processing application submission
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Processing application submission
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:45 Europe/Berlin] [2025-01-20 08:40:45] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Processing application submission
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Processing application submission
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Processing application submission
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Processing application submission
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:46 Europe/Berlin] [2025-01-20 08:40:46] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Processing application submission
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:47 Europe/Berlin] [2025-01-20 08:40:47] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Processing application submission
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Processing application submission
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Received data: stdClass Object
+(
+    [firstName] => hgfxgdlghgg
+    [lastName] => ruyoupoii
+    [middleName] => sfddda
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => hrjrt@gmail.com
+    [dateOfBirth] => 2025-01-24
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 08:40:48 Europe/Berlin] [2025-01-20 08:40:48] Error: Email already exists: hrjrt@gmail.com
+[20-Jan-2025 08:41:54 Europe/Berlin] [2025-01-20 08:41:54] Processing application submission
+[20-Jan-2025 08:41:54 Europe/Berlin] [2025-01-20 08:41:54] Received data: stdClass Object
+(
+    [firstName] => dfsffe
+    [lastName] => shriugf
+    [middleName] => gdfgdhd
+    [suffix] => II
+    [contactNumber] => 09321348182
+    [email] => dgjhryjgdr@gmail.com
+    [dateOfBirth] => 2025-01-31
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Finance
+    [position] => Treasury Analyst
+)
+
+[20-Jan-2025 08:41:54 Europe/Berlin] [2025-01-20 08:41:54] Success: Application submitted for dfsffe shriugf
+[20-Jan-2025 08:44:58 Europe/Berlin] [2025-01-20 08:44:58] Processing application submission
+[20-Jan-2025 08:44:58 Europe/Berlin] [2025-01-20 08:44:58] Received data: stdClass Object
+(
+    [firstName] => ghdgh
+    [lastName] => jssdj
+    [middleName] => htdfsfe
+    [suffix] => III
+    [contactNumber] => 09384718273
+    [email] => tjtkuk@g
+    [dateOfBirth] => 2025-01-21
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Marketing
+    [position] => SEO Specialist
+)
+
+[20-Jan-2025 08:44:58 Europe/Berlin] [2025-01-20 08:44:58] Error: Invalid email format: tjtkuk@g
+[20-Jan-2025 08:44:59 Europe/Berlin] [2025-01-20 08:44:59] Processing application submission
+[20-Jan-2025 08:44:59 Europe/Berlin] [2025-01-20 08:44:59] Received data: stdClass Object
+(
+    [firstName] => ghdgh
+    [lastName] => jssdj
+    [middleName] => htdfsfe
+    [suffix] => III
+    [contactNumber] => 09384718273
+    [email] => tjtkuk@g
+    [dateOfBirth] => 2025-01-21
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Marketing
+    [position] => SEO Specialist
+)
+
+[20-Jan-2025 08:44:59 Europe/Berlin] [2025-01-20 08:44:59] Error: Invalid email format: tjtkuk@g
+[20-Jan-2025 08:45:58 Europe/Berlin] [2025-01-20 08:45:58] Processing application submission
+[20-Jan-2025 08:45:58 Europe/Berlin] [2025-01-20 08:45:58] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:45:58 Europe/Berlin] [2025-01-20 08:45:58] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Processing application submission
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Processing application submission
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:45:59 Europe/Berlin] [2025-01-20 08:45:59] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Processing application submission
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Processing application submission
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Processing application submission
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Processing application submission
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Received data: stdClass Object
+(
+    [firstName] => rthrwwae
+    [lastName] => rfgjet
+    [middleName] => hrtrhrhth
+    [suffix] => Sr
+    [contactNumber] => 0993664065
+    [email] => arqew@gsg
+    [dateOfBirth] => 2025-01-03
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Female
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 08:46:00 Europe/Berlin] [2025-01-20 08:46:00] Error: Invalid email format: arqew@gsg
+[20-Jan-2025 09:07:35 Europe/Berlin] [2025-01-20 09:07:35] Processing application submission
+[20-Jan-2025 09:07:35 Europe/Berlin] [2025-01-20 09:07:35] Received data: stdClass Object
+(
+    [firstName] => reestwtw
+    [lastName] => wreatwt
+    [middleName] => rerwetwtw
+    [suffix] => II
+    [contactNumber] => 09657289942
+    [email] => hrjrjjrjy@gmail.com
+    [dateOfBirth] => 2025-01-23
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Payroll Specialist
+)
+
+[20-Jan-2025 09:07:35 Europe/Berlin] [2025-01-20 09:07:35] Success: Application submitted for reestwtw wreatwt
+[20-Jan-2025 09:13:57 Europe/Berlin] [2025-01-20 09:13:57] Processing application submission
+[20-Jan-2025 09:13:57 Europe/Berlin] [2025-01-20 09:13:57] Received data: stdClass Object
+(
+    [firstName] => erette
+    [lastName] => frhrg
+    [middleName] => reyretrte
+    [suffix] => IV
+    [contactNumber] => 0993664065
+    [email] => fdhgjukykfx@rg
+    [dateOfBirth] => 2025-02-04
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Marketing
+    [position] => Marketing Manager
+)
+
+[20-Jan-2025 09:13:57 Europe/Berlin] [2025-01-20 09:13:57] Error: Invalid email format: fdhgjukykfx@rg
+[20-Jan-2025 09:14:27 Europe/Berlin] [2025-01-20 09:14:27] Processing application submission
+[20-Jan-2025 09:14:27 Europe/Berlin] [2025-01-20 09:14:27] Received data: stdClass Object
+(
+    [firstName] => erette
+    [lastName] => frhrg
+    [middleName] => reyretrte
+    [suffix] => IV
+    [contactNumber] => 0993664065
+    [email] => hjhjojeigoaaaa@gmail.com
+    [dateOfBirth] => 2025-02-04
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Marketing
+    [position] => Marketing Manager
+)
+
+[20-Jan-2025 09:14:27 Europe/Berlin] [2025-01-20 09:14:27] Success: Application submitted for erette frhrg
+[20-Jan-2025 11:37:18 Europe/Berlin] [2025-01-20 11:37:18] Processing application submission
+[20-Jan-2025 11:37:18 Europe/Berlin] [2025-01-20 11:37:18] Received data: stdClass Object
+(
+    [firstName] => ewareawterw
+    [lastName] => rgswf
+    [middleName] => wared
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => jollyhotdog23456@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Human Resources
+    [position] => HR Assistant
+)
+
+[20-Jan-2025 11:37:18 Europe/Berlin] [2025-01-20 11:37:18] Success: Application submitted for ewareawterw rgswf
+[20-Jan-2025 11:55:45 Europe/Berlin] [2025-01-20 11:55:45] Processing application submission
+[20-Jan-2025 11:55:45 Europe/Berlin] [2025-01-20 11:55:45] Received data: stdClass Object
+(
+    [firstName] => fhteherf
+    [lastName] => gfgaw
+    [middleName] => ghegtert
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => fdsadwa32wd@gmail.com
+    [dateOfBirth] => 2025-01-02
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Bookkeeper
+)
+
+[20-Jan-2025 11:55:45 Europe/Berlin] [2025-01-20 11:55:45] Success: Application submitted for fhteherf gfgaw
+[20-Jan-2025 11:57:52 Europe/Berlin] [2025-01-20 11:57:52] Processing application submission
+[20-Jan-2025 11:57:52 Europe/Berlin] [2025-01-20 11:57:52] Received data: stdClass Object
+(
+    [firstName] => ytry
+    [lastName] => ftryjsd
+    [middleName] => yujdrttrr
+    [suffix] => Sr
+    [contactNumber] => 09657289942
+    [email] => sdhsgfhs2eqr@gmail.com
+    [dateOfBirth] => 2025-01-20
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Information Technology
+    [position] => IT Support Specialist
+)
+
+[20-Jan-2025 11:57:52 Europe/Berlin] [2025-01-20 11:57:52] Success: Application submitted for ytry ftryjsd
+[20-Jan-2025 12:07:04 Europe/Berlin] [2025-01-20 12:07:04] Processing application submission
+[20-Jan-2025 12:07:04 Europe/Berlin] [2025-01-20 12:07:04] Received data: stdClass Object
+(
+    [firstName] => sdawasd
+    [lastName] => dsadwa
+    [middleName] => adwasda
+    [suffix] => Jr
+    [contactNumber] => 09384718273
+    [email] => hfbjhtwst2i020@gmail.com
+    [dateOfBirth] => 2025-01-20
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Finance
+    [position] => Finance Manager
+)
+
+[20-Jan-2025 12:07:04 Europe/Berlin] [2025-01-20 12:07:04] Success: Application submitted for sdawasd dsadwa
+[20-Jan-2025 12:54:38 Europe/Berlin] [2025-01-20 12:54:38] Processing application submission
+[20-Jan-2025 12:54:38 Europe/Berlin] [2025-01-20 12:54:38] Received data: stdClass Object
+(
+    [firstName] => seresgr
+    [lastName] => dgefsrey
+    [middleName] => sgregfyj
+    [suffix] => 
+    [contactNumber] => 09321348182
+    [email] => ghhkuylgdf12@gmail.com
+    [dateOfBirth] => 2025-01-20
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Sales
+    [position] => Inside Sales Representative
+)
+
+[20-Jan-2025 12:54:38 Europe/Berlin] [2025-01-20 12:54:38] Success: Application submitted for seresgr dgefsrey
+[20-Jan-2025 13:00:33 Europe/Berlin] [2025-01-20 13:00:33] Processing application submission
+[20-Jan-2025 13:00:33 Europe/Berlin] [2025-01-20 13:00:33] Received data: stdClass Object
+(
+    [firstName] => utfuutfu
+    [lastName] => dtjhfyifi
+    [middleName] => yuftuyyt
+    [suffix] => 
+    [contactNumber] => 0993664065
+    [email] => fsdsfjg12467@gmail.com
+    [dateOfBirth] => 2025-01-20
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Marketing
+    [position] => SEO Specialist
+)
+
+[20-Jan-2025 13:00:33 Europe/Berlin] [2025-01-20 13:00:33] Success: Application submitted for utfuutfu dtjhfyifi
+[20-Jan-2025 13:05:37 Europe/Berlin] [2025-01-20 13:05:37] Processing application submission
+[20-Jan-2025 13:05:37 Europe/Berlin] [2025-01-20 13:05:37] Received data: stdClass Object
+(
+    [firstName] => tertetr
+    [lastName] => agsyyer
+    [middleName] => esttujrwyet
+    [suffix] => 
+    [contactNumber] => 09384718273
+    [email] => aWDQDwe12@gmail.com
+    [dateOfBirth] => 2025-01-20
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Human Resources
+    [position] => HR Assistant
+)
+
+[20-Jan-2025 13:05:37 Europe/Berlin] [2025-01-20 13:05:37] Success: Application submitted for tertetr agsyyer

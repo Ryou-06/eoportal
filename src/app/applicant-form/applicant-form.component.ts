@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 interface DocumentUpload {
   file: File;
-  type: 'Resume' | 'Government ID' | 'Birth Certificate' | 'Diploma' | 'Training Certificates' | 'Other';
+  type: DocumentType;
   progress?: number;
 }
 
@@ -17,6 +17,27 @@ interface DepartmentPositions {
   [key: string]: string[];
 }
 
+type DocumentType = 
+  | 'Resume'
+  | 'Government-Issued ID'
+  | 'Birth Certificate'
+  | 'Diploma'
+  | 'Transcript of Records'
+  | 'Employment Certificate'
+  | 'Barangay Clearance'
+  | 'Police Clearance'
+  | 'NBI Clearance'
+  | 'Social Security Documents'
+  | 'Tax Identification Number'
+  | 'Other';
+
+
+  interface UploadError {
+    message?: string;
+    details?: any;
+    status?: number;
+  }
+  
 
 @Component({
   selector: 'app-applicant-form',
@@ -33,14 +54,34 @@ export class ApplicantFormComponent {
   isDragOver = false;
   documentUploads = new Map<string, DocumentUpload>();
 
-  documentTypes: Array<DocumentUpload['type']> = [
+ requiredDocuments: DocumentType[] = [
+  'Resume',
+  'Government-Issued ID',
+  'Birth Certificate',
+  'Diploma',
+  'Transcript of Records',
+  'Employment Certificate',
+  'Barangay Clearance',
+  'Police Clearance',
+  'NBI Clearance',
+  'Social Security Documents',
+  'Tax Identification Number'
+  ];
+
+  documentTypes: DocumentType[] = [
     'Resume',
-    'Government ID',
+    'Government-Issued ID',
     'Birth Certificate',
     'Diploma',
-    'Training Certificates',
-    'Other'
+    'Transcript of Records',
+    'Employment Certificate',
+    'Barangay Clearance',
+    'Police Clearance',
+    'NBI Clearance',
+    'Social Security Documents',
+    'Tax Identification Number'
   ];
+
 
   departments = [
     'Human Resources',
@@ -110,6 +151,8 @@ export class ApplicantFormComponent {
 
   availablePositions: string[] = [];
 
+  private readonly MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+  private readonly CHUNK_SIZE = 3; // Number of files to upload at onc
 
   constructor(
     private fb: FormBuilder,
@@ -194,6 +237,17 @@ export class ApplicantFormComponent {
     ];
 
     files.forEach(file => {
+      // Size validation
+      if (file.size > this.MAX_FILE_SIZE) {
+        Swal.fire({
+          icon: 'error',
+          title: 'File Too Large',
+          text: `File "${file.name}" exceeds maximum size of 10MB`
+        });
+        return;
+      }
+
+      // Type validation
       if (!allowedTypes.includes(file.type)) {
         Swal.fire({
           icon: 'error',
@@ -203,11 +257,11 @@ export class ApplicantFormComponent {
         return;
       }
 
-      // Assign a default document type (can be changed by user)
+      // Add file to documentUploads
       const fileId = `file-${Date.now()}-${file.name}`;
       this.documentUploads.set(fileId, {
         file: file,
-        type: 'Other' // Default type
+        type: 'Other'
       });
     });
   }
@@ -255,71 +309,88 @@ export class ApplicantFormComponent {
   }
 
   async onSubmit() {
-    if (this.applicationForm.valid) {
-      this.isSubmitting = true;
-  
-      try {
-        const formValue = this.applicationForm.getRawValue(); // Gets values including disabled controls
-        const applicationData = {
-          ...formValue,
-          department: formValue.department,
-          position: formValue.position
-        };
-  
-        const response = await firstValueFrom(this.dataService.submitApplication(applicationData));
-  
-        if (response && response.success && response.applicantId) {
-          const applicantId = response.applicantId;
-          
-          // Now upload each document sequentially
-          for (const [fileId, upload] of this.documentUploads.entries()) {
-            const formData = new FormData();
-            formData.append('file', upload.file);
-            formData.append('applicantId', applicantId.toString());
-            formData.append('documentType', upload.type);
-  
-            try {
-              const uploadResponse = await firstValueFrom(this.dataService.uploadDocument(formData));
-              // Update progress if needed
-              if (uploadResponse && uploadResponse.status === 'progress') {
-                upload.progress = uploadResponse.percentage;
-              }
-            } catch (uploadError) {
-              console.error(`Failed to upload document ${upload.file.name}:`, uploadError);
-              await Swal.fire({
-                icon: 'error',
-                title: 'Upload Failed',
-                text: `Failed to upload ${upload.file.name}. Please try again.`,
-                confirmButtonText: 'OK'
-              });
-              throw uploadError;
-            }
-          }
-  
-
-          await Swal.fire({
-            icon: 'success',
-            title: 'Application Submitted',
-            text: 'Your application and documents have been submitted successfully.',
-            confirmButtonText: 'OK'
-          });
-  
-          this.router.navigate(['/login']);
-        } else {
-          throw new Error('Failed to get applicant ID');
-        }
-      } catch (error) {
-        console.error('Application submission failed:', error);
+    try {
+      if (this.applicationForm.invalid) {
+        const errors = this.validateForm();
         await Swal.fire({
           icon: 'error',
-          title: 'Submission Failed',
-          text: 'There was an error submitting your application. Please try again.',
-          confirmButtonText: 'OK'
+          title: 'Form Validation Error',
+          html: errors.join('<br>')
         });
-      } finally {
-        this.isSubmitting = false;
+        return;
       }
+
+      const missingDocs = this.getMissingRequiredDocuments();
+      if (missingDocs.length > 0) {
+        await Swal.fire({
+          icon: 'error',
+          title: 'Missing Required Documents',
+          text: `Please upload the following required documents: ${missingDocs.join(', ')}`
+        });
+        return;
+      }
+
+      this.isSubmitting = true;
+
+      // Submit application data first
+      const formValue = this.applicationForm.getRawValue();
+      const response = await firstValueFrom(this.dataService.submitApplication(formValue));
+
+        if (response && response.success && response.applicantId) {
+            const applicantId = response.applicantId;
+            const uploads = Array.from(this.documentUploads.values());
+            const files = uploads.map(upload => upload.file);
+            const types = uploads.map(upload => upload.type);
+
+            // Upload documents in chunks
+            try {
+                const uploadResponse = await firstValueFrom(
+                    this.dataService.uploadDocumentsInChunks(
+                        files,
+                        applicantId.toString(),
+                        types
+                    )
+                );
+
+                console.log('Upload response:', uploadResponse); // For debugging
+
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Application Submitted',
+                    text: 'Your application and documents have been submitted successfully.'
+                });
+
+                this.router.navigate(['/login']);
+            } catch (uploadError) {
+                throw new Error('Document upload failed: ' + this.getErrorMessage(uploadError));
+            }
+        } else {
+            throw new Error('Application submission failed: Invalid response from server');
+        }
+    } catch (error) {
+      console.error('Submission error:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: this.getErrorMessage(error)
+      });
+    } finally {
+      this.isSubmitting = false;
     }
+  }
+
+  // Add this helper method to safely extract error messages
+  private getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    if (typeof error === 'string') {
+      return error;
+    }
+    if (error && typeof error === 'object' && 'message' in error) {
+      return String(error.message);
+    }
+    return 'There was an error submitting your application. Please try again.';
   }
 
   private async uploadDocument(applicantId: number, upload: DocumentUpload): Promise<void> {
@@ -345,4 +416,13 @@ export class ApplicantFormComponent {
       this.documentUploads.set(fileId, upload);
     }
   }
+  getMissingRequiredDocuments(): DocumentType[] {
+    const uploadedTypes = Array.from(this.documentUploads.values()).map(upload => upload.type);
+    return this.requiredDocuments.filter(type => !uploadedTypes.includes(type));
+  }
+
+  isDocumentTypeUsed(type: DocumentType): boolean {
+    return Array.from(this.documentUploads.values()).some(upload => upload.type === type);
+  }
+
 }

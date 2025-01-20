@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, throwError, Observable, switchMap, of} from 'rxjs';
+import { BehaviorSubject, catchError, map, throwError, Observable, switchMap, of, retry, timeout} from 'rxjs';
 
 export interface UserFile {
   id: number;
@@ -431,7 +431,6 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
   }
 
   submitApplication(applicationData: any): Observable<ApplicationResponse> {
-    // Make sure applicationData includes department and position
     return this.httpClient.post<ApplicationResponse>(
       `${this.baseUrl}/submit-application.php`,
       applicationData
@@ -442,34 +441,133 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
       })
     );
   }
-  uploadDocument(formData: FormData): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/upload-document.php`, formData, {
-      reportProgress: true,
-      observe: 'events'
-    }).pipe(
-      map((event: HttpEvent<any>) => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress:
-            const progress = event.total 
-              ? Math.round(100 * event.loaded / event.total)
-              : 0;
-            return { status: 'progress', percentage: progress };
-          case HttpEventType.Response:
-            if (event.body && event.body.success) {
-              return { status: 'completed', data: event.body };
-            } else {
-              throw new Error(event.body?.error || 'Upload failed');
+
+  uploadDocument(formData: FormData, retryCount: number = 3): Observable<any> {
+    const options = {
+        reportProgress: true,
+        observe: 'events' as const,
+        headers: new HttpHeaders({
+            // Remove Content-Type to let browser set it automatically for FormData
+            Accept: 'application/json'
+        })
+    };
+
+    // Log the FormData contents for debugging
+    console.log('FormData contents:');
+    formData.forEach((value, key) => {
+        console.log(`${key}:`, value);
+    });
+
+    return this.httpClient.post<any>(
+        `${this.baseUrl}/upload-document.php`, 
+        formData, 
+        options
+    ).pipe(
+        retry(retryCount),
+        map((event: HttpEvent<any>) => {
+            switch (event.type) {
+                case HttpEventType.UploadProgress:
+                    const progress = event.total 
+                        ? Math.round(100 * event.loaded / event.total)
+                        : 0;
+                    return { 
+                        status: 'progress', 
+                        percentage: progress,
+                        loaded: event.loaded,
+                        total: event.total 
+                    };
+                case HttpEventType.Response:
+                    if (event.body && event.body.success) {
+                        return { 
+                            status: 'completed', 
+                            data: event.body,
+                            files: event.body.files 
+                        };
+                    } else {
+                        throw new Error(event.body?.error || 'Upload failed');
+                    }
+                default:
+                    return { status: 'unknown', data: event };
             }
-          default:
-            return { status: 'unknown', data: event };
-        }
-      }),
-      catchError(error => {
-        console.error('Upload error:', error);
-        throw error;
-      })
+        }),
+        catchError((error: HttpErrorResponse) => {
+            console.error('Upload error:', error);
+            // Include more detailed error information
+            return throwError(() => ({
+                error: error.message,
+                details: error.error,
+                status: error.status,
+                timestamp: new Date().toISOString()
+            }));
+        })
     );
-  }
+}
+
+uploadDocumentsInChunks(
+    files: File[], 
+    applicantId: string, 
+    documentTypes: string[], 
+    chunkSize: number = 3
+): Observable<any> {
+    return new Observable(observer => {
+        let currentChunk = 0;
+        const totalChunks = Math.ceil(files.length / chunkSize);
+
+        const uploadNextChunk = () => {
+            const start = currentChunk * chunkSize;
+            const end = Math.min(start + chunkSize, files.length);
+            const chunk = files.slice(start, end);
+            const chunkTypes = documentTypes.slice(start, end);
+
+            const formData = new FormData();
+            formData.append('applicantId', applicantId);
+
+            // Append files and their types
+            chunk.forEach((file, index) => {
+                formData.append(`files[]`, file);
+                formData.append(`documentTypes[]`, chunkTypes[index]);
+            });
+
+            // Log what we're sending
+            console.log('Uploading chunk:', {
+                currentChunk,
+                filesCount: chunk.length,
+                types: chunkTypes
+            });
+
+            this.uploadDocument(formData)
+                .subscribe({
+                    next: (response) => {
+                        console.log('Chunk upload response:', response);
+                        observer.next({
+                            status: 'progress',
+                            currentChunk: currentChunk + 1,
+                            totalChunks,
+                            files: response.files,
+                            response: response
+                        });
+
+                        if (end >= files.length) {
+                            observer.complete();
+                        } else {
+                            currentChunk++;
+                            uploadNextChunk();
+                        }
+                    },
+                    error: (error) => {
+                        console.error('Chunk upload error:', error);
+                        observer.error({
+                            error,
+                            failedChunk: currentChunk,
+                            failedFiles: chunk.map(f => f.name)
+                        });
+                    }
+                });
+        };
+
+        uploadNextChunk();
+    });
+}
   public changePassword(email: string, currentPassword: string, newPassword: string) {
   return this.httpClient.post<ChangePasswordResponse>(
     `${this.baseUrl}/changepassword.php`,

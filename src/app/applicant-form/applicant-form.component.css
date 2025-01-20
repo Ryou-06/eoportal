@@ -318,3 +318,86 @@
   .form-group select.ng-invalid.ng-touched {
     border-color: #dc3545;
   }
+  .document-requirements {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }
+  
+  .required-docs ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .required-docs li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+  }
+  
+  .required-docs li.uploaded {
+    border-color: #28a745;
+    background-color: #f8fff8;
+  }
+
+  .status-icon {
+    font-weight: bold;
+  }
+  
+  .uploaded .status-icon {
+    color: #28a745;
+  }
+
+  .document-type-select {
+    min-width: 200px;
+    padding: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-left: 10px;
+  }
+  
+  .document-type-select option[disabled] {
+    color: #6c757d;
+    font-style: italic;
+  }
+  
+  .file-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .remove-file {
+    color: #dc3545;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .add-more-files {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-more-files:hover {
+    background-color: #0056b3;
+  }
