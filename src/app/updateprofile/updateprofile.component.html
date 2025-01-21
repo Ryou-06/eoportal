@@ -1,5 +1,4 @@
 <div class="profile-page-wrapper">
-  <!-- Profile Section -->
   <div class="profile-landscape">
     <div class="profile-content">
       <div class="profile-left">
@@ -9,12 +8,29 @@
           class="profile-pic"
           (error)="handleProfilePictureError()"
         >
+        <!-- Moved profile picture upload here -->
+        <div class="picture-upload-container">
+          <input 
+            type="file" 
+            (change)="onFileSelected($event)" 
+            accept="image/*" 
+            id="profile-pic-input"
+            class="file-input"
+          >
+          <label for="profile-pic-input" class="upload-button">
+            Choose New Picture
+          </label>
+          <p class="selected-file" *ngIf="selectedFile">
+            Selected: {{ selectedFile.name }}
+          </p>
+        </div>
       </div>
       <div class="profile-right">
         <h1 class="employee-name">{{ fullname }}</h1>
         <div class="details-grid">
+          <!-- Email -->
           <div class="profile-detail">
-            <span class="icon-email"></span>
+            <i class="fa-solid fa-envelope icon"></i>
             <div class="detail-content">
               <span class="detail-label">Email</span>
               <input 
@@ -26,23 +42,103 @@
             </div>
           </div>
 
+          <!-- Contact Number -->
           <div class="profile-detail">
-            <span class="icon-calendar"></span>
+            <i class="fa-solid fa-phone icon"></i>
             <div class="detail-content">
-              <span class="detail-label">Birthday</span>
-              <p>{{ birthday }}</p>
+              <span class="detail-label">Contact Number</span>
+              <input 
+                type="tel" 
+                [(ngModel)]="contactNumber" 
+                class="styled-input"
+                placeholder="Enter contact number"
+              >
             </div>
           </div>
 
+          <!-- Civil Status -->
           <div class="profile-detail">
-            <span class="icon-department"></span>
+            <i class="fa-solid fa-heart icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Civil Status</span>
+              <select [(ngModel)]="civilStatus" class="styled-select">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Date of Birth (Read-only) -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-cake-candles icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Date of Birth</span>
+              <p>{{ dateOfBirth }}</p>
+            </div>
+          </div>
+
+          <!-- Place of Birth -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-location-dot icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Place of Birth</span>
+              <p>{{ placeOfBirth }}</p>
+            </div>
+          </div>
+
+          <!-- Nationality -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-globe icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Nationality</span>
+              <p>{{ nationality }}</p>
+            </div>
+          </div>
+
+          <!-- Gender -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-user icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Gender</span>
+              <p>{{ gender }}</p>
+            </div>
+          </div>
+
+          <!-- Department -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-building icon"></i>
             <div class="detail-content">
               <span class="detail-label">Department</span>
-              <select [(ngModel)]="selectedDepartment" class="styled-select">
-                <option *ngFor="let dept of departments" [value]="dept">
-                  {{ dept }}
-                </option>
-              </select>
+              <p>{{ department }}</p>
+            </div>
+          </div>
+
+          <!-- Position -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-briefcase icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Position</span>
+              <p>{{ position }}</p>
+            </div>
+          </div>
+
+          <!-- Created At -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-calendar-check icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Created At</span>
+              <p>{{ createdAt | date:'medium' }}</p>
+            </div>
+          </div>
+
+          <!-- Status -->
+          <div class="profile-detail">
+            <i class="fa-solid fa-circle-check icon"></i>
+            <div class="detail-content">
+              <span class="detail-label">Status</span>
+              <p>{{ status }}</p>
             </div>
           </div>
         </div>
@@ -53,6 +149,7 @@
       </div>
     </div>
   </div>
+</div>
 
   <!-- Divider -->
   <div class="section-divider">
@@ -81,4 +178,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -1,47 +1,109 @@
 <div class="profile-page-wrapper">
-  <!-- Profile Section -->
   <div class="profile-landscape">
     <div class="profile-content">
       <div class="profile-left">
-        <img 
-          [src]="profilePicture" 
-          alt="Profile Picture" 
-          class="profile-pic"
-          (error)="handleProfilePictureError()"
-          onerror="this.onerror=null; this.src='https://via.placeholder.com/200';"
-        >
+        <img [src]="profilePicture" 
+             alt="Profile Picture" 
+             class="profile-pic"
+             (error)="handleProfilePictureError()"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/200';">
       </div>
       <div class="profile-right">
         <h1 class="employee-name">{{ fullname }}</h1>
         <div class="details-grid">
+          <!-- Basic Information -->
           <div class="profile-detail">
-            <i class="icon-email"></i>
+            <i class="fa-solid fa-envelope icon"></i> <!-- Email -->
             <div class="detail-content">
               <span class="detail-label">Email</span>
               <p>{{ email }}</p>
             </div>
           </div>
-
+          
           <div class="profile-detail">
-            <i class="icon-calendar"></i>
+            <i class="fa-solid fa-phone icon"></i> <!-- Phone -->
             <div class="detail-content">
-              <span class="detail-label">Birthday</span>
-              <p>{{ birthday }}</p>
+              <span class="detail-label">Contact Number</span>
+              <p>{{ contactNumber }}</p>
             </div>
           </div>
-
+          
           <div class="profile-detail">
-            <i class="icon-department"></i>
+            <i class="fa-solid fa-cake-candles icon"></i> <!-- Birthday -->
+            <div class="detail-content">
+              <span class="detail-label">Date of Birth</span>
+              <p>{{ dateOfBirth }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-location-dot icon"></i> <!-- Place of Birth -->
+            <div class="detail-content">
+              <span class="detail-label">Place of Birth</span>
+              <p>{{ placeOfBirth }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-building icon"></i> <!-- Department -->
             <div class="detail-content">
               <span class="detail-label">Department</span>
               <p>{{ department }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-briefcase icon"></i> <!-- Position -->
+            <div class="detail-content">
+              <span class="detail-label">Position</span>
+              <p>{{ position }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-globe icon"></i> <!-- Nationality -->
+            <div class="detail-content">
+              <span class="detail-label">Nationality</span>
+              <p>{{ nationality }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-heart icon"></i> <!-- Civil Status -->
+            <div class="detail-content">
+              <span class="detail-label">Civil Status</span>
+              <p>{{ civilStatus }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-user icon"></i> <!-- Gender -->
+            <div class="detail-content">
+              <span class="detail-label">Gender</span>
+              <p>{{ gender }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-calendar-check icon"></i> <!-- Created At -->
+            <div class="detail-content">
+              <span class="detail-label">Member Since</span>
+              <p>{{ createdAt }}</p>
+            </div>
+          </div>
+          
+          <div class="profile-detail">
+            <i class="fa-solid fa-circle-check icon"></i> <!-- Status -->
+            <div class="detail-content">
+              <span class="detail-label">Account Status</span>
+              <p>{{ status }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <!-- Divider -->
   <div class="section-divider">
     <h2>Recent Tasks</h2>

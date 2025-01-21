@@ -586,3 +586,60 @@ button:hover svg {
 }
 
 /* Adjust the existing company-resources class */
+.messages-content {
+  padding: 1rem;
+  height: calc(100% - 60px);
+  overflow-y: auto;
+}
+
+.message-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.message-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.message-item.unread {
+  border-left: 4px solid #4CAF50;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.message-date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.unread-indicator {
+  background: #4CAF50;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.message-body {
+  color: white;
+  line-height: 1.5;
+}
+
+.no-messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}

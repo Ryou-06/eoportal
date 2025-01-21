@@ -29,8 +29,8 @@ type DocumentType =
   | 'NBI Clearance'
   | 'Social Security Documents'
   | 'Tax Identification Number'
-  | 'Other';
-
+  | 'Other'
+  | ''; // Add empty string as valid type
 
   interface UploadError {
     message?: string;
@@ -172,24 +172,32 @@ export class ApplicantFormComponent {
       civilStatus: ['', Validators.required],
       gender: ['', Validators.required],
       department: ['', Validators.required],
-      position: [{ value: '', disabled: true }, Validators.required]
+      position: [{ value: '', disabled: false }, Validators.required] // Initialize as enabled
     });
 
-    // Subscribe to department changes to update available positions
+    // Subscribe to department changes
     this.applicationForm.get('department')?.valueChanges.subscribe(department => {
       const positionControl = this.applicationForm.get('position');
-      if (department) {
+      
+      if (department && positionControl) {
+        // Update available positions
         this.availablePositions = this.departmentPositions[department] || [];
-        positionControl?.enable();
+        // Enable position control and reset its value
+        positionControl.enable();
+        positionControl.setValue('');
       } else {
         this.availablePositions = [];
-        positionControl?.disable();
+        if (positionControl) {
+          positionControl.disable();
+          positionControl.setValue('');
+        }
       }
-      positionControl?.setValue(''); // Reset position when department changes
     });
   }
+  
   isPositionDisabled(): boolean {
-    return !this.applicationForm.get('department')?.value;
+    const departmentValue = this.applicationForm.get('department')?.value;
+    return !departmentValue;
   }
 
   
@@ -237,7 +245,6 @@ export class ApplicantFormComponent {
     ];
 
     files.forEach(file => {
-      // Size validation
       if (file.size > this.MAX_FILE_SIZE) {
         Swal.fire({
           icon: 'error',
@@ -247,7 +254,6 @@ export class ApplicantFormComponent {
         return;
       }
 
-      // Type validation
       if (!allowedTypes.includes(file.type)) {
         Swal.fire({
           icon: 'error',
@@ -257,14 +263,15 @@ export class ApplicantFormComponent {
         return;
       }
 
-      // Add file to documentUploads
       const fileId = `file-${Date.now()}-${file.name}`;
       this.documentUploads.set(fileId, {
         file: file,
-        type: 'Other'
+        type: '' // Empty string is now a valid DocumentType
       });
     });
   }
+
+
 
   removeFile(fileId: string): void {
     this.documentUploads.delete(fileId);
@@ -319,54 +326,41 @@ export class ApplicantFormComponent {
         });
         return;
       }
-
-      const missingDocs = this.getMissingRequiredDocuments();
-      if (missingDocs.length > 0) {
-        await Swal.fire({
-          icon: 'error',
-          title: 'Missing Required Documents',
-          text: `Please upload the following required documents: ${missingDocs.join(', ')}`
-        });
-        return;
-      }
-
+  
       this.isSubmitting = true;
-
-      // Submit application data first
+  
+      // Submit application data
       const formValue = this.applicationForm.getRawValue();
-      const response = await firstValueFrom(this.dataService.submitApplication(formValue));
-
+      
+      try {
+        const response = await firstValueFrom(this.dataService.submitApplication(formValue));
+  
         if (response && response.success && response.applicantId) {
-            const applicantId = response.applicantId;
-            const uploads = Array.from(this.documentUploads.values());
-            const files = uploads.map(upload => upload.file);
-            const types = uploads.map(upload => upload.type);
-
-            // Upload documents in chunks
-            try {
-                const uploadResponse = await firstValueFrom(
-                    this.dataService.uploadDocumentsInChunks(
-                        files,
-                        applicantId.toString(),
-                        types
-                    )
-                );
-
-                console.log('Upload response:', uploadResponse); // For debugging
-
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Application Submitted',
-                    text: 'Your application and documents have been submitted successfully.'
-                });
-
-                this.router.navigate(['/login']);
-            } catch (uploadError) {
-                throw new Error('Document upload failed: ' + this.getErrorMessage(uploadError));
-            }
-        } else {
-            throw new Error('Application submission failed: Invalid response from server');
+          // ... rest of your success handling code ...
         }
+      } catch (error: any) {
+        if (error.error?.error === 'duplicate_email') {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Email Already Registered',
+            text: 'This email address is already registered in our system. Please use a different email address.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          });
+          
+          // Optionally, focus on the email field
+          const emailInput = document.getElementById('email');
+          if (emailInput) {
+            emailInput.focus();
+          }
+        } else {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed',
+            text: this.getErrorMessage(error)
+          });
+        }
+      }
     } catch (error) {
       console.error('Submission error:', error);
       await Swal.fire({
@@ -408,12 +402,15 @@ export class ApplicantFormComponent {
   }
   updateDocumentType(fileId: string, event: Event): void {
     const select = event.target as HTMLSelectElement;
-    const type = select.value as DocumentUpload['type'];
+    const newType = select.value as DocumentType;
     
     const upload = this.documentUploads.get(fileId);
-    if (upload) {
-      upload.type = type;
+    if (upload && newType) {
+      upload.type = newType;
       this.documentUploads.set(fileId, upload);
+      
+      // Force update of the Map to trigger change detection
+      this.documentUploads = new Map(this.documentUploads);
     }
   }
   getMissingRequiredDocuments(): DocumentType[] {
@@ -421,8 +418,21 @@ export class ApplicantFormComponent {
     return this.requiredDocuments.filter(type => !uploadedTypes.includes(type));
   }
 
+
   isDocumentTypeUsed(type: DocumentType): boolean {
-    return Array.from(this.documentUploads.values()).some(upload => upload.type === type);
+    if (!type) return false;
+    return Array.from(this.documentUploads.values())
+      .some(upload => upload.type === type);
   }
 
+
+  getAvailableDocumentTypes(currentType: DocumentType): DocumentType[] {
+    const usedTypes = new Set(
+      Array.from(this.documentUploads.values())
+        .map(upload => upload.type)
+        .filter(type => type && type !== currentType) // Only filter non-empty types
+    );
+    
+    return this.documentTypes.filter(type => !usedTypes.has(type) || type === currentType);
+  }
 }

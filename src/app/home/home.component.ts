@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { DataService } from '../data.service';
+import { DataService, Message } from '../data.service';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,7 +35,8 @@ export class HomeComponent implements OnInit {
   isTaskViewModalOpen = false;
   isCompanyResourcesModalOpen = false; // New modal for company resources
   username: string = '';
- 
+  messages: Message[] = [];
+
   documentTypes = [
     'Government-issued ID',
     'Tax Identification Number',
@@ -60,6 +61,8 @@ export class HomeComponent implements OnInit {
     if (userId) {
       this.fetchUserTasks(userId);
       this.fetchUserFiles();
+      this.fetchUserMessages(userId);
+
     }
   }
 
@@ -321,6 +324,35 @@ deleteFile(fileId: number) {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+  fetchUserMessages(userId: number) {
+    this.dataService.fetchUserMessages(userId).subscribe({
+      next: (messages) => {
+        this.messages = messages;
+      },
+      error: (error) => {
+        console.error('Error fetching messages:', error);
+      }
+    });
+  }
+  markAsRead(messageId: number) {
+    this.dataService.markMessageAsRead(messageId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          const message = this.messages.find(m => m.message_id === messageId);
+          if (message) {
+            message.is_read = true;
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error marking message as read:', error);
+      }
+    });
+  }
+
+  formatMessageDate(date: string): string {
+    return new Date(date).toLocaleString();
   }
   
 }

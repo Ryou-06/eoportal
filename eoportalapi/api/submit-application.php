@@ -87,6 +87,21 @@ if (isset($postdata) && !empty($postdata)) {
             exit;
         }
 
+        // Check if email already exists - THIS IS THE NEW PART
+        $stmt = $pdo->prepare("SELECT email FROM applicants WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            error_log("[$timestamp] Error: Email already exists: $email");
+            echo json_encode([
+                'success' => false, 
+                'error' => 'duplicate_email',
+                'message' => 'This email address is already registered in our system'
+            ]);
+            exit;
+        }
+
         // Validate civil status
         $validCivilStatus = ['Single', 'Married', 'Divorced', 'Widowed'];
         if (!in_array($civilStatus, $validCivilStatus)) {
@@ -155,17 +170,6 @@ if (isset($postdata) && !empty($postdata)) {
         if (!isset($validPositions[$department]) || !in_array($position, $validPositions[$department])) {
             error_log("[$timestamp] Error: Invalid position '$position' for department '$department'");
             echo json_encode(['success' => false, 'error' => 'Invalid position for selected department']);
-            exit;
-        }
-
-        // Check if email already exists
-        $stmt = $pdo->prepare("SELECT * FROM applicants WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            error_log("[$timestamp] Error: Email already exists: $email");
-            echo json_encode(['success' => false, 'error' => 'Email already exists']);
             exit;
         }
 

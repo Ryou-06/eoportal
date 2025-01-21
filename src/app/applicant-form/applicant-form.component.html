@@ -166,7 +166,7 @@
         </div>
 
         <div class="form-section">
-          <h3>Job Details</h3>
+          <h3>Applied For</h3>
           
           <div class="form-group">
             <label for="department">Department:</label>
@@ -187,8 +187,7 @@
             <select 
               id="position" 
               formControlName="position" 
-              required
-              [attr.disabled]="isPositionDisabled()">
+              required>
               <option value="">Select Position</option>
               <option *ngFor="let position of availablePositions" [value]="position">
                 {{position}}
@@ -198,6 +197,7 @@
               <small class="error" *ngIf="formControls['position'].errors?.['required']">Position is required</small>
             </div>
           </div>
+          
         </div>
   
         <!-- Document Upload Section -->
@@ -247,16 +247,17 @@
                   <div class="file-info">
                     <span class="file-name">{{upload.value.file.name}}</span>
                     <select 
-                      [value]="upload.value.type"
-                      (change)="updateDocumentType(upload.key, $event)"
-                      class="document-type-select">
-                      <option value="" disabled>Select Document Type</option>
-                      <option *ngFor="let type of documentTypes" 
-                              [value]="type"
-                              [disabled]="isDocumentTypeUsed(type) && upload.value.type !== type">
-                        {{type}}
-                      </option>
-                    </select>
+                    [value]="upload.value.type"
+                    (change)="updateDocumentType(upload.key, $event)"
+                    class="document-type-select"
+                    required>
+                    <option value="">Select Document Type</option>
+                    <option *ngFor="let type of getAvailableDocumentTypes(upload.value.type)" 
+                            [value]="type"
+                            [disabled]="type !== upload.value.type && isDocumentTypeUsed(type)">
+                      {{type}}
+                    </option>
+                  </select>
                   </div>
                   <button type="button" class="remove-file" (click)="removeFile(upload.key)">✕</button>
                 </div>

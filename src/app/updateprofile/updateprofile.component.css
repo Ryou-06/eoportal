@@ -230,3 +230,117 @@
     justify-content: center;
   }
 }
+/* Add these new icon styles to your existing CSS */
+.icon {
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+/* Icon gradient backgrounds */
+.fa-envelope {
+  background: linear-gradient(135deg, #ff6b6b, #ee5253);
+}
+
+.fa-phone {
+  background: linear-gradient(135deg, #4834d4, #686de0);
+}
+
+.fa-cake-candles {
+  background: linear-gradient(135deg, #ff9f43, #ffa502);
+}
+
+.fa-location-dot {
+  background: linear-gradient(135deg, #2ecc71, #20bf6b);
+}
+
+.fa-building {
+  background: linear-gradient(135deg, #5352ed, #3742fa);
+}
+
+.fa-briefcase {
+  background: linear-gradient(135deg, #341f97, #5f27cd);
+}
+
+.fa-globe {
+  background: linear-gradient(135deg, #00d2d3, #01a3a4);
+}
+
+.fa-heart {
+  background: linear-gradient(135deg, #ff7675, #d63031);
+}
+
+.fa-user {
+  background: linear-gradient(135deg, #574b90, #786fa6);
+}
+
+.fa-calendar-check {
+  background: linear-gradient(135deg, #10ac84, #1dd1a1);
+}
+
+.fa-circle-check {
+  background: linear-gradient(135deg, #2ed573, #7bed9f);
+}
+
+/* Update picture upload container styles */
+.picture-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.upload-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.upload-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.selected-file {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Add icon hover animation */
+.profile-detail:hover .icon {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Add floating animation */
+.icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

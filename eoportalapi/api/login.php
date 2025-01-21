@@ -46,9 +46,17 @@ if (isset($postdata) && !empty($postdata)) {
                     'user_id' => $user['user_id'],
                     'fullname' => $user['fullname'],
                     'email' => $user['email'],
+                    'contact_number' => $user['contact_number'],
                     'date_of_birth' => $user['date_of_birth'],
+                    'place_of_birth' => $user['place_of_birth'],
+                    'nationality' => $user['nationality'],
+                    'civil_status' => $user['civil_status'],
+                    'gender' => $user['gender'],
                     'department' => $user['department'],
-                    'profile_picture' => $user['profile_picture'] ?? null
+                    'position' => $user['position'],
+                    'profile_picture' => $user['profile_picture'] ?? null,
+                    'created_at' => $user['created_at'],
+                    'status' => $user['status']
                 ]
             ];
             http_response_code(200);

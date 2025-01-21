@@ -15,9 +15,17 @@ interface User {
   user_id: number;
   fullname: string;
   email: string;
-  date_of_birth: string;  // Changed from birthday to match DB
+  contact_number: string;
+  date_of_birth: string;
+  place_of_birth: string;
+  nationality: string;
+  civil_status: string;
+  gender: string;
   department: string;
+  position: string;
   profile_picture?: string;
+  created_at: string;
+  status: string;
 }
 
 interface AuthResponse {
@@ -98,6 +106,15 @@ interface ChangePasswordResponse {
   message: string;
 }
 
+export interface Message {
+  message_id: number;
+  admin_id: number;
+  user_id: number;
+  message_content: string;
+  sent_at: string;
+  is_read: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -134,18 +151,26 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
     return this.getToken() !== null;
   }
 
-  public userLogin(email: string, password: string) {
+  userLogin(email: string, password: string) {
     return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login.php`, { email, password })
       .pipe(
         map(response => {
           if (response.success && response.user) {
-            // Store user details in localStorage
+            // Store all user details in localStorage
             this.setToken(response.user.email);
             localStorage.setItem('user_id', response.user.user_id.toString());
             localStorage.setItem('fullname', response.user.fullname);
             localStorage.setItem('email', response.user.email);
+            localStorage.setItem('contact_number', response.user.contact_number);
             localStorage.setItem('date_of_birth', response.user.date_of_birth);
+            localStorage.setItem('place_of_birth', response.user.place_of_birth);
+            localStorage.setItem('nationality', response.user.nationality);
+            localStorage.setItem('civil_status', response.user.civil_status);
+            localStorage.setItem('gender', response.user.gender);
             localStorage.setItem('department', response.user.department);
+            localStorage.setItem('position', response.user.position);
+            localStorage.setItem('created_at', response.user.created_at);
+            localStorage.setItem('status', response.user.status);
             
             if (response.user.profile_picture) {
               localStorage.setItem('profilePicture', response.user.profile_picture);
@@ -204,16 +229,23 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
   }
 
   // Updated method to update department and email
-  public updateProfile(currentEmail: string, newEmail: string, department: string, profilePicture?: File) {
+  public updateProfile(
+    currentEmail: string, 
+    newEmail: string, 
+    contactNumber: string, 
+    civilStatus: string,
+    profilePicture?: File  // Optional parameter using undefined
+  ) {
     const formData = new FormData();
     formData.append('currentEmail', currentEmail);
     formData.append('newEmail', newEmail);
-    formData.append('department', department);
+    formData.append('contactNumber', contactNumber);
+    formData.append('civilStatus', civilStatus);
     
     if (profilePicture) {
       formData.append('profilePicture', profilePicture);
     }
-
+  
     return this.httpClient.post<{success: boolean, message: string, profilePicture?: string}>
       (`${this.baseUrl}/updateprofile.php`, formData)
       .pipe(
@@ -223,7 +255,8 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
               localStorage.setItem('email', newEmail);
               this.setToken(newEmail);
             }
-            localStorage.setItem('department', department);
+            localStorage.setItem('contact_number', contactNumber);
+            localStorage.setItem('civil_status', civilStatus);
             
             // If a new profile picture URL is returned, update localStorage
             if (response.profilePicture) {
@@ -437,7 +470,7 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
     ).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Application submission failed:', error);
-        return throwError(() => new Error(error.message));
+        return throwError(() => error);
       })
     );
   }
@@ -581,6 +614,32 @@ uploadDocumentsInChunks(
       console.error('Password change failed:', error);
       const errorMessage = error.error?.message || 'Failed to change password';
       return throwError(() => new Error(errorMessage));
+    })
+  );
+}
+public fetchUserMessages(userId: number): Observable<Message[]> {
+  return this.httpClient.get<{success: boolean, messages: Message[]}>(`${this.baseUrl}/fetchmessages.php`, {
+    params: { user_id: userId.toString() }
+  }).pipe(
+    map(response => {
+      if (response.success && response.messages) {
+        return response.messages;
+      }
+      return [];
+    }),
+    catchError((error: HttpErrorResponse) => {
+      console.error('Error fetching messages:', error);
+      return throwError(() => new Error(error.message));
+    })
+  );
+}
+public markMessageAsRead(messageId: number): Observable<{success: boolean}> {
+  return this.httpClient.post<{success: boolean}>(`${this.baseUrl}/markread.php`, {
+    message_id: messageId
+  }).pipe(
+    catchError((error: HttpErrorResponse) => {
+      console.error('Error marking message as read:', error);
+      return throwError(() => new Error(error.message));
     })
   );
 }

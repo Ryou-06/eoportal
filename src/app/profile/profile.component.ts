@@ -12,10 +12,18 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   fullname: string = '';
-  birthday: string = '';
-  department: string = '';
   email: string = '';
+  contactNumber: string = '';
+  dateOfBirth: string = '';
+  placeOfBirth: string = '';
+  nationality: string = '';
+  civilStatus: string = '';
+  gender: string = '';
+  department: string = '';
+  position: string = '';
   profilePicture: string = '';
+  createdAt: string = '';
+  status: string = '';
   recentTasks: Task[] = [];
 
   constructor(
@@ -33,11 +41,19 @@ export class ProfileComponent implements OnInit {
     this.loadRecentTasks();
   }
 
-  private loadProfileData(): void {
+    private loadProfileData(): void {
     this.fullname = localStorage.getItem('fullname') || 'Unknown';
     this.email = localStorage.getItem('email') || 'N/A';
-    this.birthday = this.formatBirthday(localStorage.getItem('birthday') || 'N/A');
+    this.contactNumber = localStorage.getItem('contact_number') || 'N/A';
+    this.dateOfBirth = this.formatDate(localStorage.getItem('date_of_birth') || 'N/A');
+    this.placeOfBirth = localStorage.getItem('place_of_birth') || 'N/A';
+    this.nationality = localStorage.getItem('nationality') || 'N/A';
+    this.civilStatus = localStorage.getItem('civil_status') || 'N/A';
+    this.gender = localStorage.getItem('gender') || 'N/A';
     this.department = localStorage.getItem('department') || 'N/A';
+    this.position = localStorage.getItem('position') || 'N/A';
+    this.createdAt = this.formatDate(localStorage.getItem('created_at') || 'N/A');
+    this.status = localStorage.getItem('status') || 'N/A';
     
     const userId = Number(localStorage.getItem('user_id'));
     if (userId) {
