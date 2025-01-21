@@ -1,89 +1,100 @@
 <div *ngIf="isOpen" class="modal-overlay">
     <div class="modal-container large">
-      <h3 class="modal-title">Submit Files</h3>
-  
-      <!-- File Input -->
-      <div class="input-group">
-        <label class="input-label">Select Files</label>
-        <input 
-          type="file" 
-          multiple
-          (change)="onFileSelected($event)"
-          class="file-input"
-          [attr.accept]="'.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif'"
-        >
-      </div>
-  
-      <!-- Progress Slider -->
-      <div class="input-group">
-        <label class="input-label">Progress: {{progress}}%</label>
-        <input 
-          type="range" 
-          [(ngModel)]="progress"
-          min="0" 
-          max="100" 
-          class="progress-slider"
-        >
-      </div>
-  
-      <!-- Selected Files Section -->
-      <div class="selected-files-section" *ngIf="selectedFiles.length > 0">
-        <header class="selected-files-header">
-          <h4 class="section-title">Files to Upload</h4>
-        </header>
-        <div class="selected-files-content">
-          <div *ngFor="let file of selectedFiles" class="file-item">
-            <span>{{ getFileIcon(file.name) }} {{ file.name }}</span>
-            <span class="file-size">{{ (file.size / 1024).toFixed(1) }} KB</span>
-          </div>
+        <h3 class="modal-title">Submit Files</h3>
+
+        <!-- File Input -->
+        <div class="input-group">
+            <label class="input-label">Select Files</label>
+            <input 
+                type="file" 
+                multiple
+                (change)="onFileSelected($event)"
+                class="file-input"
+                [attr.accept]="'.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif'"
+            >
         </div>
-      </div>
-  
-      <!-- Past Files Section -->
-      <div class="past-files-section">
-        <header class="past-files-header">
-          <h4 class="section-title">Task Files</h4>
-        </header>
-        
-        <!-- Loading State -->
-        <div *ngIf="isLoading" class="loading-state">
-          Loading files...
+
+        <!-- Progress Slider -->
+        <div class="input-group">
+            <label class="input-label">Progress: {{progress}}%</label>
+            <input 
+                type="range" 
+                [(ngModel)]="progress"
+                min="0" 
+                max="100" 
+                class="progress-slider"
+            >
         </div>
-  
-        <!-- Error State -->
-        <div *ngIf="error" class="error-state">
-          {{ error }}
+
+        <!-- Text Area -->
+        <div class="input-group">
+            <label class="input-label">Accomplishment Report</label>
+            <textarea 
+            [(ngModel)]="accomplishmentReport" 
+            class="text-area"
+            rows="4"
+            placeholder="Enter your accomplishment report or progress ..."
+          ></textarea>
         </div>
-  
-        <!-- Files List -->
-        <div *ngIf="!isLoading && !error" class="past-files-content">
-          <div *ngIf="pastFiles.length === 0" class="no-files-message">
-            No files uploaded for this task yet.
-          </div>
-          <div *ngFor="let file of pastFiles" class="file-item">
-            <span>{{ getFileIcon(file.filename) }} {{ file.filename }}</span>
-            <div class="file-actions">
-              <button (click)="deletePastFile(file.id)" class="delete-button">Delete</button>
+
+        <!-- Selected Files Section -->
+        <div class="selected-files-section" *ngIf="selectedFiles.length > 0">
+            <header class="selected-files-header">
+                <h4 class="section-title">Files to Upload</h4>
+            </header>
+            <div class="selected-files-content">
+                <div *ngFor="let file of selectedFiles" class="file-item">
+                    <span>{{ getFileIcon(file.name) }} {{ file.name }}</span>
+                    <span class="file-size">{{ (file.size / 1024).toFixed(1) }} KB</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-  
-      <!-- Buttons -->
-      <div class="button-group">
-        <button 
-          (click)="onCancel()" 
-          class="cancel-button"
-        >
-          Cancel
-        </button>
-        <button 
-          (click)="onSubmit()" 
-          class="submit-button"
-          [disabled]="selectedFiles.length === 0"
-        >
-          Submit
-        </button>
-      </div>
+
+        <!-- Past Files Section -->
+        <div class="past-files-section">
+            <header class="past-files-header">
+                <h4 class="section-title">Task Files</h4>
+            </header>
+            
+            <!-- Loading State -->
+            <div *ngIf="isLoading" class="loading-state">
+                Loading files...
+            </div>
+
+            <!-- Error State -->
+            <div *ngIf="error" class="error-state">
+                {{ error }}
+            </div>
+
+            <!-- Files List -->
+            <div *ngIf="!isLoading && !error" class="past-files-content">
+                <div *ngIf="pastFiles.length === 0" class="no-files-message">
+                    No files uploaded for this task yet.
+                </div>
+                <div *ngFor="let file of pastFiles" class="file-item">
+                    <span>{{ getFileIcon(file.filename) }} {{ file.filename }}</span>
+                    <div class="file-actions">
+                        <button (click)="deletePastFile(file.id)" class="delete-button">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button 
+                (click)="onCancel()" 
+                class="cancel-button"
+            >
+                Cancel
+            </button>
+            <button 
+                (click)="onSubmit()" 
+                class="submit-button"
+                [disabled]="selectedFiles.length === 0"
+            >
+                Submit
+            </button>
+        </div>
     </div>
-  </div>
+</div>

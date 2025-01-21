@@ -30,6 +30,7 @@ export interface TaskFileSubmission {
   task_id: number;
   files: File[];
   progress: number;
+  accomplishment_report: string;
 }
 
 export interface Task {
@@ -306,19 +307,22 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
   
   submitTaskFiles(submission: TaskFileSubmission) {
     const formData = new FormData();
+    
+    // Append task_id, progress, and accomplishment_report
     formData.append('task_id', submission.task_id.toString());
     formData.append('progress', submission.progress.toString());
-    
+    formData.append('accomplishment_report', submission.accomplishment_report);
+  
     // Debug log the files being sent
     console.log('Files to upload:', submission.files);
-    
+  
     if (submission.files && submission.files.length > 0) {
       submission.files.forEach((file, index) => {
         console.log(`Appending file ${index}:`, file.name, file.size);
         formData.append(`files[${index}]`, file);
       });
     }
-
+  
     // Debug log the FormData entries with type assertion
     (Array.from((formData as any).entries()) as [string, FormDataEntryValue][]).forEach(([key, value]) => {
       if (value instanceof File) {
@@ -339,13 +343,16 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
           error: error.error,
           message: error.message
         });
-        
+  
         // Check if there's a more specific error message in the response
         const errorMessage = error.error?.error || error.message || 'An unknown error occurred';
         return throwError(() => new Error(errorMessage));
       })
     );
   }
+  
+  
+  
   fetchTaskFiles(taskId: number): Observable<TaskFile[]> {
     return this.httpClient.get<TaskFileResponse>(
       `${this.baseUrl}/fetchtaskfiles.php`,

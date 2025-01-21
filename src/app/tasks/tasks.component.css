@@ -79,6 +79,18 @@ h3, span {
     background: rgba(255, 255, 255, 0.3);
 }
 
+.app-file-submission-modal {
+    display: block; /* Ensure the modal is displayed */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100; /* Increase z-index to ensure it's on top */
+}
+
+
 .task-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
     backdrop-filter: blur(12px);

@@ -6,6 +6,21 @@ import Swal from 'sweetalert2';
 
 type TaskStatus = 'Pending' | 'In Progress' | 'Completed';
 
+export interface TaskFileResponse {
+  success: boolean;
+  message?: string;
+  error?: string;  // Ensure this field exists
+  files?: { filename: string, filepath: string }[];
+}
+
+
+interface TaskFileSubmission {
+  task_id: number;
+  progress: number;
+  accomplishment_report: string;
+  files: File[];
+}
+
 
 @Component({
   selector: 'app-file-submission-modal',
@@ -18,22 +33,28 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
   @Input() isOpen = false;
   @Input() taskId?: number;
   @Output() close = new EventEmitter<void>();
-  @Output() submit = new EventEmitter<{files: File[], progress: number}>();
+  @Output() submit = new EventEmitter<{
+    files: File[];
+    progress: number;
+    accomplishmentReport: string;
+  }>();
+  files: File[] = []; // Initialized with an empty array
+  progress: number = 0; // Initialized with 0
+  accomplishmentReport: string = ''; // Initialized with an empty string
   @Output() taskUpdate = new EventEmitter<{
     taskId: number;
     progress: number;
     status: TaskStatus;
   }>();
 
-  progress = 0;
   selectedFiles: File[] = [];
   pastFiles: TaskFile[] = [];
   isLoading = false;
   error: string | null = null;
+  accomplishmentDetails: string = '';
 
   constructor(private dataService: DataService) {}
 
-  
   ngOnInit() {
     if (this.taskId) {
       this.loadTaskFiles();
@@ -49,10 +70,9 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       });
     }
   }
-  
-  
+
   ngOnChanges(changes: SimpleChanges) {
-    if ((changes['taskId'] && !changes['taskId'].firstChange) || 
+    if ((changes['taskId'] && !changes['taskId'].firstChange) ||
         (changes['isOpen'] && changes['isOpen'].currentValue === true)) {
       this.loadTaskFiles();
     }
@@ -71,7 +91,6 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       next: (files) => {
         this.pastFiles = files;
         this.isLoading = false;
-        // Update progress based on existing files
         if (files.length === 0) {
           this.progress = 0;
         }
@@ -92,20 +111,27 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      this.selectedFiles = Array.from(input.files);
+      this.selectedFiles = Array.from(input.files).filter(file => file.size <= 10 * 1024 * 1024); // 10MB max
+      if (this.selectedFiles.length === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'File Size Error',
+          text: 'One or more selected files are too large. Please select files smaller than 10MB.'
+        });
+      }
     }
   }
 
   onSubmit() {
-    if (!this.taskId) {
+    if (this.accomplishmentReport.trim().length === 0) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'No task selected'
+        icon: 'warning',
+        title: 'Missing Report',
+        text: 'Please provide an accomplishment report.'
       });
       return;
     }
-
+  
     if (this.selectedFiles.length === 0) {
       Swal.fire({
         icon: 'warning',
@@ -114,14 +140,34 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       });
       return;
     }
-
-    this.submit.emit({
-      files: this.selectedFiles,
-      progress: this.progress
+  
+    // Ensure task_id is passed as a number
+    const taskSubmission: TaskFileSubmission = {
+      task_id: this.taskId!, // No need for `String()`, it's already a number
+      progress: this.progress,
+      accomplishment_report: this.accomplishmentReport,
+      files: this.selectedFiles
+    };
+  
+    this.isLoading = true;
+  
+    // Make the HTTP request to the backend
+    this.dataService.submitTaskFiles(taskSubmission).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        if (response.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Submitted!',
+            text: response.message || 'Files and report submitted successfully.'
+          });
+          this.resetAndClose();
+        } else {
+      }
+      }
     });
-    
-    this.resetAndClose();
   }
+  
 
   onCancel() {
     this.resetAndClose();
@@ -135,8 +181,7 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
     this.close.emit();
   }
 
-  
-   deletePastFile(fileId: number) {
+  deletePastFile(fileId: number) {
     if (!fileId) {
       Swal.fire({
         icon: 'error',
@@ -145,7 +190,7 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       });
       return;
     }
-  
+
     Swal.fire({
       title: 'Are you sure?',
       text: 'This action cannot be undone.',
@@ -164,20 +209,17 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
           allowOutsideClick: false,
           allowEscapeKey: false
         });
-  
+
         this.dataService.deleteTaskFile(fileId).subscribe({
           next: (response) => {
             if (response.success) {
-              // Update the UI by removing the deleted file
               this.pastFiles = this.pastFiles.filter(file => file.id !== fileId);
-              
-              // If no files remain, update progress and status
               if (this.pastFiles.length === 0) {
                 this.progress = 0;
                 this.taskUpdate.emit({
                   taskId: this.taskId!,
                   progress: 0,
-                  status: 'In Progress' // Now TypeScript knows this is a valid TaskStatus
+                  status: 'In Progress' // Valid TaskStatus
                 });
               }
 
@@ -206,7 +248,7 @@ export class FileSubmissionModalComponent implements OnInit, OnChanges {
       }
     });
   }
-  
+
   getFileIcon(filename: string): string {
     const ext = filename.split('.').pop()?.toLowerCase();
     switch (ext) {
