@@ -1157,3 +1157,41 @@
 )
 
 [20-Jan-2025 13:05:37 Europe/Berlin] [2025-01-20 13:05:37] Success: Application submitted for tertetr agsyyer
+[21-Jan-2025 07:37:52 Europe/Berlin] [2025-01-21 07:37:52] Processing application submission
+[21-Jan-2025 07:37:52 Europe/Berlin] [2025-01-21 07:37:52] Received data: stdClass Object
+(
+    [firstName] => John Ron
+    [lastName] => Diza
+    [middleName] => Bautista
+    [suffix] => 
+    [contactNumber] => 09078295233
+    [email] => johnrondiza1106@gmail.com
+    [dateOfBirth] => 2003-11-06
+    [placeOfBirth] => Castillejos,Zambales
+    [nationality] => Pilipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Information Technology
+    [position] => IT Manager
+)
+
+[21-Jan-2025 07:37:52 Europe/Berlin] [2025-01-21 07:37:52] Success: Application submitted for John Ron Diza
+[21-Jan-2025 15:27:52 Europe/Berlin] [2025-01-21 15:27:52] Processing application submission
+[21-Jan-2025 15:27:52 Europe/Berlin] [2025-01-21 15:27:52] Received data: stdClass Object
+(
+    [firstName] => Dave Justine
+    [lastName] => Arcilla
+    [middleName] => 
+    [suffix] => 
+    [contactNumber] => 09078295244
+    [email] => davejustin@gmail.com
+    [dateOfBirth] => 2003-11-25
+    [placeOfBirth] => Subic ,Zambales
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Male
+    [department] => Marketing
+    [position] => Marketing Manager
+)
+
+[21-Jan-2025 15:27:52 Europe/Berlin] [2025-01-21 15:27:52] Success: Application submitted for Dave Justine Arcilla

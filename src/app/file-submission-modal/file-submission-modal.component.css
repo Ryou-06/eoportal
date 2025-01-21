@@ -18,6 +18,23 @@
     max-height: 80vh;
     overflow-y: auto;
   }
+
+  .text-area {
+    width: 100%;
+    background: #2d3748;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    resize: none;
+    font-size: 1rem;
+}
+.text-area:focus {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
   
   .modal-container.large {
     width: 48rem; /* Enlarged width */

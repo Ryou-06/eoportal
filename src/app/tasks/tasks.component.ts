@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataService, Task, TaskFileSubmission, TaskFileResponse, TaskComment } from '../data.service';
+import { DataService, Task, TaskFileResponse, TaskComment } from '../data.service';
 import { FileSubmissionModalComponent } from '../file-submission-modal/file-submission-modal.component';
+import { FormsModule } from '@angular/forms';
 
 interface TaskWithProgress extends Task {
   progress?: number;
@@ -15,10 +16,18 @@ interface TaskUpdateEvent {
   status: 'Pending' | 'In Progress' | 'Completed';
 }
 
+export interface TaskFileSubmission {
+  task_id: number;
+  files: File[];
+  progress: number;
+  accomplishment_report: string; // Match the field name from data.service
+}
+
+
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, FileSubmissionModalComponent],
+  imports: [CommonModule, FileSubmissionModalComponent, FormsModule],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -28,6 +37,9 @@ export class TasksComponent implements OnInit {
   sortOption = 'created_at';
   isModalOpen = false;
   taskComments: TaskComment[] = [];
+  accomplishmentDetails: string = '';
+
+
 
   constructor(private dataService: DataService) {}
   
@@ -173,61 +185,32 @@ export class TasksComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  handleFileSubmission(event: {files: File[], progress: number}) {
+  handleFileSubmission(event: { files: File[]; progress: number }) {
     if (!this.selectedTask) {
       alert('Please select a task first');
       return;
     }
-
-    // Debug log the submission data
-    console.log('Submitting files:', {
-      taskId: this.selectedTask.id,
-      files: event.files,
-      progress: event.progress
-    });
   
     const submission: TaskFileSubmission = {
       task_id: this.selectedTask.id,
       files: event.files,
-      progress: event.progress
+      progress: event.progress,
+      accomplishment_report: this.accomplishmentDetails, // Use the new name
     };
   
     this.dataService.submitTaskFiles(submission).subscribe({
       next: (response: TaskFileResponse) => {
         console.log('File submission response:', response);
-        
-        if (response.success && this.selectedTask) {
-          // Update local task data
-          this.selectedTask.progress = event.progress;
-          this.selectedTask.status = event.progress === 100 ? 'Completed' : 'In Progress';
-          
-          if (response.files && response.files.length > 0) {
-            if (!this.selectedTask.attachments) {
-              this.selectedTask.attachments = [];
-            }
-            
-            const newAttachments = response.files.map(file => ({
-              name: file.filename,
-              url: file.filepath
-            }));
-            
-            this.selectedTask.attachments = [
-              ...this.selectedTask.attachments,
-              ...newAttachments
-            ];
-          }
-          
-          this.refreshTasks();
-          this.closeFileSubmissionModal();
-          alert('Files submitted successfully!');
-        }
+        // Handle response...
       },
       error: (error) => {
         console.error('File submission error:', error);
         alert(`Failed to submit files: ${error.message}`);
-      }
+      },
     });
   }
+  
+  
   private refreshTasks() {
     const userId = Number(localStorage.getItem('user_id'));
     if (userId) {
