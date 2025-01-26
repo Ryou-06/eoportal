@@ -335,8 +335,28 @@ export class ApplicantFormComponent {
       try {
         const response = await firstValueFrom(this.dataService.submitApplication(formValue));
   
-        if (response && response.success && response.applicantId) {
-          // ... rest of your success handling code ...
+        if (response && response.success) {
+          // Show success message
+          await Swal.fire({
+            icon: 'success',
+            title: 'Application Submitted',
+            text: 'Your application has been successfully submitted!',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          });
+  
+          // Reset the form
+          this.applicationForm.reset();
+          
+          // Reset document uploads
+          this.documentUploads.clear();
+          this.documentUploads = new Map();
+  
+          // Reset department and position
+          this.availablePositions = [];
+          
+          // Optionally scroll to top
+          window.scrollTo(0, 0);
         }
       } catch (error: any) {
         if (error.error?.error === 'duplicate_email') {

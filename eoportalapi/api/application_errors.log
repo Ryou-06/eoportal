@@ -1195,3 +1195,706 @@
 )
 
 [21-Jan-2025 15:27:52 Europe/Berlin] [2025-01-21 15:27:52] Success: Application submitted for Dave Justine Arcilla
+[26-Jan-2025 15:45:17 Europe/Berlin] [2025-01-26 15:45:17] Processing application submission
+[26-Jan-2025 15:45:17 Europe/Berlin] [2025-01-26 15:45:17] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:17 Europe/Berlin] [2025-01-26 15:45:17] Success: Application submitted for kguygj jasfkhfkjhkg
+[26-Jan-2025 15:45:29 Europe/Berlin] [2025-01-26 15:45:29] Processing application submission
+[26-Jan-2025 15:45:29 Europe/Berlin] [2025-01-26 15:45:29] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:29 Europe/Berlin] [2025-01-26 15:45:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Processing application submission
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Processing application submission
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Processing application submission
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Processing application submission
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Processing application submission
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:31 Europe/Berlin] [2025-01-26 15:45:31] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:44 Europe/Berlin] [2025-01-26 15:45:44] Processing application submission
+[26-Jan-2025 15:45:44 Europe/Berlin] [2025-01-26 15:45:44] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:44 Europe/Berlin] [2025-01-26 15:45:44] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Processing application submission
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Processing application submission
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Processing application submission
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Processing application submission
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:45 Europe/Berlin] [2025-01-26 15:45:45] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:45:46 Europe/Berlin] [2025-01-26 15:45:46] Processing application submission
+[26-Jan-2025 15:45:46 Europe/Berlin] [2025-01-26 15:45:46] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09956542552
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:45:46 Europe/Berlin] [2025-01-26 15:45:46] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:04 Europe/Berlin] [2025-01-26 15:46:04] Processing application submission
+[26-Jan-2025 15:46:04 Europe/Berlin] [2025-01-26 15:46:04] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:04 Europe/Berlin] [2025-01-26 15:46:04] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Processing application submission
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Processing application submission
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Processing application submission
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:05 Europe/Berlin] [2025-01-26 15:46:05] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Processing application submission
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Processing application submission
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Processing application submission
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Processing application submission
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:06 Europe/Berlin] [2025-01-26 15:46:06] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:10 Europe/Berlin] [2025-01-26 15:46:10] Processing application submission
+[26-Jan-2025 15:46:10 Europe/Berlin] [2025-01-26 15:46:10] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0dadwads804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:10 Europe/Berlin] [2025-01-26 15:46:10] Success: Application submitted for kguygj jasfkhfkjhkg
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Processing application submission
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0dadwads804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Error: Email already exists: lumiereml0dadwads804@gmail.com
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Processing application submission
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0dadwads804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Error: Email already exists: lumiereml0dadwads804@gmail.com
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Processing application submission
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Received data: stdClass Object
+(
+    [firstName] => kguygj
+    [lastName] => jasfkhfkjhkg
+    [middleName] => dthrgsdgsg
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0dadwads804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Married
+    [gender] => Male
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:11 Europe/Berlin] [2025-01-26 15:46:11] Error: Email already exists: lumiereml0dadwads804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Processing application submission
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:28 Europe/Berlin] [2025-01-26 15:46:28] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Processing application submission
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Processing application submission
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Processing application submission
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Processing application submission
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Processing application submission
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Received data: stdClass Object
+(
+    [firstName] => fsgretjtulily
+    [lastName] => ahtherefaffds
+    [middleName] => tjhdiyfpugi
+    [suffix] => 
+    [contactNumber] => 09271827381
+    [email] => lumiereml0804@gmail.com
+    [dateOfBirth] => 2025-01-22
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Single
+    [gender] => Female
+    [department] => Human Resources
+    [position] => Employee Relations Officer
+)
+
+[26-Jan-2025 15:46:29 Europe/Berlin] [2025-01-26 15:46:29] Error: Email already exists: lumiereml0804@gmail.com
+[26-Jan-2025 15:59:12 Europe/Berlin] [2025-01-26 15:59:12] Processing application submission
+[26-Jan-2025 15:59:12 Europe/Berlin] [2025-01-26 15:59:12] Received data: stdClass Object
+(
+    [firstName] => dadwasfghtjlj
+    [lastName] => dsadaa
+    [middleName] => dfgtyityrydgf
+    [suffix] => 
+    [contactNumber] => 09321348182
+    [email] => sfhgjfjjhl346475@gmail.com
+    [dateOfBirth] => 1995-06-16
+    [placeOfBirth] => Olongapo City
+    [nationality] => Filipino
+    [civilStatus] => Divorced
+    [gender] => Male
+    [department] => Operations
+    [position] => Logistics Coordinator
+)
+
+[26-Jan-2025 15:59:12 Europe/Berlin] [2025-01-26 15:59:12] Success: Application submitted for dadwasfghtjlj dsadaa
