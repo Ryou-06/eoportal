@@ -77,7 +77,7 @@ onLogin() {
       }).then((result) => {
         if (isInactiveAccount && result.isConfirmed) {
           // Optionally, provide contact information or redirect to support page
-          window.location.href = 'mailto:admin@company.com';
+          window.location.href = 'mailto:eoportaltaskingsystem@gmail.com';
         }
       });
     }
