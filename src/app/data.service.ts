@@ -152,58 +152,65 @@ private uploadBaseUrl: string = "http://localhost/4ward/eoportal/eoportalapi/api
     return this.getToken() !== null;
   }
 
-  userLogin(email: string, password: string) {
-    return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login.php`, { email, password })
-      .pipe(
-        map(response => {
-          if (response.success && response.user) {
-            // Store all user details in localStorage
-            this.setToken(response.user.email);
-            localStorage.setItem('user_id', response.user.user_id.toString());
-            localStorage.setItem('fullname', response.user.fullname);
-            localStorage.setItem('email', response.user.email);
-            localStorage.setItem('contact_number', response.user.contact_number);
-            localStorage.setItem('date_of_birth', response.user.date_of_birth);
-            localStorage.setItem('place_of_birth', response.user.place_of_birth);
-            localStorage.setItem('nationality', response.user.nationality);
-            localStorage.setItem('civil_status', response.user.civil_status);
-            localStorage.setItem('gender', response.user.gender);
-            localStorage.setItem('department', response.user.department);
-            localStorage.setItem('position', response.user.position);
-            localStorage.setItem('created_at', response.user.created_at);
-            localStorage.setItem('status', response.user.status);
-            
-            if (response.user.profile_picture) {
-              localStorage.setItem('profilePicture', response.user.profile_picture);
-            }
-            
-            this.loggedInSubject.next(true);
+// In data.service.ts
+userLogin(email: string, password: string) {
+  return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login.php`, { email, password })
+    .pipe(
+      map(response => {
+        if (response.success && response.user) {
+          // Check user status before storing credentials
+          if (response.user.status === 'Inactive') {
+            throw new Error('Your account is currently inactive. Please contact the administrator.');
           }
-          return response;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          console.error('Login failed:', error);
-          let errorMessage = 'An error occurred during login';
+
+          // Store user details only if active
+          this.setToken(response.user.email);
+          localStorage.setItem('user_id', response.user.user_id.toString());
+          localStorage.setItem('fullname', response.user.fullname);
+          localStorage.setItem('email', response.user.email);
+          localStorage.setItem('contact_number', response.user.contact_number);
+          localStorage.setItem('date_of_birth', response.user.date_of_birth);
+          localStorage.setItem('place_of_birth', response.user.place_of_birth);
+          localStorage.setItem('nationality', response.user.nationality);
+          localStorage.setItem('civil_status', response.user.civil_status);
+          localStorage.setItem('gender', response.user.gender);
+          localStorage.setItem('department', response.user.department);
+          localStorage.setItem('position', response.user.position);
+          localStorage.setItem('created_at', response.user.created_at);
+          localStorage.setItem('status', response.user.status);
           
-          if (error.error instanceof Object && error.error.message) {
-            errorMessage = error.error.message;
-          } else if (typeof error.error === 'string') {
-            try {
-              // Try to parse error message if it's a string
-              const parsedError = JSON.parse(error.error.replace(/.*?({.*})/s, '$1'));
-              errorMessage = parsedError.message || errorMessage;
-            } catch {
-              errorMessage = error.error;
-            }
+          if (response.user.profile_picture) {
+            localStorage.setItem('profilePicture', response.user.profile_picture);
           }
           
-          return throwError(() => ({
-            success: false,
-            message: errorMessage
-          }));
-        })
-      );
-  }
+          this.loggedInSubject.next(true);
+        }
+        return response;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Login failed:', error);
+        let errorMessage = 'An error occurred during login';
+        
+        if (error.status === 403) {
+          errorMessage = 'Your account is currently inactive. Please contact the administrator.';
+        } else if (error.error instanceof Object && error.error.message) {
+          errorMessage = error.error.message;
+        } else if (typeof error.error === 'string') {
+          try {
+            const parsedError = JSON.parse(error.error.replace(/.*?({.*})/s, '$1'));
+            errorMessage = parsedError.message || errorMessage;
+          } catch {
+            errorMessage = error.error;
+          }
+        }
+        
+        return throwError(() => ({
+          success: false,
+          message: errorMessage
+        }));
+      })
+    );
+}
 
 
   public userRegistration(fullname: string, email: string, password: string, birthday: string, department: string) {
