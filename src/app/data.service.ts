@@ -30,8 +30,12 @@ interface User {
 
 interface AuthResponse {
   success: boolean;
-  message?: string;
-  user?: User;
+  message: string;
+  user?: any;
+  details?: {
+    status: string;
+    reason: string;
+  };
 }
 
 export interface TaskFileSubmission {
@@ -157,13 +161,9 @@ userLogin(email: string, password: string) {
   return this.httpClient.post<AuthResponse>(`${this.baseUrl}/login.php`, { email, password })
     .pipe(
       map(response => {
+        // Successfully logged in case
         if (response.success && response.user) {
-          // Check user status before storing credentials
-          if (response.user.status === 'Inactive') {
-            throw new Error('Your account is currently inactive. Please contact the administrator.');
-          }
-
-          // Store user details only if active
+          // Store user details
           this.setToken(response.user.email);
           localStorage.setItem('user_id', response.user.user_id.toString());
           localStorage.setItem('fullname', response.user.fullname);
@@ -188,16 +188,28 @@ userLogin(email: string, password: string) {
         return response;
       }),
       catchError((error: HttpErrorResponse) => {
-        console.error('Login failed:', error);
+        console.error('Login error:', error);
+        
+        // Handle inactive account case
+        if (error.status === 403 && error.error?.message === 'Account Inactive') {
+          return throwError(() => ({
+            success: false,
+            message: 'Account Inactive',
+            details: {
+              status: 'inactive',
+              reason: error.error.details?.reason || 'Please contact the administrator'
+            }
+          }));
+        }
+        
+        // Handle other errors
         let errorMessage = 'An error occurred during login';
         
-        if (error.status === 403) {
-          errorMessage = 'Your account is currently inactive. Please contact the administrator.';
-        } else if (error.error instanceof Object && error.error.message) {
+        if (error.error instanceof Object && error.error.message) {
           errorMessage = error.error.message;
         } else if (typeof error.error === 'string') {
           try {
-            const parsedError = JSON.parse(error.error.replace(/.*?({.*})/s, '$1'));
+            const parsedError = JSON.parse(error.error);
             errorMessage = parsedError.message || errorMessage;
           } catch {
             errorMessage = error.error;

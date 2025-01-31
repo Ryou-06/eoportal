@@ -43,7 +43,7 @@ onLogin() {
   }
 
   this.dataService.userLogin(this.email, this.password).subscribe({
-    next: (response) => {
+    next: (response: any) => {
       if (response.success && response.user) {
         Swal.fire({
           title: 'Welcome!',
@@ -54,32 +54,33 @@ onLogin() {
         }).then(() => {
           this.router.navigate([this.returnUrl]);
         });
+      }
+    },
+    error: (error: any) => {
+      console.error('Login error:', error);
+
+      if (error.message === 'Account Inactive') {
+        Swal.fire({
+          title: 'Account Inactive',
+          text: error.details?.reason || 'Your account is currently inactive. Please contact the administrator.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Contact Admin',
+          cancelButtonText: 'Close'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = 'mailto:eoportaltaskingsystem@gmail.com?subject=Inactive Account Access Request&body=Hello,%0D%0A%0D%0AI am requesting access to my inactive account.%0D%0A%0D%0AEmail: ' + this.email;
+          }
+        });
       } else {
         Swal.fire({
           title: 'Login Failed',
-          text: response.message || 'Invalid credentials',
+          text: error.message || 'An error occurred during login',
           icon: 'error'
         });
       }
-    },
-    error: (error) => {
-      console.error('Login error:', error);
-      
-      // Special handling for inactive account
-      const errorMessage = error.message || 'An error occurred during login';
-      const isInactiveAccount = errorMessage.includes('inactive');
-      
-      Swal.fire({
-        title: isInactiveAccount ? 'Account Inactive' : 'Login Failed',
-        text: errorMessage,
-        icon: isInactiveAccount ? 'warning' : 'error',
-        confirmButtonText: isInactiveAccount ? 'Contact Admin' : 'OK'
-      }).then((result) => {
-        if (isInactiveAccount && result.isConfirmed) {
-          // Optionally, provide contact information or redirect to support page
-          window.location.href = 'mailto:eoportaltaskingsystem@gmail.com';
-        }
-      });
     }
   });
 }
